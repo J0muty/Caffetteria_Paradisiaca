@@ -1,8 +1,25 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+
+
 def index(request):
-    return HttpResponse("<h4>Hello World!</h4>")
+    return render(request, 'main/index.html')
 
 
-def about(request):
-    return HttpResponse("<h4>About Page</h4>")
+def coffee(request):
+    return render(request, 'main/coffee.html')
+
+
+def menu(request):
+    return render(request, 'main/menu.html')
+
+
+def team(request):
+    return render(request, 'main/team.html')
+
+
+def contact(request):
+    return render(request, 'main/contact.html')
+
+
+def application(request):
+    return render(request, 'main/application.html')
