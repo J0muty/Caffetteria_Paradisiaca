@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import CustomLoginView, profile_view
 from django.contrib.auth import views as auth_views
