@@ -23,3 +23,9 @@ def contact(request):
 
 def application(request):
     return render(request, 'main/application.html')
+
+def login(request):
+    return render(request, 'main/login.html')
+
+def signup(request):
+    return render(request, 'main/signup.html')
