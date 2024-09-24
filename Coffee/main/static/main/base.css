@@ -23,9 +23,11 @@ body {
 }
 
 .brand-link {
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
+    font-size: 0;
+    line-height: 0;
 }
 
 
