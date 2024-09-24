@@ -12,17 +12,17 @@
         <img src="{% static 'main/logo.png' %}" alt="Coffee Paradiso Logo" width="100" height="100" class="me-2">
         <span class="fs-4">Coffee Paradiso</span>
     </a>
-            <nav class="navbar">
+            <nav class="d-inline-flex mt-2 mt-md-0 nav-central">
                 <a class="nav-link" href="{% url 'coffee' %}">Кофе</a>
                 <a class="nav-link" href="{% url 'menu' %}">Меню</a>
                 <a class="nav-link" href="{% url 'team' %}">Команда</a>
                 <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
                 <a class="nav-link" href="{% url 'application' %}">Приложение</a>
-                <div class="nav-auth">
+            </nav>
+                <nav class="d-inline-flex mt-2 mt-md-0 ms-auto">
                     <a class="nav-link" href="{% url 'login' %}">Login</a>
                     <a class="nav-link" href="{% url 'signup' %}">Sign-up</a>
-                </div>
-            </nav>
+                </nav>
         </div>
         {% block content %}{% endblock %}
     </body>
