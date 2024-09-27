@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, login, password=None, **extra_fields):
         if not login:
@@ -14,6 +15,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(login, password, **extra_fields)
+
 
 class RegUser(AbstractBaseUser):
     login = models.CharField('Логин', max_length=25, unique=True)
