@@ -1,40 +1,142 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Войти или создать аккаунт</title>
-    <link rel="stylesheet" href="{% static 'main/styles_login.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Вход</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Добавлено для вертикального выравнивания */
+            height: 100vh;
+            background-color: #ffffff;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 480px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .login-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: auto;
+        }
+
+        .welcome-text {
+            margin-bottom: 20px;
+        }
+
+        .welcome-text h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-bottom: 2px solid #888;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-bottom-color: #00a878;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #aaa;
+            opacity: 1;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #00a878;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #007b5e;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .rewards-text {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            max-width: 480px;
+        }
+
+        .rewards-text a {
+            font-size: 12px;
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .rewards-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="left">
-            <p>Войдите или создайте аккаунт <span>🌼</span></p>
+        <div class="welcome-text">
+            <h1>Войдите или создайте учетную запись</h1>
         </div>
-        <div class="right">
-            <form class="login-form" method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="username">Имя пользователя или email</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Пароль</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="password" name="password" required>
-                        <span class="show-password">👁</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <a href="#">Забыли пароль?</a>
-                </div>
-                {{ form.errors }}
-                <button type="submit" class="login-button">Авторизоваться</button>
-            </form>
-        </div>
+        <form class="login-form" method="post">
+            <div class="form-group">
+                <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" placeholder="Пароль" required>
+            </div>
+            <button type="submit">Авторизоваться</button>
+            <a href="#">Забыли пароль?</a>
+            <a href="#" style="margin-top: 10px;">Забыли свое имя пользователя?</a>
+        </form>
+    </div>
+    <div class="rewards-text">
+        Присоединяйтесь к программе Paradisiaca® Rewards,</br> чтобы получать бесплатную еду и напитки, </br>бесплатные добавки, оплачивать и делать заказы с</br> помощью телефона и многое другое.
+        </br><a href="/register">Присоединяйтесь сейчас</a>
     </div>
 </body>
 </html>

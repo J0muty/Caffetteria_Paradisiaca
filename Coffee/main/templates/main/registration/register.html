@@ -5,56 +5,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Завести аккаунт</title>
-       <link rel="stylesheet" href="{% static 'main/styles_register.css' %}">
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+        }
+
+        .registration-form {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 60px;
+        }
+
+        .welcome-text {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .welcome-text h1,
+        .welcome-text h2,
+        .welcome-text p {
+            margin: 0;
+        }
+
+        .welcome-text h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .welcome-text h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #888;
+        }
+
+        .welcome-text p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-bottom: 2px solid #888;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-bottom-color: #00a878;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #00a878;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #007b5e;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="left">
-            <p>Завести аккаунт</p>
-        </div>
-        <div class="right">
-            <form class="registration-form" method="post">
-                {% csrf_token %}
-                <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
-                <div class="form-group">
-                    <label>
-                        <input type="text" name="first_name" placeholder="Имя" required>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="text" name="last_name" placeholder="Фамилия" required>
-                    </label>
-                </div>
-
-                <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
-                <div class="form-group">
-                    <label>
-                        <input type="email" name="email" placeholder="Email" required>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="password" name="password" placeholder="Пароль" required>
-                    </label>
-                </div>
-
-                <h2>ДЕНЬ РОЖДЕНИЯ</h2>
-                <div class="form-group">
-                    <label>
-                        <input type="text" name="date" placeholder="День" required>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="text" name="month" placeholder="Месяц" required>
-                    </label>
-                </div>
-
-                <button type="submit">Создать аккаунт</button>
-            </form>
-        </div>
+    <div class="welcome-text">
+        <h1>Завести аккаунт</h1>
+        <h2>Paradisiaca® Награды</h2>
+        <p>Присоединяйтесь к Paradisiaca Rewards, чтобы зарабатывать звезды<br/> на бесплатную еду и напитки, любым способом оплаты. Получите доступ к<br/> мобильному заказу, награде на день рождения и более.</p>
     </div>
+
+    <form class="registration-form" method="post">
+        {% csrf_token %}
+        <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
+        <div class="form-group">
+            <label>
+                <input type="text" name="first_name" placeholder="Имя" required>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="text" name="last_name" placeholder="Фамилия" required>
+            </label>
+        </div>
+        <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
+        <div class="form-group">
+            <label>
+                <input type="email" name="email" placeholder="Email" required>
+            </label>
+        </div>
+        <div class="form-group">
+            <label>
+                <input type="password" name="password" placeholder="Пароль" required>
+            </label>
+        </div>
+
+        <h2>ДЕНЬ РОЖДЕНИЯ</h2>
+        <div class="form-group">
+            <label>
+                <input type="text" id="birth_date" name="birth_date" placeholder="Выберите дату" required>
+            </label>
+        </div>
+
+        <button type="submit">Создать аккаунт</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        flatpickr("#birth_date", {
+            dateFormat: "d.m.Y",
+            allowInput: true,
+        });
+    });
+    </script>
+
 </body>
 </html>
