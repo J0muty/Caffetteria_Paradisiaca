@@ -2,30 +2,34 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
-class CustomUserManager(BaseUserManager):
-    def create_user(self, login, password=None, **extra_fields):
-        if not login:
-            raise ValueError("Users must have a login")
-        user = self.model(login=login, **extra_fields)
+class RegUserManager(BaseUserManager):
+    def create_user(self, email, password=None, **extra_fields):
+        if not email:
+            raise ValueError('The Email field must be set')
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, login, password=None, **extra_fields):
+    def create_superuser(self, email, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
-        return self.create_user(login, password, **extra_fields)
+        return self.create_user(email, password, **extra_fields)
 
 
 class RegUser(AbstractBaseUser):
-    login = models.CharField('Логин', max_length=25, unique=True)
-    password = models.CharField('Пароль', max_length=128)
-    email = models.EmailField('Электронная почта', unique=True)
-    firstname = models.CharField('Имя', max_length=25)
-    lastname = models.CharField('Фамилия', max_length=25)
-    birthday = models.DateField('День рождения', auto_now=False, auto_now_add=False)
+    email = models.EmailField(unique=True)
+    firstname = models.CharField(max_length=30)
+    lastname = models.CharField(max_length=30)
+    birthdate = models.DateField('День рождения')
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
 
-    objects = CustomUserManager()
+    objects = RegUserManager()
 
-    USERNAME_FIELD = 'login'
-    REQUIRED_FIELDS = ['email', 'firstname', 'lastname', 'birthday']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['firstname', 'lastname', 'birthdate']
+
+    def __str__(self):
+        return self.email

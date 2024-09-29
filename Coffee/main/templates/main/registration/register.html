@@ -139,23 +139,22 @@
         </div>
 
         <h2>ДЕНЬ РОЖДЕНИЯ</h2>
-        <div class="form-group">
-            <label>
-                <input type="text" id="birth_date" name="birth_date" placeholder="Выберите дату" required>
-            </label>
-        </div>
-
+    <div class="form-group">
+        <label>
+            <input type="text" id="birthdate" name="birthdate" placeholder="Выберите дату" required>
+        </label>
+    </div>
         <button type="submit">Создать аккаунт</button>
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        flatpickr("#birth_date", {
-            dateFormat: "d.m.Y",
-            allowInput: true,
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr("#birthdate", {
+                dateFormat: "d-m-Y",
+                allowInput: true,
+            });
         });
-    });
     </script>
 
 </body>

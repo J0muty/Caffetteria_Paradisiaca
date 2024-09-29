@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import RegistrationForm
+from django.contrib import messages
+from .models import RegUser
+from django.db import IntegrityError
 
 
 def index(request):
@@ -34,4 +38,26 @@ def login(request):
 
 
 def register(request):
-    return render(request, 'main/registration/register.html')
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            reg_user = RegUser(
+                firstname=form.cleaned_data['first_name'],
+                lastname=form.cleaned_data['last_name'],
+                email=form.cleaned_data['email'],
+                birthdate=form.cleaned_data['birthdate']  # здесь исправлено
+            )
+            reg_user.set_password(form.cleaned_data['password'])
+            try:
+                reg_user.save()
+                messages.success(request, 'Ваш аккаунт успешно создан!')
+                return redirect('login')
+            except IntegrityError:
+                form.add_error('email', 'Пользователь с этим адресом электронной почты уже существует.')
+        else:
+            print(form.errors)  # Убедитесь, что выводите ошибки
+
+    else:
+        form = RegistrationForm()
+
+    return render(request, 'main/registration/register.html', {'form': form})

@@ -146,3 +146,8 @@ docs/_build/
 target/
 local_settings.py
 Coffee/Coffee/__pycache__/settings.cpython-312.pyc
+Coffee/main/__pycache__/views.cpython-312.pyc
+Coffee/main/__pycache__/urls.cpython-312.pyc
+Coffee/main/__pycache__/models.cpython-312.pyc
+Coffee/main/__pycache__/forms.cpython-312.pyc
+Coffee/db.sqlite3

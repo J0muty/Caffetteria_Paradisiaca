@@ -123,20 +123,21 @@
             <h1>Войдите или создайте учетную запись</h1>
         </div>
         <form class="login-form" method="post">
+            {% csrf_token %}
             <div class="form-group">
-                <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+                <input type="text" id="email" name="email" placeholder="Почта" required>
             </div>
             <div class="form-group">
                 <input type="password" id="password" name="password" placeholder="Пароль" required>
             </div>
             <button type="submit">Авторизоваться</button>
-            <a href="#">Забыли пароль?</a>
+            <a href="{% url 'register' %}">Забыли пароль?</a>
             <a href="#" style="margin-top: 10px;">Забыли свое имя пользователя?</a>
         </form>
     </div>
     <div class="rewards-text">
         Присоединяйтесь к программе Paradisiaca® Rewards,</br> чтобы получать бесплатную еду и напитки, </br>бесплатные добавки, оплачивать и делать заказы с</br> помощью телефона и многое другое.
-        </br><a href="/register">Присоединяйтесь сейчас</a>
+        </br><a href="{% url 'register' %}">Присоединяйтесь сейчас</a>
     </div>
 </body>
 </html>
