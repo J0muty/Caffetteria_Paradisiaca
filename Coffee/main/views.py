@@ -23,3 +23,7 @@ def contact(request):
 
 def application(request):
     return render(request, 'main/application.html')
+
+
+def profile(request):
+    return render(request, 'main/profile.html')
