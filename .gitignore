@@ -145,3 +145,4 @@ docs/_build/
 
 target/
 local_settings.py
+Coffee/Coffee/__pycache__/settings.cpython-312.pyc
