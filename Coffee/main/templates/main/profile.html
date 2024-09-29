@@ -7,6 +7,63 @@
     <link rel="stylesheet" href="{% static 'main/styles_profile.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Профиль</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .profile-left {
+            flex: 1 1 40%;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-right {
+            flex: 1 1 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .profile-menu {
+            padding: 20px;
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-list li {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 24px;
+            padding: 20px 25px 35px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .menu-list li i {
+            margin-right: 10px;
+            order: 1;
+            flex: 0 0 auto;
+        }
+
+        .menu-list li span {
+            order: 0;
+            flex: 1;
+        }
+    </style>
 </head>
 <body>
     <div class="profile-left">
