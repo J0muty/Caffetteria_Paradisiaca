@@ -27,3 +27,11 @@ def application(request):
 
 def profile(request):
     return render(request, 'main/profile.html')
+
+
+def login(request):
+    return render(request, 'main/registration/login.html')
+
+
+def register(request):
+    return render(request, 'main/registration/register.html')

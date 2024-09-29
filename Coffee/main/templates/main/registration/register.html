@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завести аккаунт</title>
+       <link rel="stylesheet" href="{% static 'main/styles_register.css' %}">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <p>Завести аккаунт</p>
+        </div>
+        <div class="right">
+            <form class="registration-form" method="post">
+                {% csrf_token %}
+                <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
+                <div class="form-group">
+                    <label>
+                        <input type="text" name="first_name" placeholder="Имя" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="text" name="last_name" placeholder="Фамилия" required>
+                    </label>
+                </div>
+
+                <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
+                <div class="form-group">
+                    <label>
+                        <input type="email" name="email" placeholder="Email" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="password" name="password" placeholder="Пароль" required>
+                    </label>
+                </div>
+
+                <h2>ДЕНЬ РОЖДЕНИЯ</h2>
+                <div class="form-group">
+                    <label>
+                        <input type="text" name="date" placeholder="День" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="text" name="month" placeholder="Месяц" required>
+                    </label>
+                </div>
+
+                <button type="submit">Создать аккаунт</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

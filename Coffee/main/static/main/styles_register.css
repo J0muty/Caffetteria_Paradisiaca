@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.left {
+    background-color: #f5f5f5;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.left p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.registration-form {
+    width: 80%;
+    max-width: 400px;
+}
+
+h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #888;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 2px solid #888;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-bottom-color: #00a878;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #00a878;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #007b5e;
+}
