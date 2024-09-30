@@ -12,4 +12,10 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
+    path('order-coffee/', views.order_coffee, name='order_coffee'),
+    path('manage-cards/', views.manage_cards, name='manage_cards'),
+    path('my-rewards/', views.my_rewards, name='my_rewards'),
+    path('order-history/', views.order_history, name='order_history'),
+    path('personal-info/', views.personal_info, name='personal_info'),
+    path('settings/', views.settings, name='settings'),
 ]

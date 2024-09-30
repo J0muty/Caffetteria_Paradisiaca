@@ -92,6 +92,22 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
+        .dropdown-menu {
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .dropdown-item {
+            color: #4B3D3D;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(209, 158, 86, 0.1);
+            color: #d19e56;
+        }
+
         @media (max-width: 768px) {
             .nav-link {
                 margin-right: 10px;
@@ -120,7 +136,20 @@
         </div>
         <div class="d-inline-flex mt-2 mt-md-0 ms-auto">
             {% if user.is_authenticated %}
-                <a class="nav-link" href="{% url 'profile' %}">Профиль</a>
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownProfile" data-bs-toggle="dropdown" aria-expanded="false">
+                        Профиль
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownProfile">
+                        <li><a class="dropdown-item" href="{% url 'order_coffee' %}">Заказ кофе</a></li>
+                        <li><a class="dropdown-item" href="{% url 'manage_cards' %}">Управление картами</a></li>
+                        <li><a class="dropdown-item" href="{% url 'manage_cards' %}">Мои награды</a></li>
+                        <li><a class="dropdown-item" href="{% url 'my_rewards' %}">История заказов</a></li>
+                        <li><a class="dropdown-item" href="{% url 'personal_info' %}">Персональная информация</a></li>
+                        <li><a class="dropdown-item" href="{% url 'settings' %}">Настройки</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
+                    </ul>
+                </div>
             {% else %}
                 <a class="nav-link" href="{% url 'login' %}">Войти</a>
                 <a class="nav-link" href="{% url 'register' %}">Регистрация</a>

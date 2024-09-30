@@ -85,3 +85,39 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+
+def manage_cards(request):
+    return render(request, 'main/dropdown-menu/manage_cards.html')
+
+
+def my_rewards(request):
+    return render(request, 'main/dropdown-menu/my_rewards.html')
+
+
+def order_coffee(request):
+    return render(request, 'main/dropdown-menu/order_coffee.html')
+
+
+def order_history(request):
+    return render(request, 'main/dropdown-menu/order_history.html')
+
+
+@login_required
+def personal_info(request):
+    user = request.user
+    context = {
+        'firstname': user.firstname,
+        'lastname': user.lastname,
+        'birthdate': user.birthdate,
+    }
+    return render(request, 'main/dropdown-menu/personal_info.html', context)
+
+
+@login_required
+def settings(request):
+    user = request.user
+    context = {
+        'email': user.email,
+    }
+    return render(request, 'main/dropdown-menu/settings.html', context)
