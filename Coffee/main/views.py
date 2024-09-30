@@ -1,9 +1,8 @@
 from .forms import RegistrationForm
 from .models import RegUser
 from django.db import IntegrityError
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
@@ -33,6 +32,7 @@ def application(request):
 
 @login_required(login_url='login')
 def profile(request):
+    print(f"User authenticated: {request.user.is_authenticated}")
     return render(request, 'main/profile.html')
 
 
@@ -49,13 +49,11 @@ def register(request):
             reg_user.set_password(form.cleaned_data['password'])
             try:
                 reg_user.save()
-                messages.success(request, 'Ваш аккаунт успешно создан!')
                 return redirect('login')
             except IntegrityError:
                 form.add_error('email', 'Пользователь с этим адресом электронной почты уже существует.')
         else:
             print(form.errors)
-
     else:
         form = RegistrationForm()
 
@@ -74,13 +72,16 @@ def login_view(request):
             if user.is_active:
                 print("User is active, logging in.")
                 login(request, user)
-                messages.success(request, 'Вы успешно вошли в систему!')
                 return redirect('profile')
             else:
                 print("User account is deactivated.")
-                messages.error(request, 'Ваш аккаунт деактивирован.')
         else:
             print("Authentication failed.")
-            messages.error(request, 'Неверная почта или пароль.')
 
     return render(request, 'main/registration/login.html')
+
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('index')

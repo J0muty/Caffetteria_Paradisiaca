@@ -121,3 +121,7 @@ AUTH_USER_MODEL = 'main.RegUser'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
+
+LOGIN_URL = 'login'  # Имя маршрута для страницы логина
+LOGIN_REDIRECT_URL = 'profile'  # Имя маршрута после успешного логина
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'

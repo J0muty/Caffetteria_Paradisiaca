@@ -80,6 +80,14 @@
                 <li><i class="fa fa-credit-card"></i> Способ оплаты</li>
                 <li><i class="fa fa-user"></i> Персональная информация</li>
                 <li><i class="fa fa-cog"></i> Настройки</li>
+                <li>
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-link" style="font-size: 24px; text-decoration: none;">
+                            <i class="fa fa-sign-out-alt"></i> Выйти
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>
