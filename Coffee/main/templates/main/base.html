@@ -12,8 +12,8 @@
             overflow: hidden;
             height: 100vh;
             background-color: #000;
+            font-family: 'Arial', sans-serif;
         }
-
         .background {
             position: absolute;
             top: 0;
@@ -21,68 +21,115 @@
             right: 0;
             bottom: 0;
             background: url('{% static "main/background1.jpg" %}') no-repeat center center fixed;
-            background-size: 100%;
+            background-size: cover;
             filter: blur(10px);
             z-index: -1;
         }
-
         .nav-link {
-            color: #855320;
+            color: #fff;
             border-radius: 25px;
             text-align: center;
             padding: 10px 20px;
-            transition: background-color 0.7s, color 0.5s, box-shadow 0.5s;
+            transition: background-color 0.3s, color 0.5s, box-shadow 0.5s;
             text-decoration: none;
-            margin-right: 40px;
+            margin-right: 20px;
+            position: relative;
+            font-weight: 500;
         }
-
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4);
+            color: #d19e56;
+        }
         .nav-central {
             margin-right: auto;
             padding-left: 15px;
         }
-
         .brand-link img {
-            height: 65px;
-            margin-right: 35px;
+            height: 75px;
+            margin-right: 15px;
         }
-
         .fs-4 {
             color: #d19e56;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
-
         .container {
             position: relative;
             z-index: 1;
+        }
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 15px 30px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+        }
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-brand span {
+            font-size: 1.5rem;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .nav-link {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .content {
+            color: #fff;
+            z-index: 1;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nav-link {
+                margin-right: 10px;
+                padding: 8px 15px;
+            }
+            .navbar {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
     <div class="background"></div>
 
-    <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 nav-central">
-        <a href="{% url 'index' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none">
+    <nav class="navbar d-flex flex-column flex-md-row align-items-center pb-3 mb-4 nav-central">
+        <a href="{% url 'index' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none navbar-brand">
             <img src="{% static 'main/logo.png' %}" alt="Coffee Paradiso Logo" width="100" height="100" class="me-2">
             <span class="fs-4">Coffee Paradiso</span>
         </a>
-        <nav class="d-inline-flex mt-2 mt-md-0 nav-central">
+        <div class="d-inline-flex mt-2 mt-md-0 nav-central">
             <a class="nav-link" href="{% url 'coffee' %}">Кофе</a>
             <a class="nav-link" href="{% url 'menu' %}">Меню</a>
             <a class="nav-link" href="{% url 'team' %}">Команда</a>
             <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
             <a class="nav-link" href="{% url 'application' %}">Приложение</a>
-        </nav>
-        <nav class="d-inline-flex mt-2 mt-md-0 ms-auto">
+        </div>
+        <div class="d-inline-flex mt-2 mt-md-0 ms-auto">
             {% if user.is_authenticated %}
                 <a class="nav-link" href="{% url 'profile' %}">Профиль</a>
             {% else %}
                 <a class="nav-link" href="{% url 'login' %}">Войти</a>
                 <a class="nav-link" href="{% url 'register' %}">Регистрация</a>
             {% endif %}
-        </nav>
-    </div>
+        </div>
+    </nav>
 
     <div class="container">
-        <div class="container">
+        <div class="content">
             {% block content %}
             {% endblock %}
         </div>

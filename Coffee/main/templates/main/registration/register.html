@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +10,14 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             display: flex;
             flex-direction: column;
             height: 100vh;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-
+            background: linear-gradient(to bottom right, #f7f1e3, #d3c8b5);
         }
 
         .background {
@@ -38,12 +38,29 @@
             width: 90%;
             max-width: 400px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.85);
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            padding: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
             position: relative;
             z-index: 1;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #6d4c41;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s; /* Убедитесь, что transform включен в transition */
+            will-change: transform; /* Оптимизация анимации */
+        }
+
+        .back-button:hover {
+            color: #5d4037;
+            transform: scale(1.1); /* Увеличиваем размер */
+            filter: none; /* Убедитесь, что нет фильтров размытия */
         }
 
         .welcome-text {
@@ -51,28 +68,18 @@
             margin-bottom: 20px;
         }
 
-        .welcome-text h1,
-        .welcome-text h2,
-        .welcome-text p {
-            margin: 0;
-        }
-
         .welcome-text h1 {
-            font-size: 32px;
-            margin-bottom: 10px;
-            color: #000;
+            margin: 0;
+            font-size: 28px;
+            color: #6d4c41;
         }
 
-        .welcome-text h2 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: #888;
-        }
-
-        .welcome-text p {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
+        h2 {
+            font-size: 20px;
+            margin: 20px 0 10px;
+            color: #6d4c41;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .form-group {
@@ -95,74 +102,108 @@
             padding: 15px;
             font-size: 18px;
             border: none;
-            border-bottom: 2px solid #888;
-            transition: border-color 0.3s;
+            border-bottom: 2px solid #d3c8b5;
+            border-radius: 4px;
+            transition: border-color 0.3s, box-shadow 0.3s;
             box-sizing: border-box;
         }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
         input[type="password"]:focus {
-            border-bottom-color: #00a878;
+            border-bottom-color: #6d4c41;
             outline: none;
+            box-shadow: 0 2px 5px rgba(109, 76, 65, 0.4);
         }
 
         button {
             width: 100%;
             padding: 15px;
-            background-color: #00a878;
+            background-color: #6d4c41;
             color: #ffffff;
             border: none;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 18px;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
 
         button:hover {
-            background-color: #007b5e;
+            background-color: #5d4037;
+            transform: translateY(-2px);
+        }
+
+        .login-link {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+            text-align: left;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .login-link a {
+            color: #473128;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
     <div class="background"></div>
 
-    <div class="welcome-text">
-        <h1>Завести аккаунт</h1>
-    </div>
-
-    <form class="registration-form" method="post">
-        {% csrf_token %}
-        <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
-        <div class="form-group">
-            <label>
-                <input type="text" name="first_name" placeholder="Имя" required>
-            </label>
-        </div>
-        <div class="form-group">
-            <label>
-                <input type="text" name="last_name" placeholder="Фамилия" required>
-            </label>
-        </div>
-        <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
-        <div class="form-group">
-            <label>
-                <input type="email" name="email" placeholder="Email" required>
-            </label>
-        </div>
-        <div class="form-group">
-            <label>
-                <input type="password" name="password" placeholder="Пароль" required>
-            </label>
+    <div class="registration-form">
+        <div class="back-button" onclick="window.location.href='/'">
+            <i class="fas fa-arrow-left"></i>
         </div>
 
-        <h2>ДЕНЬ РОЖДЕНИЯ</h2>
-        <div class="form-group">
-            <label>
+        <div class="welcome-text">
+            <h1>Завести аккаунт</h1>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
+            <div class="form-group">
+                <label for="first_name">Имя</label>
+                <input type="text" id="first_name" name="first_name" placeholder="Введите имя" required>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Фамилия</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Введите фамилию" required>
+            </div>
+            <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Введите email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+            </div>
+            <h2>ДЕНЬ РОЖДЕНИЯ</h2>
+            <div class="form-group">
+                <label for="birthdate">Дата рождения</label>
                 <input type="text" id="birthdate" name="birthdate" placeholder="Выберите дату" required>
-            </label>
+            </div>
+            <button type="submit">Создать аккаунт</button>
+        </form>
+
+        <div class="login-link">
+            <span>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></span>
         </div>
-        <button type="submit">Создать аккаунт</button>
-    </form>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
@@ -173,6 +214,5 @@
             });
         });
     </script>
-
 </body>
 </html>
