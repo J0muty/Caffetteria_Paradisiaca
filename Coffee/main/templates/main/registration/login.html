@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,19 +14,35 @@
             align-items: center;
             flex-direction: column;
             height: 100vh;
-            background-color: #ffffff;
+            overflow: hidden;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('{% static "main/background_login.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(10px);
+            z-index: -1;
         }
 
         .container {
             width: 90%;
             max-width: 480px;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 40px;
             display: flex;
             flex-direction: column;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
         .login-form {
@@ -118,6 +135,7 @@
     </style>
 </head>
 <body>
+    <div class="background"></div>
     <div class="container">
         <div class="welcome-text">
             <h1>Войдите или создайте учетную запись</h1>
@@ -135,9 +153,9 @@
             <a href="#" style="margin-top: 10px;">Забыли свое имя пользователя?</a>
         </form>
     </div>
-    <div class="rewards-text">
-        Присоединяйтесь к программе Paradisiaca® Rewards,</br> чтобы получать бесплатную еду и напитки, </br>бесплатные добавки, оплачивать и делать заказы с</br> помощью телефона и многое другое.
-        </br><a href="{% url 'register' %}">Присоединяйтесь сейчас</a>
-    </div>
+        <div class="rewards-text">
+            Присоединяйтесь к программе Paradisiaca® Rewards,<br> чтобы получать бесплатную еду и напитки,<br> бесплатные добавки, оплачивать и делать заказы с<br> помощью телефона и многое другое.
+            <br><a href="{% url 'register' %}">Присоединяйтесь сейчас</a>
+        </div>
 </body>
 </html>

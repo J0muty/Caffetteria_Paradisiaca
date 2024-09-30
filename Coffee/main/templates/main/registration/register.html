@@ -16,17 +16,34 @@
             height: 100vh;
             justify-content: center;
             align-items: center;
-            background-color: #ffffff;
+            overflow: hidden;
+
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('{% static "main/background_register.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(10px);
+            z-index: -1;
         }
 
         .registration-form {
             width: 90%;
             max-width: 400px;
             text-align: center;
-            background: #fff;
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             padding: 60px;
+            position: relative;
+            z-index: 1;
         }
 
         .welcome-text {
@@ -107,10 +124,10 @@
     </style>
 </head>
 <body>
+    <div class="background"></div>
+
     <div class="welcome-text">
         <h1>Завести аккаунт</h1>
-        <h2>Paradisiaca® Награды</h2>
-        <p>Присоединяйтесь к Paradisiaca Rewards, чтобы зарабатывать звезды<br/> на бесплатную еду и напитки, любым способом оплаты. Получите доступ к<br/> мобильному заказу, награде на день рождения и более.</p>
     </div>
 
     <form class="registration-form" method="post">
@@ -139,11 +156,11 @@
         </div>
 
         <h2>ДЕНЬ РОЖДЕНИЯ</h2>
-    <div class="form-group">
-        <label>
-            <input type="text" id="birthdate" name="birthdate" placeholder="Выберите дату" required>
-        </label>
-    </div>
+        <div class="form-group">
+            <label>
+                <input type="text" id="birthdate" name="birthdate" placeholder="Выберите дату" required>
+            </label>
+        </div>
         <button type="submit">Создать аккаунт</button>
     </form>
 
