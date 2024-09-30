@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
 from .forms import RegistrationForm
-from django.contrib import messages
 from .models import RegUser
 from django.db import IntegrityError
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -29,12 +31,9 @@ def application(request):
     return render(request, 'main/application.html')
 
 
+@login_required(login_url='login')
 def profile(request):
     return render(request, 'main/profile.html')
-
-
-def login(request):
-    return render(request, 'main/registration/login.html')
 
 
 def register(request):
@@ -45,7 +44,7 @@ def register(request):
                 firstname=form.cleaned_data['first_name'],
                 lastname=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
-                birthdate=form.cleaned_data['birthdate']  # здесь исправлено
+                birthdate=form.cleaned_data['birthdate']
             )
             reg_user.set_password(form.cleaned_data['password'])
             try:
@@ -55,9 +54,33 @@ def register(request):
             except IntegrityError:
                 form.add_error('email', 'Пользователь с этим адресом электронной почты уже существует.')
         else:
-            print(form.errors)  # Убедитесь, что выводите ошибки
+            print(form.errors)
 
     else:
         form = RegistrationForm()
 
     return render(request, 'main/registration/register.html', {'form': form})
+
+
+def login_view(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        print(f"Attempting to authenticate user: {email}")
+
+        user = authenticate(request, username=email, password=password)
+
+        if user is not None:
+            if user.is_active:
+                print("User is active, logging in.")
+                login(request, user)
+                messages.success(request, 'Вы успешно вошли в систему!')
+                return redirect('profile')
+            else:
+                print("User account is deactivated.")
+                messages.error(request, 'Ваш аккаунт деактивирован.')
+        else:
+            print("Authentication failed.")
+            messages.error(request, 'Неверная почта или пароль.')
+
+    return render(request, 'main/registration/login.html')
