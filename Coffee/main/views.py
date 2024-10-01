@@ -69,18 +69,15 @@ def login_view(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         password = request.POST.get('password')
-        print(f"Attempting to authenticate user: {email}")
 
         user = authenticate(request, username=email, password=password)
 
         if user is not None:
             if user.is_active:
-                print("User is active, logging in.")
                 login(request, user)
                 return redirect('profile')
-            else:
-                print("User account is deactivated.")
         else:
+            # Handle invalid login
             print("Authentication failed.")
 
     return render(request, 'main/registration/login.html')

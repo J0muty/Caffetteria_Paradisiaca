@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            background-color: #f5f3f4;
+            background-color: #f8f4e3;
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -23,42 +23,22 @@
             overflow: hidden;
         }
         .sidebar {
-            width: 300px;
-            min-width: 250px;
+            width: 350px;
+            min-width: 300px;
             padding: 20px;
-            border-right: 1px solid #e0e0e0;
-            background-color: #fff;
+            border-right: 1px solid #d6cfc4;
+            background-color: #ffffff;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             position: relative;
             transition: transform 0.3s ease-in-out;
         }
-        .sidebar .user-info {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .sidebar .user-info img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 15px;
-        }
-        .sidebar .user-info .user-name {
-            font-size: 1.2rem;
-            color: #6f4e37;
-            font-weight: bold;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 200px;
-        }
         .sidebar h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #6f4e37;
             margin-bottom: 30px;
             text-align: center;
+            font-weight: bold;
         }
         .menu-list {
             list-style: none;
@@ -71,28 +51,36 @@
             align-items: center;
             padding: 15px 20px;
             border-radius: 8px;
-            background: rgba(255, 255, 255, 0.8);
-            transition: background 0.3s, transform 0.3s;
+            background: rgba(111, 78, 55, 0.1);
+            transition: background 0.3s, box-shadow 0.3s;
             cursor: pointer;
             font-size: 1rem;
             color: #6f4e37;
+            will-change: background, box-shadow;
         }
-        .menu-list li:hover {
-            background: rgba(111, 78, 55, 0.1);
-            transform: scale(1.05);
+        .menu-list li:hover:not(.logout) {
+            background: rgba(0, 123, 255, 0.25);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
         }
         .menu-list li.active {
-            background: rgba(111, 78, 55, 0.1);
-            font-weight: bold;
-        }
-        .menu-list li.active:hover {
-            transform: translateX(5px) scale(1.05);
+            background: rgba(111, 78, 55, 0.15);
         }
         .menu-list li i {
             margin-right: 15px;
             color: #6B4F4F;
             min-width: 20px;
             text-align: center;
+        }
+        .menu-list li.logout:hover {
+            background: rgba(255, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
+        }
+        .menu-list a {
+            text-decoration: none;
+            color: inherit;
+            width: 100%;
+            display: flex;
+            align-items: center;
         }
         .content {
             flex: 1;
@@ -108,40 +96,46 @@
             font-size: 0.8rem;
             color: #6f4e37;
             background-color: #fff;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #d6cfc4;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="sidebar" id="sidebar">
-            <div class="user-info">
-                <img src="https://via.placeholder.com/60" alt="Аватар пользователя">
-                <div class="user-name" title="{{ firstname }} {{ lastname }}">
-                    {{ firstname|format_name:lastname }}
-                </div>
-            </div>
             <h1>Мой профиль</h1>
             <ul class="menu-list">
-                <li class="active" onclick="window.location.href='/'">
-                    <i class="fa fa-home"></i>Главная
+                <li class="active">
+                    <a href="/" class="nav-link">
+                        <i class="fa fa-home"></i>Главная
+                    </a>
                 </li>
-                <li onclick="window.location.href='/manage-cards'">
-                    <i class="fa fa-credit-card"></i>Управление картами
+                <li>
+                    <a href="{% url 'manage_cards' %}" class="nav-link">
+                        <i class="fa fa-credit-card"></i>Управление картами
+                    </a>
                 </li>
-                <li onclick="window.location.href='/my-rewards'">
-                    <i class="fa fa-trophy"></i>Бонусы
+                <li>
+                    <a href="{% url 'my_rewards' %}" class="nav-link">
+                        <i class="fa fa-trophy"></i>Бонусы
+                    </a>
                 </li>
-                <li onclick="window.location.href='/order-history'">
-                    <i class="fa fa-history"></i>История заказов
+                <li>
+                    <a href="{% url 'order_history' %}" class="nav-link">
+                        <i class="fa fa-history"></i>История заказов
+                    </a>
                 </li>
-                <li onclick="window.location.href='/personal-info'">
-                    <i class="fa fa-user"></i>Персональная информация
+                <li>
+                    <a href="{% url 'personal_info' %}" class="nav-link">
+                        <i class="fa fa-user"></i>Персональная информация
+                    </a>
                 </li>
-                <li onclick="window.location.href='/settings'">
-                    <i class="fa fa-cog"></i>Настройки
+                <li>
+                    <a href="{% url 'settings' %}" class="nav-link">
+                        <i class="fa fa-cog"></i>Настройки
+                    </a>
                 </li>
-                <li onclick="document.getElementById('logout-form').submit();">
+                <li class="logout" onclick="document.getElementById('logout-form').submit();">
                     <i class="fa fa-sign-out-alt"></i>Выйти
                 </li>
             </ul>

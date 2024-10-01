@@ -8,40 +8,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         body {
-            background-color: #f5f3f4;
+            background-color: #f8f4e3;
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .container {
             display: flex;
-            height: 100vh;
-            overflow-y: auto;
+            flex: 1;
+            overflow: hidden;
         }
         .sidebar {
-            width: 30%;
+            width: 300px;
+            min-width: 250px;
             padding: 20px;
-            border-right: 1px solid #e0e0e0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: #fff;
+            border-right: 1px solid #d6cfc4;
+            background-color: #ffffff;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             position: relative;
+            transition: transform 0.3s ease-in-out;
         }
         .sidebar h1 {
             font-size: 2rem;
             color: #6f4e37;
-            margin: 20px 0;
+            margin-bottom: 30px;
             text-align: center;
+            font-weight: bold;
         }
         .content {
-            width: 70%;
+            flex: 1;
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 30px;
+            overflow-y: auto;
         }
         .card {
             border: none;
@@ -61,11 +65,12 @@
             color: #6f4e37;
         }
         .footer {
-            margin-top: auto;
             text-align: center;
             padding: 10px;
             font-size: 0.8rem;
             color: #6f4e37;
+            background-color: #fff;
+            border-top: 1px solid #d6cfc4;
         }
         .back-button {
             position: absolute;
@@ -96,6 +101,9 @@
             <div class="card mt-5">
                 <div class="card-header">
                     Бонусы
+                </div>
+                <div class="card-body">
+                    <p class="form-label">Ваши бонусы будут отображаться здесь.</p>
                 </div>
             </div>
         </div>
