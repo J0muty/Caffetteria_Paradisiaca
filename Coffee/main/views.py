@@ -32,8 +32,13 @@ def application(request):
 
 @login_required(login_url='login')
 def profile(request):
+    user = request.user
+    context = {
+        'firstname': user.firstname,
+        'lastname': user.lastname,
+    }
     print(f"User authenticated: {request.user.is_authenticated}")
-    return render(request, 'main/profile.html')
+    return render(request, 'main/profile.html', context)
 
 
 def register(request):

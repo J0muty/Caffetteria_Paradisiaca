@@ -10,29 +10,52 @@
         body {
             background-color: #f5f3f4;
             font-family: 'Helvetica Neue', Arial, sans-serif;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .container {
             display: flex;
-            height: 100vh;
-            overflow-y: auto;
+            flex: 1;
+            overflow: hidden;
         }
         .sidebar {
-            width: 30%;
+            width: 300px;
+            min-width: 250px;
             padding: 20px;
             border-right: 1px solid #e0e0e0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             background-color: #fff;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             position: relative;
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+        .sidebar .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .sidebar .user-info img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        .sidebar .user-info .user-name {
+            font-size: 1.2rem;
+            color: #6f4e37;
+            font-weight: bold;
         }
         .sidebar h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #6f4e37;
-            margin: 20px 0;
+            margin-bottom: 30px;
             text-align: center;
         }
         .menu-list {
@@ -43,65 +66,86 @@
         .menu-list li {
             margin: 10px 0;
             display: flex;
-            justify-content: space-between;
-            padding: 15px;
+            align-items: center;
+            padding: 15px 20px;
             border-radius: 8px;
             background: rgba(255, 255, 255, 0.8);
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
             cursor: pointer;
+            font-size: 1rem;
+            color: #6f4e37;
         }
-        .menu-list li:hover {
-            background: rgba(255, 255, 255, 0.9);
+        .menu-list li.active, .menu-list li:hover {
+            background: rgba(111, 78, 55, 0.1);
+            transform: translateX(5px);
         }
         .menu-list li i {
-            margin-left: 10px;
+            margin-right: 15px;
             color: #6B4F4F;
+            min-width: 20px;
+            text-align: center;
         }
         .content {
-            width: 70%;
+            flex: 1;
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            padding: 30px;
             overflow-y: auto;
         }
         .footer {
-            margin-top: auto;
             text-align: center;
             padding: 10px;
             font-size: 0.8rem;
             color: #6f4e37;
+            background-color: #fff;
+            border-top: 1px solid #e0e0e0;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 1000;
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
-        <div class="sidebar">
+        <div class="sidebar" id="sidebar">
+            <div class="user-info">
+                <img src="https://via.placeholder.com/60" alt="Аватар пользователя">
+                <div class="user-name">{{ firstname }} {{ lastname }}</div>
+            </div>
             <h1>Мой профиль</h1>
             <ul class="menu-list">
-                <li onclick="window.location.href='/'">
-                    Главная <i class="fa fa-home"></i>
-                </li>
-                <li onclick="window.location.href='/order-coffee'">
-                    Заказ кофе <i class="fa fa-coffee"></i>
+                <li class="active" onclick="window.location.href='/'">
+                    <i class="fa fa-home"></i>Главная
                 </li>
                 <li onclick="window.location.href='/manage-cards'">
-                    Управление картами <i class="fa fa-credit-card"></i>
+                    <i class="fa fa-credit-card"></i>Управление картами
                 </li>
                 <li onclick="window.location.href='/my-rewards'">
-                    Мои награды <i class="fa fa-trophy"></i>
+                    <i class="fa fa-trophy"></i>Бонусы
                 </li>
                 <li onclick="window.location.href='/order-history'">
-                    История заказов <i class="fa fa-history"></i>
+                    <i class="fa fa-history"></i>История заказов
                 </li>
                 <li onclick="window.location.href='/personal-info'">
-                    Персональная информация <i class="fa fa-user"></i>
+                    <i class="fa fa-user"></i>Персональная информация
                 </li>
                 <li onclick="window.location.href='/settings'">
-                    Настройки <i class="fa fa-cog"></i>
+                    <i class="fa fa-cog"></i>Настройки
                 </li>
                 <li onclick="document.getElementById('logout-form').submit();">
-                    Выйти <i class="fa fa-sign-out-alt"></i>
+                    <i class="fa fa-sign-out-alt"></i>Выйти
                 </li>
             </ul>
             <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
@@ -109,7 +153,7 @@
             </form>
         </div>
         <div class="content">
-            <h2>Добро пожаловать в ваш профиль!</h2>
+            <h2>Добро пожаловать, {{firstname}}!</h2>
             <p>Здесь вы можете управлять своей учетной записью и просматривать информацию.</p>
         </div>
     </div>

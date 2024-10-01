@@ -141,10 +141,9 @@
                         Профиль
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownProfile">
-                        <li><a class="dropdown-item" href="{% url 'order_coffee' %}">Заказ кофе</a></li>
                         <li><a class="dropdown-item" href="{% url 'manage_cards' %}">Управление картами</a></li>
-                        <li><a class="dropdown-item" href="{% url 'manage_cards' %}">Мои награды</a></li>
-                        <li><a class="dropdown-item" href="{% url 'my_rewards' %}">История заказов</a></li>
+                        <li><a class="dropdown-item" href="{% url 'my_rewards' %}">Бонусы</a></li>
+                        <li><a class="dropdown-item" href="{% url 'order_history' %}">История заказов</a></li>
                         <li><a class="dropdown-item" href="{% url 'personal_info' %}">Персональная информация</a></li>
                         <li><a class="dropdown-item" href="{% url 'settings' %}">Настройки</a></li>
                         <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
