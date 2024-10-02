@@ -53,14 +53,14 @@
             font-size: 24px;
             color: #6d4c41;
             cursor: pointer;
-            transition: color 0.3s, transform 0.3s; /* Убедитесь, что transform включен в transition */
-            will-change: transform; /* Оптимизация анимации */
+            transition: color 0.3s, transform 0.3s;
+            will-change: transform;
         }
 
         .back-button:hover {
             color: #5d4037;
-            transform: scale(1.1); /* Увеличиваем размер */
-            filter: none; /* Убедитесь, что нет фильтров размытия */
+            transform: scale(1.1);
+            filter: none;
         }
 
         .welcome-text {
@@ -160,59 +160,77 @@
         }
     </style>
 </head>
-<body>
-    <div class="background"></div>
+    <body>
+        <div class="background"></div>
 
-    <div class="registration-form">
-        <div class="back-button" onclick="window.location.href='/'">
-            <i class="fas fa-arrow-left"></i>
+        <div class="registration-form">
+            <div class="back-button" onclick="window.location.href='/'">
+                <i class="fas fa-arrow-left"></i>
+            </div>
+
+            <div class="welcome-text">
+                <h1>Завести аккаунт</h1>
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
+                <div class="form-group">
+                    <label for="first_name">Имя</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Введите имя" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Фамилия</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Введите фамилию" required>
+                </div>
+                <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Введите email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                </div>
+                <h2>ДЕНЬ РОЖДЕНИЯ</h2>
+                <div class="form-group">
+                    <label for="birthdate">Дата рождения</label>
+                    <input type="text" id="birthdate" name="birthdate" placeholder="дд-мм-гггг" required>
+                </div>
+                <button type="submit">Создать аккаунт</button>
+            </form>
+
+            <div class="login-link">
+                <span>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></span>
+            </div>
         </div>
 
-        <div class="welcome-text">
-            <h1>Завести аккаунт</h1>
-        </div>
-
-        <form method="post">
-            {% csrf_token %}
-            <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
-            <div class="form-group">
-                <label for="first_name">Имя</label>
-                <input type="text" id="first_name" name="first_name" placeholder="Введите имя" required>
-            </div>
-            <div class="form-group">
-                <label for="last_name">Фамилия</label>
-                <input type="text" id="last_name" name="last_name" placeholder="Введите фамилию" required>
-            </div>
-            <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Введите email" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Пароль</label>
-                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
-            </div>
-            <h2>ДЕНЬ РОЖДЕНИЯ</h2>
-            <div class="form-group">
-                <label for="birthdate">Дата рождения</label>
-                <input type="text" id="birthdate" name="birthdate" placeholder="Выберите дату" required>
-            </div>
-            <button type="submit">Создать аккаунт</button>
-        </form>
-
-        <div class="login-link">
-            <span>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></span>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
             flatpickr("#birthdate", {
                 dateFormat: "d-m-Y",
                 allowInput: true,
             });
+            const birthdateInput = document.getElementById("birthdate");
+            birthdateInput.addEventListener("input", function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.replace(/(\d{2})(\d+)/, '$1-$2');
+                }
+                if (value.length >= 5) {
+                    value = value.replace(/(\d{2}-\d{2})(\d+)/, '$1-$2');
+                }
+                if (value.length >= 10) {
+                    const year = value.split('-')[2];
+                    if (year.length > 4) {
+                        value = value.slice(0, 10);
+                    }
+                }
+                e.target.value = value;
+            });
         });
-    </script>
-</body>
+
+        </script>
+    </body>
 </html>
