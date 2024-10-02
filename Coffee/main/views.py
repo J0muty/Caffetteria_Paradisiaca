@@ -77,8 +77,8 @@ def login_view(request):
                 login(request, user)
                 return redirect('profile')
         else:
-            # Handle invalid login
-            print("Authentication failed.")
+            error_message = "Вы ввели неверный email или пароль."
+            return render(request, 'main/registration/login.html', {'error_message': error_message})
 
     return render(request, 'main/registration/login.html')
 
