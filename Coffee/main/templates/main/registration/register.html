@@ -81,7 +81,7 @@
         }
 
         .form-group {
-            margin-bottom: 25px; /* Увеличен отступ снизу для размещения ошибки ниже поля */
+            margin-bottom: 25px;
             position: relative;
             text-align: left;
         }
@@ -160,6 +160,10 @@
         .error-visible {
             display: block;
         }
+
+        .valid {
+            color: green;
+        }
     </style>
 </head>
 <body>
@@ -221,6 +225,14 @@
                         Пароль должен содержать не менее 8 символов.
                     {% endif %}
                 </div>
+                <div class="password-requirements" id="passwordRequirements" style="display:none;">
+                    <ul>
+                        <li id="lengthRequirement" class="requirement">Минимум 8 символов</li>
+                        <li id="uppercaseRequirement" class="requirement">Хотя бы одна заглавная буква</li>
+                        <li id="lowercaseRequirement" class="requirement">Хотя бы одна строчная буква</li>
+                        <li id="specialCharacterRequirement" class="requirement">Хотя бы один специальный символ</li>
+                    </ul>
+                </div>
             </div>
             <h2>ДЕНЬ РОЖДЕНИЯ</h2>
             <div class="form-group">
@@ -259,6 +271,13 @@
             const emailError = document.getElementById("emailError");
             const passwordError = document.getElementById("passwordError");
             const birthdateError = document.getElementById("birthdateError");
+
+            const passwordInput = document.getElementById("password");
+            const passwordRequirements = document.getElementById("passwordRequirements");
+            const lengthRequirement = document.getElementById("lengthRequirement");
+            const uppercaseRequirement = document.getElementById("uppercaseRequirement");
+            const lowercaseRequirement = document.getElementById("lowercaseRequirement");
+            const specialCharacterRequirement = document.getElementById("specialCharacterRequirement");
 
             // Функция для проверки валидности даты
             function validateBirthdate(dateStr) {
@@ -311,7 +330,7 @@
                 let isValid = true;
 
                 // Очистка предыдущих ошибок
-                [firstNameError, lastNameError, emailError, passwordError, birthdateError].forEach(function(el) {
+                 [firstNameError, lastNameError, emailError, passwordError, birthdateError].forEach(function(el) {
                     el.classList.remove("error-visible");
                 });
 
@@ -350,8 +369,14 @@
 
                 // Проверка Пароля
                 const password = document.getElementById("password").value;
-                if (password.length < 8) {
-                    passwordError.textContent = "Пароль должен содержать не менее 8 символов.";
+                // Добавьте дополнительную проверку на наличие всех требований к паролю
+                const allRequirementsMet = lengthRequirement.classList.contains("valid") &&
+                    uppercaseRequirement.classList.contains("valid") &&
+                    lowercaseRequirement.classList.contains("valid") &&
+                    specialCharacterRequirement.classList.contains("valid");
+
+                if (!allRequirementsMet) {
+                    passwordError.textContent = "Пожалуйста, выполните все требования к паролю.";
                     passwordError.classList.add("error-visible");
                     isValid = false;
                 }
@@ -401,6 +426,60 @@
                     {% endfor %}
                 {% endif %}
             }
+
+
+            passwordInput.addEventListener("focus", function() {
+                passwordRequirements.style.display = "block"; // Показывать требования при фокусе
+            });
+
+            passwordInput.addEventListener("blur", function() {
+                passwordRequirements.style.display = "none"; // Скрывать требования при потере фокуса
+            });
+
+            passwordInput.addEventListener("input", function() {
+                const password = passwordInput.value;
+
+
+            // Проверка длины
+            if (password.length >= 8) {
+                lengthRequirement.classList.add("valid");
+            } else {
+                lengthRequirement.classList.remove("valid");
+            }
+
+            // Проверка на заглавные буквы
+            if (/[A-Z]/.test(password)) {
+                uppercaseRequirement.classList.add("valid");
+            } else {
+                uppercaseRequirement.classList.remove("valid");
+            }
+
+            // Проверка на строчные буквы
+            if (/[a-z]/.test(password)) {
+                lowercaseRequirement.classList.add("valid");
+            } else {
+                lowercaseRequirement.classList.remove("valid");
+            }
+
+            // Проверка на специальные символы
+            if (/[!/@#$%^&*(),.?":{}|<>]/.test(password)) {
+                specialCharacterRequirement.classList.add("valid");
+            } else {
+                specialCharacterRequirement.classList.remove("valid");
+            }
+
+            // Проверка всех условий перед отправкой формы
+            const allRequirementsMet = lengthRequirement.classList.contains("valid") &&
+                uppercaseRequirement.classList.contains("valid") &&
+                lowercaseRequirement.classList.contains("valid") &&
+                specialCharacterRequirement.classList.contains("valid");
+
+            if (allRequirementsMet) {
+                passwordError.textContent = "";
+            } else {
+                passwordError.textContent = "Пожалуйста, выполните все требования к паролю.";
+            }
+        });
 
             showServerErrors();
         });
