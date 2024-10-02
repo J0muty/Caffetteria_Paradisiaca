@@ -83,7 +83,7 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Увеличен отступ снизу для размещения ошибки ниже поля */
             position: relative;
             text-align: left;
         }
@@ -155,64 +155,108 @@
         .error-message {
             color: #e74c3c;
             font-size: 14px;
-            margin-top: -10px;
-            margin-bottom: 10px;
+            margin-top: 5px; /* Отступ сверху для размещения ошибки ниже поля */
+            display: none; /* Скрыто по умолчанию */
         }
     </style>
 </head>
-    <body>
-        <div class="background"></div>
+<body>
+    <div class="background"></div>
 
-        <div class="registration-form">
-            <div class="back-button" onclick="window.location.href='/'">
-                <i class="fas fa-arrow-left"></i>
-            </div>
-
-            <div class="welcome-text">
-                <h1>Завести аккаунт</h1>
-            </div>
-
-            <form method="post">
-                {% csrf_token %}
-                <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
-                <div class="form-group">
-                    <label for="first_name">Имя</label>
-                    <input type="text" id="first_name" name="first_name" placeholder="Введите имя" required>
-                </div>
-                <div class="form-group">
-                    <label for="last_name">Фамилия</label>
-                    <input type="text" id="last_name" name="last_name" placeholder="Введите фамилию" required>
-                </div>
-                <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Введите email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Пароль</label>
-                    <input type="password" id="password" name="password" placeholder="Введите пароль" required>
-                </div>
-                <h2>ДЕНЬ РОЖДЕНИЯ</h2>
-                <div class="form-group">
-                    <label for="birthdate">Дата рождения</label>
-                    <input type="text" id="birthdate" name="birthdate" placeholder="дд-мм-гггг" required>
-                </div>
-                <button type="submit">Создать аккаунт</button>
-            </form>
-
-            <div class="login-link">
-                <span>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></span>
-            </div>
+    <div class="registration-form">
+        <div class="back-button" onclick="window.location.href='/'">
+            <i class="fas fa-arrow-left"></i>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
+        <div class="welcome-text">
+            <h1>Завести аккаунт</h1>
+        </div>
+
+        <form id="registrationForm" method="post" novalidate>
+            {% csrf_token %}
+            <h2>ПЕРСОНАЛЬНАЯ ИНФОРМАЦИЯ</h2>
+            <div class="form-group">
+                <label for="first_name">Имя</label>
+                <input type="text" id="first_name" name="first_name" placeholder="Введите имя" required>
+                <div class="error-message" id="firstNameError">Пожалуйста, введите ваше имя без цифр.</div>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Фамилия</label>
+                <input type="text" id="last_name" name="last_name" placeholder="Введите фамилию" required>
+                <div class="error-message" id="lastNameError">Пожалуйста, введите вашу фамилию без цифр.</div>
+            </div>
+            <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Введите email" required>
+                <div class="error-message" id="emailError">Пожалуйста, введите корректный email.</div>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                <div class="error-message" id="passwordError">Пароль должен содержать не менее 8 символов.</div>
+            </div>
+            <h2>ДЕНЬ РОЖДЕНИЯ</h2>
+            <div class="form-group">
+                <label for="birthdate">Дата рождения</label>
+                <input type="text" id="birthdate" name="birthdate" placeholder="дд-мм-гггг" required>
+                <div class="error-message" id="birthdateError">Пожалуйста, введите корректную дату рождения.</div>
+            </div>
+            <button type="submit">Создать аккаунт</button>
+        </form>
+
+        <div class="login-link">
+            <span>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></span>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
             flatpickr("#birthdate", {
                 dateFormat: "d-m-Y",
                 allowInput: true,
+                maxDate: "today",
             });
+
             const birthdateInput = document.getElementById("birthdate");
+            const registrationForm = document.getElementById("registrationForm");
+
+            const firstNameError = document.getElementById("firstNameError");
+            const lastNameError = document.getElementById("lastNameError");
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+            const birthdateError = document.getElementById("birthdateError");
+
+            // Функция для проверки валидности даты
+            function validateBirthdate(dateStr) {
+                const parts = dateStr.split('-');
+                if (parts.length !== 3) return false;
+
+                const day = parseInt(parts[0], 10);
+                const month = parseInt(parts[1], 10) - 1;
+                const year = parseInt(parts[2], 10);
+
+                const date = new Date(year, month, day);
+
+                if (date.getFullYear() !== year || date.getMonth() !== month || date.getDate() !== day) {
+                    return false;
+                }
+
+                const today = new Date();
+                if (date > today) {
+                    return false;
+                }
+
+                return true;
+            }
+
+            // Функция для проверки, содержит ли строка цифры
+            function containsDigits(str) {
+                return /\d/.test(str);
+            }
+
+            // Обработчик ввода для автоматического форматирования
             birthdateInput.addEventListener("input", function(e) {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length >= 2) {
@@ -229,8 +273,85 @@
                 }
                 e.target.value = value;
             });
-        });
 
-        </script>
-    </body>
+            registrationForm.addEventListener("submit", function(e) {
+                let isValid = true;
+
+                // Очистка предыдущих ошибок
+                [firstNameError, lastNameError, emailError, passwordError, birthdateError].forEach(function(el) {
+                    el.style.display = "none";
+                });
+
+                // Проверка Имени
+                const firstName = document.getElementById("first_name").value.trim();
+                if (firstName === "") {
+                    firstNameError.textContent = "Пожалуйста, введите ваше имя.";
+                    firstNameError.style.display = "block";
+                    isValid = false;
+                } else if (containsDigits(firstName)) {
+                    firstNameError.textContent = "Имя не должно содержать цифр.";
+                    firstNameError.style.display = "block";
+                    isValid = false;
+                }
+
+                // Проверка Фамилии
+                const lastName = document.getElementById("last_name").value.trim();
+                if (lastName === "") {
+                    lastNameError.textContent = "Пожалуйста, введите вашу фамилию.";
+                    lastNameError.style.display = "block";
+                    isValid = false;
+                } else if (containsDigits(lastName)) {
+                    lastNameError.textContent = "Фамилия не должна содержать цифр.";
+                    lastNameError.style.display = "block";
+                    isValid = false;
+                }
+
+                // Проверка Email
+                const email = document.getElementById("email").value.trim();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    emailError.style.display = "block";
+                    isValid = false;
+                }
+
+                // Проверка Пароля
+                const password = document.getElementById("password").value;
+                if (password.length < 8) {
+                    passwordError.style.display = "block";
+                    isValid = false;
+                }
+
+                // Проверка Даты Рождения
+                const birthdate = document.getElementById("birthdate").value.trim();
+                if (!validateBirthdate(birthdate)) {
+                    const today = new Date();
+                    const parts = birthdate.split('-');
+                    let errorMsg = "Пожалуйста, введите корректную дату рождения.";
+
+                    if (parts.length === 3) {
+                        const day = parseInt(parts[0], 10);
+                        const month = parseInt(parts[1], 10);
+                        const year = parseInt(parts[2], 10);
+                        if (isNaN(day) || isNaN(month) || isNaN(year)) {
+                            errorMsg = "Дата рождения должна состоять из чисел.";
+                        } else {
+                            const date = new Date(year, month - 1, day);
+                            if (date > today) {
+                                errorMsg = "Дата рождения не может быть в будущем.";
+                            }
+                        }
+                    }
+
+                    birthdateError.textContent = errorMsg;
+                    birthdateError.style.display = "block";
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
 </html>
