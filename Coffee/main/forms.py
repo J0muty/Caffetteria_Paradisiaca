@@ -17,13 +17,13 @@ class RegistrationForm(forms.Form):
     def clean_password(self):
         password = self.cleaned_data.get('password')
         if len(password) < 8 or not re.search(r'[A-Z]', password):
-            raise ValidationError('Password must be at least 8 characters long and contain an uppercase letter.')
+            raise ValidationError('Пароль должен иметь длину не менее 8 символов и содержать заглавную букву..')
         return make_password(password)
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if RegUser.objects.filter(email=email).exists():
-            raise ValidationError('Email is already in use.')
+            raise ValidationError('Эта почта уже используется')
         return email
 
     def clean_birthdate(self):
