@@ -26,10 +26,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('{% static "main/background_register.jpg" %}');
+            background: url('{% static "main/background_register.jpg" %}') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
             filter: blur(10px);
             z-index: -1;
         }
@@ -155,8 +153,12 @@
         .error-message {
             color: #e74c3c;
             font-size: 14px;
-            margin-top: 5px; /* Отступ сверху для размещения ошибки ниже поля */
-            display: none; /* Скрыто по умолчанию */
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-visible {
+            display: block;
         }
     </style>
 </head>
@@ -178,29 +180,59 @@
             <div class="form-group">
                 <label for="first_name">Имя</label>
                 <input type="text" id="first_name" name="first_name" placeholder="Введите имя" required>
-                <div class="error-message" id="firstNameError">Пожалуйста, введите ваше имя без цифр.</div>
+                <div class="error-message" id="firstNameError">
+                    {% if form.first_name.errors %}
+                        {{ form.first_name.errors.0 }}
+                    {% else %}
+                        Пожалуйста, введите ваше имя без цифр.
+                    {% endif %}
+                </div>
             </div>
             <div class="form-group">
                 <label for="last_name">Фамилия</label>
                 <input type="text" id="last_name" name="last_name" placeholder="Введите фамилию" required>
-                <div class="error-message" id="lastNameError">Пожалуйста, введите вашу фамилию без цифр.</div>
+                <div class="error-message" id="lastNameError">
+                    {% if form.last_name.errors %}
+                        {{ form.last_name.errors.0 }}
+                    {% else %}
+                        Пожалуйста, введите вашу фамилию без цифр.
+                    {% endif %}
+                </div>
             </div>
             <h2>БЕЗОПАСНОСТЬ АККАУНТА</h2>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Введите email" required>
-                <div class="error-message" id="emailError">Пожалуйста, введите корректный email.</div>
+                <div class="error-message" id="emailError">
+                    {% if form.email.errors %}
+                        {{ form.email.errors.0 }}
+                    {% else %}
+                        Пожалуйста, введите корректный email.
+                    {% endif %}
+                </div>
             </div>
             <div class="form-group">
                 <label for="password">Пароль</label>
                 <input type="password" id="password" name="password" placeholder="Введите пароль" required>
-                <div class="error-message" id="passwordError">Пароль должен содержать не менее 8 символов.</div>
+                <div class="error-message" id="passwordError">
+                    {% if form.password.errors %}
+                        {{ form.password.errors.0 }}
+                    {% else %}
+                        Пароль должен содержать не менее 8 символов.
+                    {% endif %}
+                </div>
             </div>
             <h2>ДЕНЬ РОЖДЕНИЯ</h2>
             <div class="form-group">
                 <label for="birthdate">Дата рождения</label>
                 <input type="text" id="birthdate" name="birthdate" placeholder="дд-мм-гггг" required>
-                <div class="error-message" id="birthdateError">Пожалуйста, введите корректную дату рождения.</div>
+                <div class="error-message" id="birthdateError">
+                    {% if form.birthdate.errors %}
+                        {{ form.birthdate.errors.0 }}
+                    {% else %}
+                        Пожалуйста, введите корректную дату рождения.
+                    {% endif %}
+                </div>
             </div>
             <button type="submit">Создать аккаунт</button>
         </form>
@@ -274,23 +306,24 @@
                 e.target.value = value;
             });
 
+            // Обработчик отправки формы
             registrationForm.addEventListener("submit", function(e) {
                 let isValid = true;
 
                 // Очистка предыдущих ошибок
                 [firstNameError, lastNameError, emailError, passwordError, birthdateError].forEach(function(el) {
-                    el.style.display = "none";
+                    el.classList.remove("error-visible");
                 });
 
                 // Проверка Имени
                 const firstName = document.getElementById("first_name").value.trim();
                 if (firstName === "") {
                     firstNameError.textContent = "Пожалуйста, введите ваше имя.";
-                    firstNameError.style.display = "block";
+                    firstNameError.classList.add("error-visible");
                     isValid = false;
                 } else if (containsDigits(firstName)) {
                     firstNameError.textContent = "Имя не должно содержать цифр.";
-                    firstNameError.style.display = "block";
+                    firstNameError.classList.add("error-visible");
                     isValid = false;
                 }
 
@@ -298,11 +331,11 @@
                 const lastName = document.getElementById("last_name").value.trim();
                 if (lastName === "") {
                     lastNameError.textContent = "Пожалуйста, введите вашу фамилию.";
-                    lastNameError.style.display = "block";
+                    lastNameError.classList.add("error-visible");
                     isValid = false;
                 } else if (containsDigits(lastName)) {
                     lastNameError.textContent = "Фамилия не должна содержать цифр.";
-                    lastNameError.style.display = "block";
+                    lastNameError.classList.add("error-visible");
                     isValid = false;
                 }
 
@@ -310,14 +343,16 @@
                 const email = document.getElementById("email").value.trim();
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailPattern.test(email)) {
-                    emailError.style.display = "block";
+                    emailError.textContent = "Пожалуйста, введите корректный email.";
+                    emailError.classList.add("error-visible");
                     isValid = false;
                 }
 
                 // Проверка Пароля
                 const password = document.getElementById("password").value;
                 if (password.length < 8) {
-                    passwordError.style.display = "block";
+                    passwordError.textContent = "Пароль должен содержать не менее 8 символов.";
+                    passwordError.classList.add("error-visible");
                     isValid = false;
                 }
 
@@ -343,14 +378,31 @@
                     }
 
                     birthdateError.textContent = errorMsg;
-                    birthdateError.style.display = "block";
+                    birthdateError.classList.add("error-visible");
                     isValid = false;
                 }
 
                 if (!isValid) {
-                    e.preventDefault();
+                    e.preventDefault(); // Предотвращение отправки формы
                 }
             });
+
+            // Показывать серверные ошибки при загрузке страницы
+            function showServerErrors() {
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% if field.errors %}
+                            const errorElement = document.getElementById("{{ field.name }}Error");
+                            if (errorElement) {
+                                errorElement.textContent = "{{ field.errors.0|escapejs }}";
+                                errorElement.classList.add("error-visible");
+                            }
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            }
+
+            showServerErrors();
         });
     </script>
 </body>
