@@ -4,6 +4,109 @@
 Приложение
 {% endblock %}
 
+{% block styles %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fdf6e3;
+    }
+
+    .app-container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 40px 20px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        color: #343a40;
+        text-align: center;
+    }
+
+    .custom-heading {
+        font-size: 2.5em;
+        color: #d19e56;
+        margin-bottom: 30px;
+        font-weight: bold;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.85);
+        padding: 20px;
+        border-radius: 15px;
+        transition: transform 0.3s;
+    }
+
+    .custom-heading:hover {
+        transform: translateY(-3px);
+    }
+
+    .feature-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        text-align: left;
+    }
+
+    .feature-list li {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+        position: relative;
+        padding-left: 30px;
+        color: #5a5a5a;
+        display: flex;
+        align-items: center;
+    }
+
+    .feature-list li::before {
+        content: '✓';
+        color: #d19e56;
+        font-size: 1.5em;
+        margin-right: 10px;
+    }
+
+    .download-button {
+        background-color: #d19e56;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        margin-top: 20px;
+    }
+
+    .download-button:hover {
+        background-color: #a87c41;
+        transform: translateY(-3px);
+    }
+
+    @media (max-width: 576px) {
+        .custom-heading {
+            font-size: 2em;
+        }
+
+        .feature-list li {
+            font-size: 1em;
+        }
+
+        .download-button {
+            font-size: 1em;
+            padding: 10px 20px;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-    <h1 class="custom-heading">Приложение</h1>
+<div class="app-container">
+    <h1 class="custom-heading">Мобильное приложение</h1>
+
+    <ul class="feature-list">
+        <li>Копите бонусы и оплачивайте ими до 100% покупок</li>
+        <li>Участвуйте в специальных акциях</li>
+        <li>Следите за актуальными новостями и предложениями</li>
+        <li>Найдите ближайшую кофейню</li>
+    </ul>
+
+    <button class="download-button" onclick="window.location.href='https://link-to-download.com'">Скачать приложение</button>
+</div>
 {% endblock %}
