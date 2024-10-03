@@ -22,12 +22,11 @@
         <h2>Вакансии</h2>
         <ul>
             <li><strong>Бариста:</strong> Если вы увлечены кофе и хотите делиться своим опытом с клиентами, мы будем рады вам!</li>
-            <li><strong>Менеджер кофейни:</strong> Ищем организованного и ответственного человека для управления нашей кофейней.</li>
             <li><strong>Помощник по кухне:</strong> Идеально подходит для тех, кто хочет работать в дружной атмосфере и помогать создавать наши вкусные десерты.</li>
         </ul>
 
         <h2>Как подать заявку</h2>
-        <p>Если вы заинтересованы в работе с нами, пожалуйста, отправьте ваше резюме и сопроводительное письмо на <a href="mailto:email@paradiso.com">email@paradiso.com</a>. Укажите, на какую позицию вы хотите претендовать и почему вы хотите работать в нашей кофейне.</p>
+        <p>Если вы заинтересованы в работе с нами, пожалуйста, отправьте ваше резюме и сопроводительное письмо на <a href="mailto:email@paradiso.com" class="career-link">email@paradiso.com</a>. Укажите, на какую позицию вы хотите претендовать и почему вы хотите работать в нашей кофейне.</p>
 
         <p>Мы с нетерпением ждём возможности увидеть вас в нашей команде!</p>
     </div>
@@ -38,13 +37,14 @@
 <style>
     body {
         font-family: 'Poppins', sans-serif;
+        background-color: #fdf6e3;
     }
 
     .career-container {
         max-width: 1200px;
         margin: 20px auto;
         padding: 40px 20px;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(255, 255, 255, 0.95);
         border-radius: 15px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
         color: #343a40;
@@ -82,19 +82,41 @@
     ul {
         margin-left: 20px;
         margin-bottom: 20px;
+        list-style-type: disc;
     }
 
     li {
         margin-bottom: 10px;
     }
 
-    a {
+    .career-link {
+        position: relative;
         color: #d19e56;
-        text-decoration: underline;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        font-weight: 600;
     }
 
-    a:hover {
+    .career-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        display: block;
+        margin-top: 5px;
+        right: 0;
+        background: #d19e56;
+        transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .career-link:hover {
         color: #a87c41;
+    }
+
+    .career-link:hover::after {
+        width: 100%;
+        left: 0;
+        background: #a87c41;
     }
 
     @media (max-width: 576px) {
@@ -104,6 +126,10 @@
 
         h2 {
             font-size: 1.5em;
+        }
+
+        .career-link::after {
+            height: 1.5px;
         }
     }
 </style>
