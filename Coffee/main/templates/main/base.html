@@ -70,15 +70,13 @@
             z-index: 1;
             padding: 20px;
             border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             margin-top: 20px;
         }
         .dropdown-menu {
             border-radius: 8px;
             background-color: rgba(255, 255, 255, 0.9);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            z-index: 1060; /* Увеличен для обеспечения отображения поверх навбара */
+            z-index: 1060;
         }
         .dropdown-item {
             color: #4B3D3D;
@@ -101,6 +99,7 @@
                 font-size: 1.2rem;
             }
         }
+        {% block styles %}{% endblock %}
     </style>
 </head>
 <body>
@@ -119,7 +118,7 @@
             <div class="d-flex">
                 <a class="nav-link" href="{% url 'coffee' %}">Кофе</a>
                 <a class="nav-link" href="{% url 'menu' %}">Меню</a>
-                <a class="nav-link" href="{% url 'team' %}">Команда</a>
+                <a class="nav-link" href="{% url 'сareer' %}">Карьера</a>
                 <a class="nav-link" href="{% url 'contact' %}">Контакты</a>
                 <a class="nav-link" href="{% url 'application' %}">Приложение</a>
             </div>
@@ -152,7 +151,6 @@
             {% endblock %}
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

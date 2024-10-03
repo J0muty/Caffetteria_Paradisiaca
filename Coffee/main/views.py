@@ -4,6 +4,7 @@ from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 
 def index(request):
@@ -18,12 +19,13 @@ def menu(request):
     return render(request, 'main/menu.html')
 
 
-def team(request):
-    return render(request, 'main/team.html')
+def сareer(request):
+    return render(request, 'main/сareer.html')
 
 
 def contact(request):
-    return render(request, 'main/contact.html')
+    current_year = datetime.now().year
+    return render(request, 'main/contact.html', {'current_year': current_year})
 
 
 def application(request):
