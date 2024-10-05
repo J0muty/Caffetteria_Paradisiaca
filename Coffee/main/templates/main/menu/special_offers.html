@@ -1,0 +1,89 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Специальные предложения
+{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fdf6e3;
+    }
+
+    .main-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 40px 20px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        color: #343a40;
+    }
+
+    .custom-heading {
+        text-align: center;
+        font-size: 2.8em;
+        color: #d19e56;
+        margin-bottom: 30px;
+        font-weight: bold;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.85);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .brew-methods {
+        margin-top: 20px;
+    }
+
+    .brew-method {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .brew-method img {
+        width: 150px;
+        height: auto;
+        margin-right: 20px;
+        border-radius: 10px;
+    }
+
+    .brew-method h2 {
+        margin: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="main-container">
+        <h1 class="custom-heading">Специальные предложения</h1>
+
+        <div class="brew-methods">
+            <div class="brew-method">
+                <img src="path/to/paradiso-coffee.jpg" alt="Кофе Paradiso">
+                <div>
+                    <h2>Кофе Paradiso</h2>
+                    <p>Смешанная обжарка из трёх типов, идеально подходит для всех, кто хочет попробовать всё.</p>
+                </div>
+            </div>
+            <div class="brew-method">
+                <img src="path/to/slow-breakfast.jpg" alt="Медленный завтрак">
+                <div>
+                    <h2>Медленный завтрак</h2>
+                    <p>Френч-пресс со светлой обжаркой и свежими круассанами.</p>
+                </div>
+            </div>
+            <div class="brew-method">
+                <img src="path/to/cold-relaxation.jpg" alt="Холодный отдых">
+                <div>
+                    <h2>Холодный отдых</h2>
+                    <p>Ледяной пуровер с темной обжаркой, подаваемый с легким десертом.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

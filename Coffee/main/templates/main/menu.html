@@ -1,9 +1,118 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block title %}
 Меню
 {% endblock %}
 
+{% block styles %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fdf6e3;
+    }
+
+    .main-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 40px 20px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        color: #343a40;
+    }
+
+    .custom-heading {
+        text-align: center;
+        font-size: 2.8em;
+        color: #d19e56;
+        margin-bottom: 40px;
+        font-weight: bold;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.85);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .nav-menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 60px;
+    }
+
+    .nav-menu a {
+        margin: 0 15px;
+        font-size: 1.5em;
+        color: #d19e56;
+        text-decoration: none;
+        padding: 10px 20px;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        transition: all 0.3s;
+    }
+
+    .nav-menu a:hover {
+        border: 2px solid #d19e56;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .section {
+        text-align: center;
+        margin: 20px;
+        flex: 0 0 calc(50% - 40px);
+    }
+
+    .section img {
+        width: 200px;
+        height: auto;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .section p {
+        font-size: 0.8em;
+        color: #555;
+        margin-top: 5px;
+    }
+
+    .section img {
+    display: block;
+    margin: 0 auto 10px auto;
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+}
+
+</style>
+{% endblock %}
+
 {% block content %}
-    <h1 class="custom-heading">Меню</h1>
+    <div class="main-container">
+        <h1 class="custom-heading">Меню Paradiso</h1>
+
+        <div class="nav-menu">
+            <div class="section">
+                <img src="{% static 'main/menu/drinks_preview.png' %}" alt="Напитки">
+                <a href="{% url 'drinks' %}">Напитки</a>
+                <p>Погрузитесь в мир напитков Paradiso! Наши бариста с радостью приготовят для вас что-то особенное, что сделает ваш день ярче.</p>
+            </div>
+            <div class="section">
+                <img src="{% static 'main/menu/snacks_preview.png' %}" alt="Закуски">
+                <a href="{% url 'snacks' %}">Закуски</a>
+                <p>Проверьте наши аппетитные закуски, идеально сочетающиеся с кофе! В каждом укусе — забота о вашем вкусе.</p>
+            </div>
+            <div class="section">
+                <img src="{% static 'main/menu/desserts_preview.png' %}" alt="Десерты">
+                <a href="{% url 'desserts' %}">Десерты</a>
+                <p>У нас есть все для сладкоежек! Насладитесь нашими десертами, которые идеально сочетаются с вашим любимым напитком.</p>
+            </div>
+            <div class="section">
+                <img src="{% static 'main/menu/special_offers_preview.png' %}" alt="Комбо">
+                <a href="{% url 'special_offers' %}">Комбо</a>
+                <p>Скомпонуйте свой идеальный день с нашим комбо! Наслаждайтесь ароматным кофе в компании с изысканными десертами, приготовленными с любовью.</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

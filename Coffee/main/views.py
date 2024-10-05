@@ -15,10 +15,6 @@ def coffee(request):
     return render(request, 'main/coffee.html')
 
 
-def menu(request):
-    return render(request, 'main/menu.html')
-
-
 def сareer(request):
     return render(request, 'main/сareer.html')
 
@@ -125,3 +121,27 @@ def settings(request):
         'email': user.email,
     }
     return render(request, 'main/dropdown-menu/settings.html', context)
+
+
+def menu(request):
+    return render(request, 'main/menu.html')
+
+
+@login_required
+def desserts(request):
+    return render(request, 'main/menu/desserts.html')
+
+
+@login_required
+def drinks(request):
+    return render(request, 'main/menu/drinks.html')
+
+
+@login_required
+def special_offers(request):
+    return render(request, 'main/menu/special_offers.html')
+
+
+@login_required
+def snacks(request):
+    return render(request, 'main/menu/snacks.html')

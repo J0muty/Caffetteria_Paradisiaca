@@ -1,0 +1,96 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Закуски
+{% endblock %}
+
+{% block styles %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fdf6e3;
+    }
+
+    .main-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 40px 20px;
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        color: #343a40;
+    }
+
+    .custom-heading {
+        text-align: center;
+        font-size: 2.8em;
+        color: #d19e56;
+        margin-bottom: 30px;
+        font-weight: bold;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.85);
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .brew-methods {
+        margin-top: 20px;
+    }
+
+    .brew-method {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .brew-method img {
+        width: 150px;
+        height: auto;
+        margin-right: 20px;
+        border-radius: 10px;
+    }
+
+    .brew-method h2 {
+        margin: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="main-container">
+        <h1 class="custom-heading">Закуски</h1>
+
+        <div class="brew-methods">
+            <div class="brew-method">
+                <img src="path/to/croissant.jpg" alt="Круассан">
+                <div>
+                    <h2>Круассан</h2>
+                    <p>Свежеприготовленный круассан с маслом и джемом.</p>
+                </div>
+            </div>
+            <div class="brew-method">
+                <img src="path/to/biscuits.jpg" alt="Песочное печенье">
+                <div>
+                    <h2>Песочное печенье</h2>
+                    <p>Хрустящее печенье, сделанное с любовью.</p>
+                </div>
+            </div>
+            <div class="brew-method">
+                <img src="path/to/sandwich.jpg" alt="Сендвич">
+                <div>
+                    <h2>Сендвич с курицей</h2>
+                    <p>Сендвич с нежной курицей, свежими овощами и соусом.</p>
+                </div>
+            </div>
+            <div class="brew-method">
+                <img src="path/to/veggie-sandwich.jpg" alt="Вегетарианский сендвич">
+                <div>
+                    <h2>Вегетарианский сендвич</h2>
+                    <p>Сендвич с ассорти овощей и хумусом.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
