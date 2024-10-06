@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 def index(request):
@@ -47,16 +50,11 @@ def register(request):
                 firstname=form.cleaned_data['first_name'],
                 lastname=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
-                birthdate=form.cleaned_data['birthdate']
+                birthdate=form.cleaned_data['birthdate'],
             )
-            reg_user.set_password(form.cleaned_data['password'])
-            try:
-                reg_user.save()
-                return redirect('login')
-            except IntegrityError:
-                form.add_error('email', 'Пользователь с этим адресом электронной почты уже существует.')
-        else:
-            print(form.errors)
+            reg_user.password = form.cleaned_data['password']
+            reg_user.save()
+            return redirect('login')
     else:
         form = RegistrationForm()
 
@@ -68,15 +66,17 @@ def login_view(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        user = authenticate(request, username=email, password=password)
-
-        if user is not None:
-            if user.is_active:
+        try:
+            user = User.objects.get(email=email)
+            if user.password == password:
                 login(request, user)
                 return redirect('index')
-        else:
-            error_message = "Вы ввели неверный email или пароль."
-            return render(request, 'main/registration/login.html', {'error_message': error_message})
+        except User.DoesNotExist:
+            pass
+
+        error_message = "Вы ввели неверный email или пароль."
+        print(error_message)
+        return render(request, 'main/registration/login.html', {'error_message': error_message})
 
     return render(request, 'main/registration/login.html')
 

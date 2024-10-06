@@ -1,7 +1,6 @@
 from django import forms
 from .models import RegUser
 from datetime import datetime
-from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
 import re
 
@@ -17,8 +16,8 @@ class RegistrationForm(forms.Form):
     def clean_password(self):
         password = self.cleaned_data.get('password')
         if len(password) < 8 or not re.search(r'[A-Z]', password):
-            raise ValidationError('Пароль должен иметь длину не менее 8 символов и содержать заглавную букву..')
-        return make_password(password)
+            raise ValidationError('Пароль должен иметь длину не менее 8 символов и содержать заглавную букву.')
+        return password
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -37,10 +36,10 @@ class RegistrationForm(forms.Form):
 
     def save(self):
         user = RegUser(
-            firstname=self.cleaned_data['firstname'],
-            lastname=self.cleaned_data['lastname'],
+            firstname=self.cleaned_data['first_name'],
+            lastname=self.cleaned_data['last_name'],
             email=self.cleaned_data['email'],
-            password=make_password(self.cleaned_data['password']),
+            password=self.cleaned_data['password'],
             birthdate=self.cleaned_data['birthdate'],
         )
         user.save()
