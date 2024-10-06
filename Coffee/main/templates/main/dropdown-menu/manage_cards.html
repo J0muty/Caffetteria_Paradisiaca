@@ -15,12 +15,20 @@
             height: 100vh;
             display: flex;
             font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
+
+        .dark-theme {
+            background-color: #333;
+            color: #fff;
+        }
+
         .container {
             display: flex;
             flex: 1;
             overflow: hidden;
         }
+
         .sidebar {
             width: 300px;
             min-width: 250px;
@@ -35,6 +43,12 @@
             justify-content: center;
             align-items: center;
         }
+
+        .dark-theme .sidebar {
+            border-right: 1px solid #444;
+            background-color: #444;
+        }
+
         .sidebar h1 {
             font-size: 2rem;
             color: #6f4e37;
@@ -42,6 +56,11 @@
             text-align: center;
             font-weight: bold;
         }
+
+        .dark-theme .sidebar h1 {
+            color: #fff;
+        }
+
         .content {
             flex: 1;
             background-color: #ffffff;
@@ -50,19 +69,30 @@
             padding: 30px;
             overflow-y: auto;
         }
+
+        .dark-theme .content {
+            background-color: #555;
+        }
+
         .card {
             border: none;
             border-radius: 10px;
             margin-top: 20px;
         }
+
         .card-header {
             background-color: #6f4e37;
             color: white;
-            border-bottom: 1px solid #e0e0e0;
             font-weight: bold;
             font-size: 1.5rem;
             padding: 15px;
         }
+
+        .dark-theme .card-header {
+            background-color: #3e2b23;
+            color: #ffffff;
+        }
+
         .back-button {
             position: absolute;
             top: 10px;
@@ -74,9 +104,18 @@
             color: #6f4e37;
             transition: color 0.3s;
         }
+
         .back-button:hover {
             color: #5d4037;
             transform: scale(1.1);
+        }
+
+        .dark-theme .back-button {
+            color: #ffffff;
+        }
+
+        .dark-theme .back-button:hover {
+            color: #d1cfcf;
         }
     </style>
 </head>
@@ -93,9 +132,27 @@
                 <div class="card-header">
                     Добавленные карты
                 </div>
+                <div class="card-body">
+                    <p>Здесь будет информация о добавленных картах.</p>
+                </div>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const body = document.body;
+
+            function applyTheme() {
+                if (localStorage.getItem("dark-theme") === "true") {
+                    body.classList.add("dark-theme");
+                } else {
+                    body.classList.remove("dark-theme");
+                }
+            }
+
+            applyTheme();
+        });
+    </script>
 </body>
 </html>

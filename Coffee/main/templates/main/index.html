@@ -1,9 +1,247 @@
 {% extends 'main/base.html' %}
-
+{% load static %}
 {% block title %}
 Главная страница
 {% endblock %}
 
+{% block styles %}
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #fdf6e3;
+        color: #3e2723;
+        margin: 0;
+        padding: 0;
+    }
+
+    .hero-section {
+        position: relative;
+        padding: 100px 20px;
+        text-align: center;
+        color: #fff;
+        overflow: hidden;
+        background: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.5)
+        );
+    }
+
+    .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("{% static 'main/menu/img.png' %}");
+        background-size: cover;
+        background-position: center;
+        filter: blur(5px);
+        z-index: 1;
+    }
+
+    .hero-section > * {
+        position: relative;
+        z-index: 2;
+    }
+
+    .hero-section h1 {
+        font-size: 3.5em;
+        font-weight: bold;
+        text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        margin-bottom: 20px;
+        animation: fadeInDown 1s;
+    }
+
+    .hero-section p {
+        font-size: 1.5em;
+        margin-bottom: 30px;
+        animation: fadeInUp 1s;
+    }
+
+    .hero-section a {
+        background-color: #d19e56;
+        color: white;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-section a:hover {
+        background-color: #b57e46;
+        transform: translateY(-3px);
+    }
+
+    @keyframes fadeInDown {
+        0% {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .services-section {
+        max-width: 1200px;
+        margin: 80px auto;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .services-section h2 {
+        font-size: 2.5em;
+        color: #ffffff;
+        margin-bottom: 40px;
+        font-weight: bold;
+        position: relative;
+    }
+
+    .services-section h2::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background: #d19e56;
+        margin: 10px auto 0;
+        border-radius: 2px;
+    }
+
+    .services {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .service {
+        flex: 1 1 calc(33% - 40px);
+        margin: 20px;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s;
+    }
+
+    .service:hover {
+        transform: scale(1.05);
+    }
+
+    .service h3 {
+        font-size: 1.8em;
+        color: #3e2723;
+        margin-bottom: 20px;
+    }
+
+    .service p {
+        font-size: 1.1em;
+        color: #555;
+    }
+
+    .cta-section {
+        background-color: #d19e56;
+        color: white;
+        text-align: center;
+        padding: 60px 20px;
+        margin-top: 100px;
+        border-radius: 15px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-section h2 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+    .cta-section p {
+        font-size: 1.3em;
+        margin-bottom: 30px;
+    }
+
+    .cta-section a {
+        background-color: #fff;
+        color: #d19e56;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    .cta-section a:hover {
+        background-color: #e5e5e5;
+    }
+
+    @media (max-width: 768px) {
+        .services {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service {
+            flex: 1 1 90%;
+            margin: 10px 0;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5em;
+        }
+
+        .hero-section p {
+            font-size: 1.2em;
+        }
+    }
+</style>
+
+{% endblock %}
+
+
 {% block content %}
-    <h1 class="custom-heading">Главная страница</h1>
+    <section class="hero-section">
+        <h1>Добро пожаловать в Paradiso!</h1>
+        <p>Насладитесь лучшими кофейными напитками в городе</p>
+        <a href="{% url 'menu' %}">Посмотреть меню</a>
+    </section>
+
+    <section class="services-section">
+        <h2>Что мы предлагаем</h2>
+        <div class="services">
+            <div class="service">
+                <h3>Напитки</h3>
+                <p>Наши уникальные кофе и чаи созданы для истинных ценителей вкуса.</p>
+            </div>
+            <div class="service">
+                <h3>Закуски</h3>
+                <p>Идеальные закуски, которые дополнят ваш кофе.</p>
+            </div>
+            <div class="service">
+                <h3>Десерты</h3>
+                <p>Нежные десерты, созданные с любовью к сладкому.</p>
+            </div>
+        </div>
+    </section>
+
+    {% if not user.is_authenticated %}
+        <section class="cta-section">
+            <h2>Присоединяйтесь к нам сегодня!</h2>
+            <p>Зарегистрируйтесь сейчас и получите скидку на первый заказ</p>
+            <a href="{% url 'register' %}">Зарегистрироваться</a>
+        </section>
+    {% endif %}
+
 {% endblock %}

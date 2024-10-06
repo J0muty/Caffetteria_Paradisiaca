@@ -71,19 +71,28 @@
         margin-bottom: 10px;
     }
 
+    .section a {
+        display: block;
+        font-size: 1.5em;
+        color: #d19e56;
+        text-decoration: none;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+    }
+
     .section p {
         font-size: 0.8em;
         color: #555;
-        margin-top: 5px;
+        margin-top: 15px;
     }
 
     .section img {
-    display: block;
-    margin: 0 auto 10px auto;
-    width: 200px;
-    height: auto;
-    border-radius: 10px;
-}
+        display: block;
+        margin: 0 auto 10px auto;
+        width: 200px;
+        height: auto;
+        border-radius: 10px;
+    }
 
 </style>
 {% endblock %}
@@ -94,7 +103,7 @@
 
         <div class="nav-menu">
             <div class="section">
-                <img src="{% static 'main/menu/drinks_preview.png' %}" alt="Напитки">
+                <img src="{% static 'main/menu/drinks_preview_.png' %}" alt="Напитки">
                 <a href="{% url 'drinks' %}">Напитки</a>
                 <p>Погрузитесь в мир напитков Paradiso! Наши бариста с радостью приготовят для вас что-то особенное, что сделает ваш день ярче.</p>
             </div>
@@ -109,7 +118,7 @@
                 <p>У нас есть все для сладкоежек! Насладитесь нашими десертами, которые идеально сочетаются с вашим любимым напитком.</p>
             </div>
             <div class="section">
-                <img src="{% static 'main/menu/special_offers_preview.png' %}" alt="Комбо">
+                <img src="{% static 'main/menu/combo.png' %}" alt="Комбо">
                 <a href="{% url 'special_offers' %}">Комбо</a>
                 <p>Скомпонуйте свой идеальный день с нашим комбо! Наслаждайтесь ароматным кофе в компании с изысканными десертами, приготовленными с любовью.</p>
             </div>

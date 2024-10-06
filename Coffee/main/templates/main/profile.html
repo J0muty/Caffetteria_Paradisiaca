@@ -7,7 +7,7 @@
     <title>Профиль</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Lobster&family=Raleway:wght@400&family=Merriweather:wght@400&family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Lobster&family=Raleway:wght@400&family=Merriweather:wght@400&family=Poppins:wght@400&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f8f4e3;
@@ -17,6 +17,7 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
+            font-size: 1.1rem;
         }
         .container {
             display: flex;
@@ -35,13 +36,15 @@
             transition: transform 0.3s ease-in-out;
         }
         .sidebar h1 {
-            font-size: 2rem;
+            font-size: 2.1rem;
             color: #6f4e37;
-            margin-bottom: 30px;
-            text-align: center;
+            text-align: left;
             font-weight: bold;
+            margin-left: 20px;
+            margin-top: 10px;
         }
         .menu-list {
+            margin-top: 40px;
             list-style: none;
             padding: 0;
             width: 100%;
@@ -55,7 +58,7 @@
             background: rgba(111, 78, 55, 0.1);
             transition: background 0.3s, box-shadow 0.3s;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: #6f4e37;
             will-change: background, box-shadow;
         }
@@ -90,6 +93,13 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             padding: 30px;
             overflow-y: auto;
+            position: relative;
+        }
+        h2 {
+            color: #6f4e37;
+            font-weight: bold;
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.1rem !important;
         }
         .footer {
             text-align: center;
@@ -98,6 +108,149 @@
             color: #6f4e37;
             background-color: #fff;
             border-top: 1px solid #d6cfc4;
+        }
+
+        .dark-theme {
+            background-color: #222;
+            color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-theme .sidebar {
+            background-color: #333;
+            border-right: 1px solid #555;
+        }
+        .dark-theme .footer {
+            background-color: #333;
+            border-top: 1px solid #555;
+            color: #fff;
+        }
+        .dark-theme .menu-list li {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        .dark-theme .menu-list li:hover:not(.logout) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .dark-theme .menu-list li.logout:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+        .dark-theme h2 {
+            color: #fff;
+        }
+        .dark-theme p {
+            color: #ccc;
+        }
+        .dark-theme .content {
+            background-color: #444;
+            color: #ddd;
+        }
+        .dark-theme .sidebar h1 {
+            color: #ddd;
+        }
+        .dark-theme .btn {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .dark-theme .btn:hover {
+            background-color: #777;
+        }
+        .dark-theme #themeIcon {
+            color: #f3f35e;
+        }
+        .dark-theme .menu-list li i {
+            color: #3e2b23;
+        }
+
+        .toggleWrapper {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            overflow: hidden;
+        }
+        .toggleWrapper input {
+            position: absolute;
+            left: -99em;
+        }
+        .toggle {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            width: 90px;
+            height: 50px;
+            background-color: #83D8FF;
+            border-radius: 90px;
+            transition: background-color 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+        }
+        .toggle__handler {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            top: 3px;
+            left: 3px;
+            width: 44px;
+            height: 44px;
+            background-color: #FFCF96;
+            border-radius: 50px;
+            box-shadow: 0 2px 6px rgba(0,0,0,.3);
+            transition: all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform: rotate(-45deg);
+        }
+        .crater {
+            position: absolute;
+            background-color: #E8CDA5;
+            opacity: 0;
+            transition: opacity 200ms ease-in-out;
+            border-radius: 100%;
+        }
+        .crater--1 { top: 18px; left: 10px; width: 4px; height: 4px; }
+        .crater--2 { top: 28px; left: 22px; width: 6px; height: 6px; }
+        .crater--3 { top: 10px; left: 25px; width: 8px; height: 8px; }
+
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            transition: all 300ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
+            border-radius: 50%;
+        }
+        .star--1 { top: 10px; left: 35px; width: 30px; height: 3px; }
+        .star--2 { top: 18px; left: 28px; width: 30px; height: 3px; }
+        .star--3 { top: 27px; left: 40px; width: 30px; height: 3px; }
+        .star--4, .star--5, .star--6 { opacity: 0; }
+
+        .star--4 { top: 16px; left: 11px; width: 2px; height: 2px; }
+        .star--5 { top: 32px; left: 17px; width: 3px; height: 3px; }
+        .star--6 { top: 36px; left: 28px; width: 2px; height: 2px; }
+
+        input:checked + .toggle {
+            background-color: #749DD6;
+        }
+        input:checked + .toggle .toggle__handler {
+            background-color: #FFE5B5;
+            transform: translate3d(40px, 0, 0) rotate(0);
+        }
+        input:checked + .toggle .star--1 {
+            width: 2px;
+            height: 2px;
+        }
+        input:checked + .toggle .star--2 {
+            width: 4px;
+            height: 4px;
+        }
+        input:checked + .toggle .star--3 {
+            width: 2px;
+            height: 2px;
+        }
+        input:checked + .toggle .star--4,
+        input:checked + .toggle .star--5,
+        input:checked + .toggle .star--6 {
+            opacity: 1;
+        }
+        input:checked + .toggle .crater--1,
+        input:checked + .toggle .crater--2,
+        input:checked + .toggle .crater--3 {
+            opacity: 0;
         }
     </style>
 </head>
@@ -109,11 +262,6 @@
                 <li class="active">
                     <a href="/" class="nav-link">
                         <i class="fa fa-home"></i>Главная
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url 'manage_cards' %}" class="nav-link">
-                        <i class="fa fa-credit-card"></i>Управление картами
                     </a>
                 </li>
                 <li>
@@ -145,13 +293,54 @@
             </form>
         </div>
         <div class="content">
-            <h2>Добро пожаловать, {{ firstname }}!</h2>
+            <div class="h2-container">
+                <h2>Добро пожаловать, {{ firstname }}!</h2>
+            </div>
             <p>Здесь вы можете управлять своей учетной записью и просматривать информацию.</p>
+                <div class="toggleWrapper">
+                    <input id="darkmode-toggle" type="checkbox">
+                    <label for="darkmode-toggle" class="toggle">
+                        <span class="toggle__handler">
+                            <span class="crater crater--1"></span>
+                            <span class="crater crater--2"></span>
+                            <span class="crater crater--3"></span>
+                        </span>
+                        <span class="star star--1"></span>
+                        <span class="star star--2"></span>
+                        <span class="star star--3"></span>
+                        <span class="star star--4"></span>
+                        <span class="star star--5"></span>
+                        <span class="star star--6"></span>
+                    </label>
+                </div>
         </div>
     </div>
     <div class="footer">
         &copy; 2024 Кофейня. Все права защищены.
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toggle = document.querySelector('#darkmode-toggle');
+        const body = document.body;
+
+        if (localStorage.getItem('dark-theme') === 'true') {
+            toggle.checked = true;
+            body.classList.add('dark-theme');
+        }
+
+        toggle.addEventListener('change', function() {
+            if (toggle.checked) {
+                body.classList.add('dark-theme');
+                localStorage.setItem('dark-theme', 'true');
+            } else {
+                body.classList.remove('dark-theme');
+                localStorage.setItem('dark-theme', 'false');
+            }
+        });
+    });
+</script>
+
 </body>
 </html>

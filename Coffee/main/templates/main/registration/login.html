@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pO5tMZBPE3vG6T4tWgCkDwLFIxOqXlL6BnW3J6Mk5Z6u7Xt1ZKmm5LMXKdC7gW6h8xz2TR5kMcXvj8N90zQG3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             margin: 0;
@@ -55,12 +55,14 @@
         .form-group {
             margin-bottom: 20px;
             text-align: left;
+            position: relative;
         }
 
         input[type="text"],
         input[type="password"] {
             width: 100%;
             padding: 15px;
+            padding-right: 45px;
             font-size: 18px;
             border: none;
             border-radius: 6px;
@@ -76,7 +78,31 @@
             box-shadow: 0 2px 5px rgba(109, 76, 65, 0.4);
         }
 
-        button {
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        #togglePassword {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: #6d4c41;
+            font-size: 20px;
+            outline: none;
+            z-index: 2;
+        }
+
+        #togglePassword:focus {
+            outline: none;
+        }
+
+        button[type="submit"] {
             width: 100%;
             padding: 15px;
             background-color: #6d4c41;
@@ -88,7 +114,7 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        button:hover {
+        button[type="submit"]:hover {
             background-color: #5d4037;
             transform: translateY(-2px);
         }
@@ -144,6 +170,17 @@
             transform: scale(1.1);
             filter: none;
         }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-visible {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -156,13 +193,32 @@
         <div class="welcome-text">
             <h1>Войдите или создайте учетную запись</h1>
         </div>
-        <form class="login-form" method="post">
+        <form class="login-form" method="post" id="loginForm">
             {% csrf_token %}
             <div class="form-group">
                 <input type="text" id="email" name="email" placeholder="Почта" required>
+                <div class="error-message" id="emailError">
+                    {% if form.email.errors %}
+                        {{ form.email.errors.0 }}
+                    {% else %}
+                        Пожалуйста, введите корректный email.
+                    {% endif %}
+                </div>
             </div>
             <div class="form-group">
-                <input type="password" id="password" name="password" placeholder="Пароль" required>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Пароль" required>
+                    <button type="button" id="togglePassword" aria-label="Показать пароль">
+                        <i id="eyeIcon" class="fas fa-eye"></i>
+                    </button>
+                </div>
+                <div class="error-message" id="passwordError">
+                    {% if form.password.errors %}
+                        {{ form.password.errors.0 }}
+                    {% else %}
+                        Пожалуйста, введите ваш пароль.
+                    {% endif %}
+                </div>
             </div>
             <button type="submit">Авторизоваться</button>
             <div class="link-container">
@@ -175,5 +231,76 @@
         Присоединяйтесь к программе Paradisiaca® Rewards,<br> чтобы получать бесплатную еду и напитки,<br> бесплатные добавки, оплачивать и делать заказы с<br> помощью телефона и многое другое.
         <br><a href="{% url 'register' %}">Присоединяйтесь сейчас</a>
     </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const togglePasswordButton = document.getElementById("togglePassword");
+            const eyeIcon = document.getElementById("eyeIcon");
+            const passwordInput = document.getElementById("password");
+
+            togglePasswordButton.addEventListener("click", function () {
+                const currentType = passwordInput.getAttribute("type");
+
+                if (currentType === "password") {
+                    passwordInput.setAttribute("type", "text");
+                    eyeIcon.classList.remove("fa-eye");
+                    eyeIcon.classList.add("fa-eye-slash");
+                    togglePasswordButton.setAttribute("aria-label", "Скрыть пароль");
+                } else {
+                    passwordInput.setAttribute("type", "password");
+                    eyeIcon.classList.remove("fa-eye-slash");
+                    eyeIcon.classList.add("fa-eye");
+                    togglePasswordButton.setAttribute("aria-label", "Показать пароль");
+                }
+
+                console.log(`Current password input type: ${currentType}`);
+            });
+
+            const loginForm = document.getElementById("loginForm");
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+
+            loginForm.addEventListener("submit", function(e) {
+                let isValid = true;
+
+                [emailError, passwordError].forEach(function(el) {
+                    el.classList.remove("error-visible");
+                });
+
+                const email = document.getElementById("email").value.trim();
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    emailError.textContent = "Пожалуйста, введите корректный email.";
+                    emailError.classList.add("error-visible");
+                    isValid = false;
+                }
+
+                const password = passwordInput.value;
+                if (password.length < 8) {
+                    passwordError.textContent = "Пароль должен содержать не менее 8 символов.";
+                    passwordError.classList.add("error-visible");
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+
+            // Показывать серверные ошибки при загрузке страницы (если есть)
+            {% if form.errors %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        const errorElement = document.getElementById("{{ field.name }}Error");
+                        if (errorElement) {
+                            errorElement.textContent = "{{ field.errors.0|escapejs }}";
+                            errorElement.classList.add("error-visible");
+                        }
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        });
+    </script>
 </body>
 </html>

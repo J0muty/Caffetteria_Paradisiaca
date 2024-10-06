@@ -95,7 +95,8 @@
 
         input[type="text"],
         input[type="email"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="date"] {
             width: 100%;
             padding: 15px;
             font-size: 18px;
@@ -108,13 +109,45 @@
 
         input[type="text"]:focus,
         input[type="email"]:focus,
-        input[type="password"]:focus {
+        input[type="password"]:focus,
+        input[type="date"]:focus {
             border-bottom-color: #6d4c41;
             outline: none;
             box-shadow: 0 2px 5px rgba(109, 76, 65, 0.4);
         }
 
-        button {
+        .password-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .password-container input {
+            flex: 1;
+        }
+
+        #togglePassword {
+            position: absolute;
+            right: 25px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            color: #6d4c41;
+            font-size: 18px;
+            outline: none;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        #togglePassword:focus {
+            outline: none;
+        }
+
+        button[type="submit"] {
             width: 100%;
             padding: 15px;
             background-color: #6d4c41;
@@ -126,7 +159,7 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        button:hover {
+        button[type="submit"]:hover {
             background-color: #5d4037;
             transform: translateY(-2px);
         }
@@ -162,6 +195,25 @@
         }
 
         .valid {
+            color: green;
+        }
+
+        .password-requirements {
+            margin-top: 10px;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .password-requirements li {
+            font-size: 14px;
+            color: #e74c3c;
+            margin-bottom: 5px;
+        }
+
+        .password-requirements li.valid {
             color: green;
         }
     </style>
@@ -217,7 +269,12 @@
             </div>
             <div class="form-group">
                 <label for="password">Пароль</label>
-                <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Введите пароль" required>
+                    <button type="button" id="togglePassword" aria-label="Показать пароль">
+                        <i id="eyeIcon" class="fa fa-eye"></i>
+                    </button>
+                </div>
                 <div class="error-message" id="passwordError">
                     {% if form.password.errors %}
                         {{ form.password.errors.0 }}
@@ -278,6 +335,9 @@
             const uppercaseRequirement = document.getElementById("uppercaseRequirement");
             const lowercaseRequirement = document.getElementById("lowercaseRequirement");
             const specialCharacterRequirement = document.getElementById("specialCharacterRequirement");
+
+            const togglePasswordButton = document.getElementById("togglePassword");
+            const eyeIcon = document.getElementById("eyeIcon");
 
             // Функция для проверки валидности даты
             function validateBirthdate(dateStr) {
@@ -462,7 +522,7 @@
             }
 
             // Проверка на специальные символы
-            if (/[!/@#$%^&*(),.?":{}|<>]/.test(password)) {
+            if (/[!/@#$%^&*()_,.?":{}|<>-]/.test(password)) {
                 specialCharacterRequirement.classList.add("valid");
             } else {
                 specialCharacterRequirement.classList.remove("valid");
@@ -480,6 +540,22 @@
                 passwordError.textContent = "Пожалуйста, выполните все требования к паролю.";
             }
         });
+             // Функция для показа/скрытия пароля
+            togglePasswordButton.addEventListener("click", function () {
+                const currentType = passwordInput.getAttribute("type");
+
+                if (currentType === "password") {
+                    passwordInput.setAttribute("type", "text");
+                    eyeIcon.classList.remove("fa-eye");
+                    eyeIcon.classList.add("fa-eye-slash");
+                    togglePasswordButton.setAttribute("aria-label", "Скрыть пароль");
+                } else {
+                    passwordInput.setAttribute("type", "password");
+                    eyeIcon.classList.remove("fa-eye-slash");
+                    eyeIcon.classList.add("fa-eye");
+                    togglePasswordButton.setAttribute("aria-label", "Показать пароль");
+                }
+            });
 
             showServerErrors();
         });

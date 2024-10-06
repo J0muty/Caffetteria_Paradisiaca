@@ -87,10 +87,6 @@ def logout_view(request):
     return redirect('index')
 
 
-def manage_cards(request):
-    return render(request, 'main/dropdown-menu/manage_cards.html')
-
-
 def my_rewards(request):
     return render(request, 'main/dropdown-menu/my_rewards.html')
 
