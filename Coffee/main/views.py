@@ -134,8 +134,8 @@ def drinks(request):
 
 
 @login_required
-def special_offers(request):
-    return render(request, 'main/menu/special_offers.html')
+def combo_and_special_offers(request):
+    return render(request, 'main/menu/combo_and_special_offers.html')
 
 
 @login_required
