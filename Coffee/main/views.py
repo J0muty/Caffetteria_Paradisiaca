@@ -95,10 +95,6 @@ def order_coffee(request):
     return render(request, 'main/dropdown-menu/order_coffee.html')
 
 
-def reset_password(request):
-    return render(request, 'main/registration/reset_password.html')
-
-
 def order_history(request):
     return render(request, 'main/dropdown-menu/order_history.html')
 
@@ -145,3 +141,11 @@ def combo_and_special_offers(request):
 @login_required
 def snacks(request):
     return render(request, 'main/menu/snacks.html')
+
+
+def reset_password(request):
+    return render(request, 'main/registration/reset_password.html')
+
+
+def new_password(request):
+    return render(request, 'main/registration/new_password.html')
