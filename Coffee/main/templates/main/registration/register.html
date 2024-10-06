@@ -322,28 +322,26 @@
 
             const birthdateInput = document.getElementById("birthdate");
             const registrationForm = document.getElementById("registrationForm");
-
             const firstNameError = document.getElementById("firstNameError");
             const lastNameError = document.getElementById("lastNameError");
             const emailError = document.getElementById("emailError");
             const passwordError = document.getElementById("passwordError");
             const birthdateError = document.getElementById("birthdateError");
-
             const passwordInput = document.getElementById("password");
             const passwordRequirements = document.getElementById("passwordRequirements");
             const lengthRequirement = document.getElementById("lengthRequirement");
             const uppercaseRequirement = document.getElementById("uppercaseRequirement");
             const lowercaseRequirement = document.getElementById("lowercaseRequirement");
             const specialCharacterRequirement = document.getElementById("specialCharacterRequirement");
-
             const togglePasswordButton = document.getElementById("togglePassword");
             const eyeIcon = document.getElementById("eyeIcon");
+
+            let areRequirementsVisible = false;
 
             // Функция для проверки валидности даты
             function validateBirthdate(dateStr) {
                 const parts = dateStr.split('-');
                 if (parts.length !== 3) return false;
-
                 const day = parseInt(parts[0], 10);
                 const month = parseInt(parts[1], 10) - 1;
                 const year = parseInt(parts[2], 10);
@@ -390,7 +388,7 @@
                 let isValid = true;
 
                 // Очистка предыдущих ошибок
-                 [firstNameError, lastNameError, emailError, passwordError, birthdateError].forEach(function(el) {
+                [firstNameError, lastNameError, emailError, passwordError, birthdateError].forEach(function(el) {
                     el.classList.remove("error-visible");
                 });
 
@@ -429,7 +427,6 @@
 
                 // Проверка Пароля
                 const password = document.getElementById("password").value;
-                // Добавьте дополнительную проверку на наличие всех требований к паролю
                 const allRequirementsMet = lengthRequirement.classList.contains("valid") &&
                     uppercaseRequirement.classList.contains("valid") &&
                     lowercaseRequirement.classList.contains("valid") &&
@@ -468,7 +465,7 @@
                 }
 
                 if (!isValid) {
-                    e.preventDefault(); // Предотвращение отправки формы
+                    e.preventDefault();
                 }
             });
 
@@ -487,60 +484,63 @@
                 {% endif %}
             }
 
-
             passwordInput.addEventListener("focus", function() {
-                passwordRequirements.style.display = "block"; // Показывать требования при фокусе
+                passwordRequirements.style.display = "block";
+                areRequirementsVisible = true;
             });
 
             passwordInput.addEventListener("blur", function() {
-                passwordRequirements.style.display = "none"; // Скрывать требования при потере фокуса
+                // Не скрывать требования при нажатии на глазик
+                if (document.activeElement !== togglePasswordButton && !areRequirementsVisible) {
+                    passwordRequirements.style.display = "none";
+                }
             });
 
             passwordInput.addEventListener("input", function() {
                 const password = passwordInput.value;
 
+                // Проверка длины
+                if (password.length >= 8) {
+                    lengthRequirement.classList.add("valid");
+                } else {
+                    lengthRequirement.classList.remove("valid");
+                }
 
-            // Проверка длины
-            if (password.length >= 8) {
-                lengthRequirement.classList.add("valid");
-            } else {
-                lengthRequirement.classList.remove("valid");
-            }
+                // Проверка на заглавные буквы
+                if (/[A-Z]/.test(password)) {
+                    uppercaseRequirement.classList.add("valid");
+                } else {
+                    uppercaseRequirement.classList.remove("valid");
+                }
 
-            // Проверка на заглавные буквы
-            if (/[A-Z]/.test(password)) {
-                uppercaseRequirement.classList.add("valid");
-            } else {
-                uppercaseRequirement.classList.remove("valid");
-            }
+                // Проверка на строчные буквы
+                if (/[a-z]/.test(password)) {
+                    lowercaseRequirement.classList.add("valid");
+                } else {
+                    lowercaseRequirement.classList.remove("valid");
+                }
 
-            // Проверка на строчные буквы
-            if (/[a-z]/.test(password)) {
-                lowercaseRequirement.classList.add("valid");
-            } else {
-                lowercaseRequirement.classList.remove("valid");
-            }
+                // Проверка на специальные символы
+                if (/[!/@#$%^&*()_,.?":{}|<>-]/.test(password)) {
+                    specialCharacterRequirement.classList.add("valid");
+                } else {
+                    specialCharacterRequirement.classList.remove("valid");
+                }
 
-            // Проверка на специальные символы
-            if (/[!/@#$%^&*()_,.?":{}|<>-]/.test(password)) {
-                specialCharacterRequirement.classList.add("valid");
-            } else {
-                specialCharacterRequirement.classList.remove("valid");
-            }
+                // Проверка всех условий перед отправкой формы
+                const allRequirementsMet = lengthRequirement.classList.contains("valid") &&
+                    uppercaseRequirement.classList.contains("valid") &&
+                    lowercaseRequirement.classList.contains("valid") &&
+                    specialCharacterRequirement.classList.contains("valid");
 
-            // Проверка всех условий перед отправкой формы
-            const allRequirementsMet = lengthRequirement.classList.contains("valid") &&
-                uppercaseRequirement.classList.contains("valid") &&
-                lowercaseRequirement.classList.contains("valid") &&
-                specialCharacterRequirement.classList.contains("valid");
+                if (allRequirementsMet) {
+                    passwordError.textContent = "";
+                } else {
+                    passwordError.textContent = "Пожалуйста, выполните все требования к паролю.";
+                }
+            });
 
-            if (allRequirementsMet) {
-                passwordError.textContent = "";
-            } else {
-                passwordError.textContent = "Пожалуйста, выполните все требования к паролю.";
-            }
-        });
-             // Функция для показа/скрытия пароля
+            // Функция для показа/скрытия пароля
             togglePasswordButton.addEventListener("click", function () {
                 const currentType = passwordInput.getAttribute("type");
 
@@ -555,10 +555,25 @@
                     eyeIcon.classList.add("fa-eye");
                     togglePasswordButton.setAttribute("aria-label", "Показать пароль");
                 }
+
+                // Обеспечиваем, чтобы требования к паролю всегда оставались видимыми
+                passwordRequirements.style.display = "block";
+                areRequirementsVisible = true;
+            });
+
+            // Обработчик событий для других полей ввода
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('focus', function() {
+                    if (this !== passwordInput) {
+                        passwordRequirements.style.display = "none";
+                        areRequirementsVisible = false;
+                    }
+                });
             });
 
             showServerErrors();
         });
     </script>
+
 </body>
 </html>
