@@ -73,7 +73,7 @@ def login_view(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return redirect('profile')
+                return redirect('index')
         else:
             error_message = "Вы ввели неверный email или пароль."
             return render(request, 'main/registration/login.html', {'error_message': error_message})
