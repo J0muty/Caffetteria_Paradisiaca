@@ -52,7 +52,7 @@ def register(request):
                 email=form.cleaned_data['email'],
                 birthdate=form.cleaned_data['birthdate'],
             )
-            reg_user.password = form.cleaned_data['password']
+            reg_user.set_password(form.cleaned_data['password'])
             reg_user.save()
             return redirect('login')
     else:
@@ -68,7 +68,7 @@ def login_view(request):
 
         try:
             user = User.objects.get(email=email)
-            if user.password == password:
+            if user.check_password(password):
                 login(request, user)
                 return redirect('index')
         except User.DoesNotExist:
