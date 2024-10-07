@@ -149,3 +149,8 @@ def reset_password(request):
 
 def new_password(request):
     return render(request, 'main/registration/new_password.html')
+
+
+@login_required
+def change_settings(request):
+    return render(request, 'main/profile/change.html')
