@@ -44,6 +44,19 @@
             box-shadow: 0 4px 20px rgba(255, 255, 255, 0.5);
             color: #d19e56;
         }
+
+        .nav-link:focus,
+        .nav-link:active {
+            background-color: transparent;
+            color: #fff;
+            box-shadow: none;
+            outline: none;
+        }
+
+        .nav-link:focus-visible {
+            outline: none;
+        }
+
         .nav-central {
             margin-right: auto;
             padding-left: 15px;
@@ -88,6 +101,12 @@
             background-color: rgba(209, 158, 86, 0.1);
             color: #d19e56;
         }
+
+        .dropdown-toggle:focus {
+            box-shadow: none;
+            background-color: transparent;
+        }
+
         @media (max-width: 768px) {
             .nav-link {
                 margin-right: 10px;
