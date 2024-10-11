@@ -6,6 +6,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
 from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
+from django.http import HttpResponse
 
 User = get_user_model()
 
@@ -143,8 +145,19 @@ def snacks(request):
     return render(request, 'main/menu/snacks.html')
 
 
-def reset_password(request):
-    return render(request, 'main/registration/reset_password.html')
+def password_reset_form(request):
+    return render(request, 'main/registration/password_reset_form.html')
+
+
+def send_test_email(request):
+    send_mail(
+        'Тестовое письмо',
+        'Это тестовое письмо от Django.',
+        'lololow2017@yandex.ru',
+        ['J0muty@mail.ru'],
+        fail_silently=False,
+    )
+    return HttpResponse("Письмо отправлено!")
 
 
 def new_password(request):

@@ -127,3 +127,15 @@ AUTHENTICATION_BACKENDS = [
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'profile'
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
+EMAIL_HOST_USER = 'lololow2017@yandex.ru'
+EMAIL_HOST_PASSWORD = 'lpjrywdjnpydonie'
+DEFAULT_FROM_EMAIL = 'lololow2017@yandex.ru'
+
+SERVER_EMAIL = DEFAULT_FROM_EMAIL
