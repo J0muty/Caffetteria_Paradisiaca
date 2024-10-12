@@ -18,27 +18,10 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('order-coffee/', views.order_coffee, name='order_coffee'),
 
-
-    path('password_reset_form/',
-         auth_views.PasswordResetView.as_view(
-             template_name='main/registration/password_reset_form.html'
-         ),
-         name='password_reset_form'),
-    path('password_reset/done/',
-         auth_views.PasswordResetDoneView.as_view(
-             template_name='main/registration/password_reset_done.html'
-         ),
-         name='password_reset_done'),
-    path('password_reset_confirm/<uidb64>/<token>/',
-         auth_views.PasswordResetConfirmView.as_view(
-             template_name='main/registration/password_reset_confirm.html'
-         ),
+    path('password_reset_form/', views.password_reset_form, name='password_reset_form'),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='main/registration/password_reset_done.html'), name='password_reset_done'),
+    path('password_reset_confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='main/registration/password_reset_confirm.html'),
          name='password_reset_confirm'),
-    path('password_reset_complete/',
-         auth_views.PasswordResetCompleteView.as_view(
-             template_name='main/registration/password_reset_complete.html'
-         ),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(template_name='main/registration/password_reset_complete.html'),
          name='password_reset_complete'),
-
-    path('send_test_email/', views.send_test_email, name='send_test_email'),
 ]

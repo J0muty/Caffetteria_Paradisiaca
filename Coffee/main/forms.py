@@ -4,6 +4,7 @@ from datetime import datetime
 from django.core.exceptions import ValidationError
 import re
 from django.contrib.auth.forms import SetPasswordForm
+from django.contrib.auth.forms import PasswordResetForm
 
 
 class RegistrationForm(forms.Form):
@@ -56,3 +57,13 @@ class ResetPasswordForm(SetPasswordForm):
         if self.instance.check_password(password):
             raise forms.ValidationError("Новый пароль не может совпадать с текущим.")
         return password
+
+
+class CustomPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if not RegUser.objects.filter(email=email).exists():
+            raise ValidationError("Пользователь с таким email не зарегистрирован.")
+        return email
