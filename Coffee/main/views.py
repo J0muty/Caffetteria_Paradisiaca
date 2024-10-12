@@ -8,6 +8,7 @@ from datetime import datetime
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from .forms import ResetPasswordForm
 
 User = get_user_model()
 
@@ -147,6 +148,24 @@ def snacks(request):
 
 def password_reset_form(request):
     return render(request, 'main/registration/password_reset_form.html')
+
+
+@login_required
+def password_reset_confirm(request):
+    user = request.user
+    if request.method == 'POST':
+        form = ResetPasswordForm(user=user, data=request.POST)
+        if form.is_valid():
+            # Save the new password
+            form.save()
+            messages.success(request, 'Пароль успешно сброшен!')
+            return redirect('login')  # Redirect to the login page
+        else:
+            messages.error(request, 'Исправьте ошибки в форме.')
+    else:
+        form = ResetPasswordForm(user=user)
+
+    return render(request, 'main/registration/password_reset_confirm.html', {'form': form})
 
 
 def send_test_email(request):

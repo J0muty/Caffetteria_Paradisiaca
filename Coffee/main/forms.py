@@ -3,6 +3,7 @@ from .models import RegUser
 from datetime import datetime
 from django.core.exceptions import ValidationError
 import re
+from django.contrib.auth.forms import SetPasswordForm
 
 
 class RegistrationForm(forms.Form):
@@ -43,3 +44,15 @@ class RegistrationForm(forms.Form):
             birthdate=self.cleaned_data['birthdate'],
         )
         user.save()
+
+
+class ResetPasswordForm(SetPasswordForm):
+    class Meta:
+        model = RegUser
+        fields = ['new_password1', 'new_password2']
+
+    def clean_new_password1(self):
+        password = self.cleaned_data.get('new_password1')
+        if self.instance.check_password(password):
+            raise forms.ValidationError("Новый пароль не может совпадать с текущим.")
+        return password
