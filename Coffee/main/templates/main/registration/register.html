@@ -490,7 +490,6 @@
             });
 
             passwordInput.addEventListener("blur", function() {
-                // Не скрывать требования при нажатии на глазик
                 if (document.activeElement !== togglePasswordButton && !areRequirementsVisible) {
                     passwordRequirements.style.display = "none";
                 }
