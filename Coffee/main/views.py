@@ -157,6 +157,7 @@ def password_reset_form(request):
                 use_https=request.is_secure(),
                 email_template_name='main/registration/password_reset_email.txt',
             )
+            request.session['password_reset_form_submitted'] = True
             messages.success(request, 'Инструкции по сбросу пароля отправлены на вашу почту.')
             return redirect('password_reset_done')
         else:
@@ -166,6 +167,13 @@ def password_reset_form(request):
 
     return render(request, 'main/registration/password_reset_form.html', {'form': form})
 
+
+def password_reset_done(request):
+    if not request.session.get('password_reset_form_submitted'):
+        return HttpResponseForbidden("Access Denied")
+
+    del request.session['password_reset_form_submitted']
+    return render(request, 'main/registration/password_reset_done.html')
 
 
 @login_required
@@ -185,15 +193,12 @@ def password_reset_confirm(request):
     return render(request, 'main/registration/password_reset_confirm.html', {'form': form})
 
 
-def send_test_email(request):
-    send_mail(
-        'Тестовое письмо',
-        'Это тестовое письмо от Django.',
-        'lololow2017@yandex.ru',
-        ['J0muty@mail.ru'],
-        fail_silently=False,
-    )
-    return HttpResponse("Письмо отправлено!")
+def password_reset_complete(request):
+    referer = request.META.get('HTTP_REFERER')
+    if not referer or 'password_reset_confirm' not in referer:
+        return HttpResponseForbidden("Access Denied")
+
+    return render(request, 'main/registration/password_reset_complete.html')
 
 
 def new_password(request):
