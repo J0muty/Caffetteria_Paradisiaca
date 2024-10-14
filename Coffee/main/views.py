@@ -23,8 +23,8 @@ def coffee(request):
     return render(request, 'main/coffee.html')
 
 
-def сareer(request):
-    return render(request, 'main/сareer.html')
+def career(request):
+    return render(request, 'main/career.html')
 
 
 def contact(request):
