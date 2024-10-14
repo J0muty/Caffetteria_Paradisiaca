@@ -10,6 +10,7 @@
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #fdf6e3;
+        background-image: none;
     }
 
     .main-container {
@@ -60,6 +61,12 @@
         border: 1px solid #d19e56;
         border-radius: 10px;
         background-color: rgba(255, 255, 255, 0.8);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .brew-method:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
     .brew-method h2 {
@@ -73,16 +80,6 @@
         text-align: justify;
         margin-left: 20px;
         margin-right: 20px;
-    }
-
-    @media (max-width: 576px) {
-        .custom-heading {
-            font-size: 2em;
-        }
-
-        .brew-method h2 {
-            font-size: 1.5em;
-        }
     }
 
     .custom-centered-heading {
@@ -100,6 +97,101 @@
 
     .custom-centered-heading:hover {
         transform: translateY(-3px);
+    }
+
+    /* Адаптивные стили */
+    @media (max-width: 1200px) {
+        .main-container {
+            max-width: 1000px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .main-container {
+            max-width: 90%;
+            padding: 35px 15px;
+        }
+        .custom-heading {
+            font-size: 2.5em;
+            padding: 18px;
+        }
+        .brew-method h2 {
+            font-size: 1.6em;
+        }
+        .coffee-text, .brew-method p {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .main-container {
+            max-width: 95%;
+            padding: 30px 15px;
+        }
+        .custom-heading {
+            font-size: 2.2em;
+            padding: 15px;
+        }
+        .brew-method h2 {
+            font-size: 1.5em;
+        }
+        .coffee-text, .brew-method p {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .main-container {
+            max-width: 100%;
+            margin: 10px;
+            padding: 20px 10px;
+        }
+
+        .custom-heading {
+            font-size: 1.8em;
+            padding: 10px;
+        }
+
+        .brew-method h2 {
+            font-size: 1.3em;
+        }
+
+        .coffee-text, .brew-method p {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .custom-centered-heading {
+            font-size: 1.8em;
+            padding: 15px;
+        }
+
+        .brew-method {
+            padding: 15px;
+        }
+    }
+
+    a {
+        color: #d19e56;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #a87c41;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 576px) {
+        .custom-heading, .custom-centered-heading {
+            box-shadow: none;
+        }
+
+        .brew-method h2 {
+            text-align: center;
+        }
     }
 </style>
 
@@ -135,7 +227,7 @@
                 <p><strong>Отмерьте воду и закипятите её:</strong> Измерьте необходимое количество воды и немного добавьте для промывки фильтра, затем вскипятите её.</p>
                 <p><strong>Промойте фильтр:</strong> Быстро промойте бумажный фильтр горячей водой и слейте её, чтобы добиться максимально чистого аромата кофе.</p>
                 <p><strong>Выберите помол и измерьте кофе:</strong> Для пуровера подходит мелкий помол, похожий на сахарную пудру. Рассчитайте две столовые ложки молотого кофе на 180 мл воды.</p>
-                <p><strong>Залейте воду и дайте настояться:</strong> Влейте горячую воду, покрывая кофе лишь наполовину, и дайте ему настояться 10 секунд <br> для равномерного раскрытия вкуса.</p>
+                <p><strong>Залейте воду и дайте настояться:</strong> Влейте горячую воду, покрывая кофе лишь наполовину, и дайте ему настояться 10 секунд для равномерного раскрытия вкуса.</p>
                 <p><strong>Закончите заливку и наслаждайтесь:</strong> Медленно доливайте оставшуюся воду, делая небольшие круговые движения по всей поверхности кофе. Ваш напиток готов!</p>
             </div>
 
@@ -152,34 +244,32 @@
 
             <div class="brew-method">
                 <h2>Кофемашина</h2>
-                <p>Фильтрованный кофе из кофемашины — это быстрый и удобный способ приготовить отличную чашку, если соблюдать правильные пропорции <br> и использовать чистую воду.</p>
+                <p>Фильтрованный кофе из кофемашины — это быстрый и удобный способ приготовить отличную чашку, если соблюдать правильные пропорции и использовать чистую воду.</p>
                 <p><strong>Выберите правильный помол:</strong> Для фильтров с плоским дном используется средний помол, похожий на морскую соль. Для конусных фильтров – более мелкий, похожий на сахарную пудру.</p>
                 <p><strong>Отмерьте кофе:</strong> На 180 мл воды рекомендуется использовать две столовые ложки свежемолотого кофе.</p>
                 <p><strong>Настаивайте и наслаждайтесь:</strong> Заварите кофе и наслаждайтесь им сразу после приготовления.</p>
             </div>
+        </div>
 
-            <p class="coffee-text">
-                Таким образом, вне зависимости от выбранного способа заваривания, соблюдение правильных пропорций и температурных режимов поможет вам наслаждаться вкусным и ароматным кофе в любое время!
-            </p>
+        <h2 class="custom-centered-heading">Спектр Paradiso Roast™</h2>
+        <p class="coffee-text">
+            Наш кофе сортируется по трем профилям обжарки, поэтому вы легко сможете найти тот вкус и интенсивность, которые подходят именно вам.
+        </p>
 
-            <h2 class="custom-centered-heading">Спектр Paradiso Roast™</h2>
-            <p class="coffee-text">
-                Наш кофе сортируется по трем профилям обжарки, поэтому вы легко сможете найти тот вкус и интенсивность, которые подходят именно вам.
-            </p>
-
+        <div class="brew-methods">
             <div class="brew-method">
                 <h2>Светлая обжарка</h2>
-                <p>Светлая обжарка предпочитается для сохранения оригинальных вкусов и ароматов зерен. Она придаёт кофе легкость и яркость</p>
+                <p>Светлая обжарка предпочитается для сохранения оригинальных вкусов и ароматов зерен. Она придаёт кофе легкость и яркость.</p>
             </div>
 
             <div class="brew-method">
                 <h2>Средняя обжарка</h2>
-                <p>Это универсальный способ, который подчеркивает баланс между сладостью и кислотностью, придавая напитку мягкий, гармоничный вкус</p>
+                <p>Это универсальный способ, который подчеркивает баланс между сладостью и кислотностью, придавая напитку мягкий, гармоничный вкус.</p>
             </div>
 
             <div class="brew-method">
                 <h2>Темная обжарка</h2>
-                <p>Темная обжарка раскрывает глубокие карамельные и шоколадные ноты. Этот кофе обладает ярко выраженным вкусом и насыщенным ароматом</p>
+                <p>Темная обжарка раскрывает глубокие карамельные и шоколадные ноты. Этот кофе обладает ярко выраженным вкусом и насыщенным ароматом.</p>
             </div>
         </div>
     </div>

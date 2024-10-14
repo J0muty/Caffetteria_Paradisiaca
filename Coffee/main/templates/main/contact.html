@@ -9,6 +9,7 @@
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #fdf6e3;
+        background-image: none;
     }
 
     .contacts-container {
@@ -88,12 +89,12 @@
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s;
+        transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .contact-info:hover {
         transform: translateY(-5px);
-        color: #101010;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
     }
 
     .contact-info h2 {
@@ -135,6 +136,7 @@
         display: inline-block;
         border-radius: 50%;
         transition: border-color 0.3s, transform 0.3s;
+        border: 2px solid transparent;
     }
 
     .social-icon:hover {
@@ -153,88 +155,183 @@
         transform: scale(1.2);
     }
 
+    .orange-text {
+        color: #d19e56;
+    }
+
+    @media (max-width: 1200px) {
+        .contacts-container {
+            max-width: 1000px;
+        }
+    }
+
     @media (max-width: 992px) {
+        .contacts-container {
+            max-width: 90%;
+            padding: 35px 15px;
+        }
+        .custom-heading {
+            font-size: 2.5em;
+            padding: 18px;
+        }
+        .brew-method h2 {
+            font-size: 1.6em;
+        }
+        .coffee-text, .brew-method p {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .contacts-content {
+            flex-direction: column;
+        }
         .map-container, .contact-info {
-            flex: 0 1 100%;
             max-width: 100%;
+            flex: 1 1 100%;
+        }
+        .custom-heading {
+            font-size: 2.2em;
+            padding: 15px;
+        }
+        .brew-method h2 {
+            font-size: 1.5em;
+        }
+        .coffee-text, .brew-method p {
+            margin-left: 10px;
+            margin-right: 10px;
         }
     }
 
     @media (max-width: 576px) {
-        .custom-heading {
-            font-size: 2em;
+        .contacts-container {
+            max-width: 100%;
+            margin: 10px;
+            padding: 20px 10px;
         }
 
-        .contact-info h2 {
-            font-size: 1.5em;
+        .custom-heading {
+            font-size: 1.8em;
+            padding: 10px;
+        }
+
+        .brew-method h2 {
+            font-size: 1.3em;
+            text-align: center;
+        }
+
+        .coffee-text, .brew-method p {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .custom-centered-heading {
+            font-size: 1.8em;
+            padding: 15px;
+        }
+
+        .brew-method {
+            padding: 15px;
+        }
+
+        .social-icons {
+            gap: 20px;
+        }
+
+        .social-icon img {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    a {
+        color: #d19e56;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #a87c41;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 576px) {
+        .custom-heading, .custom-centered-heading {
+            box-shadow: none;
         }
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="contacts-container">
-    <h1 class="custom-heading">Контакты</h1>
+    <div class="contacts-container">
+        <h1 class="custom-heading">Контакты</h1>
 
-    <div class="contacts-content">
-        <div class="map-container">
-            <div id="map"></div>
-            <div id="map-loading" class="map-loading">
-                <p>Загрузка карты...</p>
+        <div class="contacts-content">
+            <div class="map-container">
+                <div id="map"></div>
+                <div id="map-loading" class="map-loading">
+                    <p>Загрузка карты...</p>
+                </div>
             </div>
-        </div>
-        <div class="contact-info">
-            <h2>Наше кафе</h2>
-            <p class="orange-text"><strong>Адрес:</strong> ул. Кировоградская, д. 9, к. 4, г. Москва</p>
-            <p class="orange-text"><strong>Телефон:</strong> +7 (918) 648-20-00</p>
-            <p class="orange-text"><strong>Режим работы:</strong></p>
-            <ul class="orange-text">
-                <li>Пн-Пт: 09:00 - 21:00</li>
-                <li>Сб-Вс: 10:00 - 22:00</li>
-            </ul>
-            <p class="social-media"><strong>Социальные сети:</strong></p>
-            <div class="social-icons">
-                <a href="#" class="social-icon"><img src="{% static 'main/icons/facebook-icon.png' %}" alt="Facebook"></a>
-                <a href="#" class="social-icon"><img src="{% static 'main/icons/instagram-icon.png' %}" alt="Instagram"></a>
-                <a href="#" class="social-icon"><img src="{% static 'main/icons/twitter-icon.png' %}" alt="Twitter"></a>
+            <div class="contact-info">
+                <h2>Наше кафе</h2>
+                <p class="orange-text"><strong>Адрес:</strong> ул. Кировоградская, д. 9, к. 4, г. Москва</p>
+                <p class="orange-text"><strong>Телефон:</strong> +7 (918) 648-20-00</p>
+                <p class="orange-text"><strong>Режим работы:</strong></p>
+                <ul class="orange-text">
+                    <li>Пн-Пт: 09:00 - 21:00</li>
+                    <li>Сб-Вс: 10:00 - 22:00</li>
+                </ul>
+                <p class="social-media"><strong>Социальные сети:</strong></p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">
+                        <img src="{% static 'main/icons/facebook-icon.png' %}" alt="Facebook">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="{% static 'main/icons/instagram-icon.png' %}" alt="Instagram">
+                    </a>
+                    <a href="#" class="social-icon">
+                        <img src="{% static 'main/icons/twitter-icon.png' %}" alt="Twitter">
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script type="text/javascript">
-    function init() {
-        if (typeof ymaps === 'undefined') {
-            console.error("API Yandex карты не загружен.");
+    <script type="text/javascript">
+        function init() {
+            if (typeof ymaps === 'undefined') {
+                console.error("API Yandex карты не загружен.");
+                document.getElementById('map-loading').style.display = 'none';
+                return;
+            }
+
+            var mapElement = document.getElementById('map');
+
+            if (!mapElement) {
+                console.error("Элемент с id 'map' не найден на странице.");
+                document.getElementById('map-loading').style.display = 'none';
+                return;
+            }
+
+            var myMap = new ymaps.Map("map", {
+                center: [55.621719, 37.611742],
+                zoom: 15,
+                controls: ['zoomControl']
+            });
+
+            var myPlacemark = new ymaps.Placemark([55.621719, 37.611742], {
+                hintContent: 'Наше кафе',
+                balloonContent: 'Добро пожаловать в наше кафе!'
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+
             document.getElementById('map-loading').style.display = 'none';
-            return;
         }
+    </script>
 
-        var mapElement = document.getElementById('map');
-
-        if (!mapElement) {
-            console.error("Элемент с id 'map' не найден на странице.");
-            document.getElementById('map-loading').style.display = 'none';
-            return;
-        }
-
-        var myMap = new ymaps.Map("map", {
-            center: [55.621719, 37.611742],
-            zoom: 15,
-            controls: ['zoomControl']
-        });
-
-        var myPlacemark = new ymaps.Placemark([55.621719, 37.611742], {
-            hintContent: 'Наше кафе',
-            balloonContent: 'Добро пожаловать в наше кафе!'
-        });
-
-        myMap.geoObjects.add(myPlacemark);
-
-        document.getElementById('map-loading').style.display = 'none';
-    }
-</script>
-
-<script src="https://api-maps.yandex.ru/2.1/?apikey=8fdf6b99-4024-4248-a5fe-2e7974318cfb&lang=ru_RU&onload=init" type="text/javascript" async defer></script>
-
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=8fdf6b99-4024-4248-a5fe-2e7974318cfb&lang=ru_RU&onload=init" type="text/javascript" async defer></script>
 {% endblock %}

@@ -95,7 +95,6 @@
             background-color: rgba(255, 255, 255, 0.9);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             z-index: 1060;
-            /* Добавим плавное раскрытие меню */
             transition: all 0.3s ease;
         }
         .dropdown-item {
@@ -146,7 +145,6 @@
             }
             .dropdown-menu {
                 width: 100%;
-                /* Изменяем позиционирование на статическое */
                 position: static;
                 float: none;
                 margin-top: 0;
@@ -163,18 +161,14 @@
             .fs-4 {
                 font-size: 1rem;
             }
-            /* Дополнительные стили для Dropdown меню на мобильных устройствах */
             .dropdown-menu.show {
                 display: block;
             }
-            /* Убираем абсолютное позиционирование для Dropdown меню на мобильных */
             .dropdown-menu {
                 position: static !important;
                 float: none !important;
             }
         }
-
-        /* Улучшение кнопки navbar-toggler */
         .navbar-toggler {
             border-color: rgba(255, 255, 255, 0.5);
             padding: 0.25rem 0.75rem;
@@ -184,8 +178,6 @@
             width: 30px;
             height: 30px;
         }
-
-        /* Стилизация раскрывающегося меню */
         .collapse.show .nav-link {
             margin-right: 0;
             margin-bottom: 10px;

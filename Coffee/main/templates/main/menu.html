@@ -5,10 +5,13 @@
 {% endblock %}
 
 {% block styles %}
+
 <style>
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #fdf6e3;
+        margin: 0;
+        padding: 0;
     }
 
     .main-container {
@@ -35,6 +38,10 @@
         transition: background-color 0.3s, transform 0.3s;
     }
 
+    .custom-heading:hover {
+        transform: translateY(-3px);
+    }
+
     .nav-menu {
         display: flex;
         flex-wrap: wrap;
@@ -43,7 +50,7 @@
     }
 
     .nav-menu a {
-        margin: 0 15px;
+        margin: 10px 15px;
         font-size: 1.5em;
         color: #d19e56;
         text-decoration: none;
@@ -51,6 +58,8 @@
         border: 2px solid transparent;
         border-radius: 10px;
         transition: all 0.3s;
+        flex: 1 1 calc(50% - 40px);
+        text-align: center;
     }
 
     .nav-menu a:hover {
@@ -65,10 +74,16 @@
     }
 
     .section img {
+        display: block;
+        margin: 0 auto 10px auto;
         width: 200px;
         height: auto;
         border-radius: 10px;
-        margin-bottom: 10px;
+        transition: transform 0.3s;
+    }
+
+    .section img:hover {
+        transform: scale(1.05);
     }
 
     .section a {
@@ -78,23 +93,116 @@
         text-decoration: none;
         padding: 10px 20px;
         margin-bottom: 10px;
+        transition: color 0.3s, background-color 0.3s;
+    }
+
+    .section a:hover {
+        color: #fff;
+        background-color: #d19e56;
+        border-radius: 5px;
     }
 
     .section p {
-        font-size: 0.8em;
+        font-size: 0.9em;
         color: #555;
         margin-top: 15px;
+        padding: 0 10px;
+        text-align: center;
     }
 
-    .section img {
-        display: block;
-        margin: 0 auto 10px auto;
-        width: 200px;
-        height: auto;
-        border-radius: 10px;
+    /* Адаптивные стили */
+    @media (max-width: 992px) {
+        .nav-menu a {
+            flex: 1 1 calc(50% - 40px);
+        }
     }
 
+    @media (max-width: 768px) {
+        .nav-menu a {
+            flex: 1 1 100%;
+        }
+
+        .section {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .section img {
+            width: 150px;
+        }
+
+        .custom-heading {
+            font-size: 2.5em;
+            padding: 15px;
+            margin-bottom: 30px;
+        }
+
+        .section a {
+            font-size: 1.3em;
+            padding: 8px 16px;
+        }
+
+        .section p {
+            font-size: 0.85em;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .nav-menu {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            flex: 1 1 100%;
+            max-width: 90%;
+            margin: 10px 0;
+            font-size: 1.2em;
+            padding: 8px 16px;
+        }
+
+        .section img {
+            width: 120px;
+        }
+
+        .custom-heading {
+            font-size: 2em;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section a {
+            font-size: 1.1em;
+            padding: 6px 12px;
+        }
+
+        .section p {
+            font-size: 0.8em;
+        }
+    }
+
+    a {
+        color: #d19e56;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #a87c41;
+        text-decoration: underline;
+    }
+
+    @media (max-width: 576px) {
+        .custom-heading, .nav-menu a, .section a {
+            box-shadow: none;
+        }
+
+        .section img:hover {
+            transform: none;
+        }
+    }
 </style>
+
 {% endblock %}
 
 {% block content %}

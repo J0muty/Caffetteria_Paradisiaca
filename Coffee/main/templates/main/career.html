@@ -4,40 +4,12 @@
 Карьера
 {% endblock %}
 
-{% block content %}
-<div class="career-container">
-    <h1 class="custom-heading">Карьера в Paradiso</h1>
-
-    <div class="career-content">
-        <p class="career-paragraph">В кофейне Paradiso мы ищем увлечённых и талантливых людей, готовых стать частью нашей дружной команды. Мы верим, что успех нашей кофейни зависит от людей, которые в неё работают, и стремимся создать вдохновляющую и поддерживающую атмосферу для всех сотрудников.</p>
-
-        <h2>Почему стоит работать с нами?</h2>
-        <ul>
-            <li><strong>Дружный коллектив:</strong> Мы гордимся нашей командой, которая поддерживает друг друга и работает вместе для достижения общих целей</li>
-            <li><strong>Обучение и развитие:</strong> Мы предлагаем обучение на месте, чтобы вы могли развивать свои навыки в кофейном искусстве и клиентском обслуживании</li>
-            <li><strong>Гибкий график:</strong> Мы понимаем, как важен баланс между работой и личной жизнью, поэтому предлагаем гибкие графики для наших сотрудников</li>
-            <li><strong>Конкурентоспособная заработная плата:</strong> Мы ценим труд наших сотрудников и предлагаем достойную оплату за вашу работу</li>
-        </ul>
-
-        <h2>Вакансии</h2>
-        <ul>
-            <li><strong>Бариста:</strong> Если вы увлечены кофе и хотите делиться своим опытом с клиентами, мы будем рады вам!</li>
-            <li><strong>Помощник по кухне:</strong> Идеально подходит для тех, кто хочет работать в дружной атмосфере и помогать создавать наши вкусные десерты</li>
-        </ul>
-
-        <h2>Как подать заявку</h2>
-        <p class="career-paragraph">Если вы заинтересованы в работе с нами, пожалуйста, отправьте ваше резюме и сопроводительное письмо на <a href="mailto:email@paradiso.com" class="career-link">email@paradiso.com</a>. Укажите, на какую позицию вы хотите претендовать и почему вы хотите работать в нашей кофейне.</p>
-
-        <p class="career-paragraph">Мы с нетерпением ждём вас в нашей команде!</p>
-    </div>
-</div>
-{% endblock %}
-
 {% block styles %}
 <style>
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #fdf6e3;
+        background-image: none;
     }
 
     .career-container {
@@ -124,9 +96,56 @@
         background: #a87c41;
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: 1200px) {
+        .career-container {
+            max-width: 1000px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .career-container {
+            max-width: 90%;
+            padding: 35px 15px;
+        }
         .custom-heading {
-            font-size: 2em;
+            font-size: 2.5em;
+            padding: 18px;
+        }
+        h2 {
+            font-size: 1.8em;
+        }
+        .career-paragraph {
+            margin: 0 15px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .career-container {
+            max-width: 95%;
+            padding: 30px 15px;
+        }
+        .custom-heading {
+            font-size: 2.2em;
+            padding: 15px;
+        }
+        h2 {
+            font-size: 1.6em;
+        }
+        .career-paragraph {
+            margin: 0 10px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .career-container {
+            max-width: 100%;
+            margin: 10px;
+            padding: 20px 10px;
+        }
+
+        .custom-heading {
+            font-size: 1.8em;
+            padding: 10px;
         }
 
         h2 {
@@ -137,9 +156,57 @@
             margin: 0 10px;
         }
 
+        ul {
+            margin-left: 15px;
+        }
+
+        li {
+            font-size: 1em;
+            margin-bottom: 8px;
+        }
+
         .career-link::after {
             height: 1.5px;
         }
     }
+
+    @media (max-width: 576px) {
+        .custom-heading {
+            box-shadow: none;
+        }
+
+        .career-link {
+            display: inline-block;
+        }
+    }
 </style>
+{% endblock %}
+
+{% block content %}
+<div class="career-container">
+    <h1 class="custom-heading">Карьера в Paradiso</h1>
+
+    <div class="career-content">
+        <p class="career-paragraph">В кофейне Paradiso мы ищем увлечённых и талантливых людей, готовых стать частью нашей дружной команды. Мы верим, что успех нашей кофейни зависит от людей, которые в неё работают, и стремимся создать вдохновляющую и поддерживающую атмосферу для всех сотрудников.</p>
+
+        <h2>Почему стоит работать с нами?</h2>
+        <ul>
+            <li><strong>Дружный коллектив:</strong> Мы гордимся нашей командой, которая поддерживает друг друга и работает вместе для достижения общих целей</li>
+            <li><strong>Обучение и развитие:</strong> Мы предлагаем обучение на месте, чтобы вы могли развивать свои навыки в кофейном искусстве и клиентском обслуживании</li>
+            <li><strong>Гибкий график:</strong> Мы понимаем, как важен баланс между работой и личной жизнью, поэтому предлагаем гибкие графики для наших сотрудников</li>
+            <li><strong>Конкурентоспособная заработная плата:</strong> Мы ценим труд наших сотрудников и предлагаем достойную оплату за вашу работу</li>
+        </ul>
+
+        <h2>Вакансии</h2>
+        <ul>
+            <li><strong>Бариста:</strong> Если вы увлечены кофе и хотите делиться своим опытом с клиентами, мы будем рады вам!</li>
+            <li><strong>Помощник по кухне:</strong> Идеально подходит для тех, кто хочет работать в дружной атмосфере и помогать создавать наши вкусные десерты</li>
+        </ul>
+
+        <h2>Как подать заявку</h2>
+        <p class="career-paragraph">Если вы заинтересованы в работе с нами, пожалуйста, отправьте ваше резюме и сопроводительное письмо на <a href="mailto:email@paradiso.com" class="career-link">email@paradiso.com</a>. Укажите, на какую позицию вы хотите претендовать и почему вы хотите работать в нашей кофейне.</p>
+
+        <p class="career-paragraph">Мы с нетерпением ждём вас в нашей команде!</p>
+    </div>
+</div>
 {% endblock %}
