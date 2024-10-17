@@ -39,15 +39,15 @@
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 40px;
+            padding: 20px;
             position: relative;
             z-index: 1;
         }
 
         .back-button {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 10px;
+            left: 10px;
             font-size: 24px;
             color: #6d4c41;
             cursor: pointer;
@@ -63,25 +63,25 @@
 
         .welcome-text {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .welcome-text h1 {
             margin: 0;
-            font-size: 28px;
+            font-size: 24px;
             color: #6d4c41;
         }
 
         h2 {
-            font-size: 20px;
-            margin: 20px 0 10px;
+            font-size: 18px;
+            margin: 15px 0 10px;
             color: #6d4c41;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             position: relative;
             text-align: left;
         }
@@ -89,7 +89,7 @@
         label {
             display: block;
             margin-bottom: 5px;
-            font-size: 16px;
+            font-size: 14px;
             color: #333;
         }
 
@@ -98,8 +98,8 @@
         input[type="password"],
         input[type="date"] {
             width: 100%;
-            padding: 15px;
-            font-size: 18px;
+            padding: 10px;
+            font-size: 16px;
             border: none;
             border-bottom: 2px solid #d3c8b5;
             border-radius: 4px;
@@ -128,7 +128,7 @@
 
         #togglePassword {
             position: absolute;
-            right: 25px;
+            right: 15px;
             background: none;
             border: none;
             cursor: pointer;
@@ -149,13 +149,13 @@
 
         button[type="submit"] {
             width: 100%;
-            padding: 15px;
+            padding: 10px;
             background-color: #6d4c41;
             color: #ffffff;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
             transition: background-color 0.3s, transform 0.2s;
         }
 
@@ -165,13 +165,11 @@
         }
 
         .login-link {
-            margin-top: 15px;
-            font-size: 14px;
+            margin-top: 20px;
+            font-size: 12px;
             color: #666;
             text-align: left;
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
+            position: relative;
         }
 
         .login-link a {
@@ -185,7 +183,7 @@
 
         .error-message {
             color: #e74c3c;
-            font-size: 14px;
+            font-size: 12px;
             margin-top: 5px;
             display: none;
         }
@@ -194,27 +192,76 @@
             display: block;
         }
 
-        .valid {
-            color: green;
+        @media (max-width: 768px) {
+            .registration-form {
+                width: 100%;
+                max-width: 300px;
+                padding: 15px;
+            }
+
+            .welcome-text h1 {
+                font-size: 20px;
+            }
+
+            h2 {
+                font-size: 16px;
+            }
+
+            input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            button[type="submit"] {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .back-button {
+                font-size: 20px;
+                top: 10px;
+                left: 10px;
+            }
+
+            .login-link {
+                font-size: 10px;
+                bottom: 5px;
+                left: 5px;
+            }
         }
 
-        .password-requirements {
-            margin-top: 10px;
-        }
+        @media (max-width: 480px) {
+            .registration-form {
+                width: 100%;
+                max-width: 280px;
+                padding: 10px;
+            }
 
-        .password-requirements ul {
-            list-style: none;
-            padding: 0;
-        }
+            .welcome-text h1 {
+                font-size: 18px;
+            }
 
-        .password-requirements li {
-            font-size: 14px;
-            color: #e74c3c;
-            margin-bottom: 5px;
-        }
+            h2 {
+                font-size: 14px;
+            }
 
-        .password-requirements li.valid {
-            color: green;
+            input {
+                padding: 7px;
+                font-size: 12px;
+            }
+
+            button[type="submit"] {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .back-button {
+                font-size: 18px;
+            }
+
+            .login-link {
+                font-size: 9px;
+            }
         }
     </style>
 </head>
