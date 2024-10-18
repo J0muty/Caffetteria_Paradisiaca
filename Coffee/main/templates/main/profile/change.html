@@ -118,6 +118,21 @@
             color: #e0e0e0;
         }
 
+        .form-check-label {
+            font-size: 1.2rem;
+        }
+
+        .small-text {
+            font-size: 0.9rem;
+            color: #6f4e37;
+            margin-top: 5px;
+            text-indent: 25px;
+        }
+
+        .dark-theme .small-text {
+            color: #e0e0e0;
+        }
+
         .back-button {
             position: absolute;
             top: 10px;
@@ -152,58 +167,56 @@
             color: #e0e0e0;
         }
 
-        /* Стили для ссылок */
-        .btn-link {
-            text-decoration: none;
-            color: inherit;
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-        }
-
-        .btn-link:hover {
-            text-decoration: underline;
-        }
-
-        .btn-link.light-theme {
-            color: black;
-        }
-
-        .btn-link.dark-theme {
-            color: #e0e0e0;
-        }
-
         .form-check {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        .form-check-input {
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
             cursor: pointer;
-            height: 20px;
-            width: 50px;
-            border-radius: 17px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background-color: #ccc;
-            outline: none;
-            box-shadow: none;
-            transition: background-color 0.3s;
+            transition: .4s;
+            border-radius: 34px;
         }
 
-        .form-check-input:checked {
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
             background-color: #28a745;
         }
 
-        .small-text {
-            font-size: 0.8rem;
-            color: #6f4e37;
-            margin-top: 5px;
-        }
-
-        .dark-theme .small-text {
-            color: #e0e0e0;
+        input:checked + .slider:before {
+            transform: translateX(26px);
         }
 
         .save-button {
@@ -240,17 +253,23 @@
         <div class="content">
             <div class="card mt-5">
                 <div class="card-body">
-                    <div class="form-check form-switch">
+                    <div class="form-check">
                         <span class="form-check-label"><strong>Общие электронные письма</strong></span>
-                        <input class="form-check-input" type="checkbox" id="general-emails">
+                        <label class="custom-switch">
+                            <input type="checkbox" id="general-emails">
+                            <span class="slider"></span>
+                        </label>
                     </div>
                     <p class="small-text">Да, я хотел бы получать электронные письма от Starbucks о предложениях и рекламных акциях, в том числе касающихся информации, содержащейся в моей учетной записи.</p>
 
-                    <div class="form-check form-switch">
+                    <div class="form-check">
                         <span class="form-check-label"><strong>Персонализированные электронные письма</strong></span>
-                        <input class="form-check-input" type="checkbox" id="personalized-emails">
+                        <label class="custom-switch">
+                            <input type="checkbox" id="personalized-emails">
+                            <span class="slider"></span>
+                        </label>
                     </div>
-                    <p class="small-text">Да, я хотел бы получать электронные письма от Starbucks о предложениях и рекламных акциях на конкретные продукты, основанные на информации моей учетной записи. Вы можете отказаться от подписки в любое время. Пожалуйста, прочтите нашу Политику конфиденциальности или свяжитесь с нами напрямую.</p>
+                    <p class="small-text">Да, я хотел бы получать электронные письма от Starbucks о предложениях и рекламных акциях на конкретные продукты, основанные на информации моей учетной записи. Вы можете отказаться от подписки в любое время. <br> Пожалуйста, прочтите нашу Политику конфиденциальности или свяжитесь с нами напрямую.</p>
 
                     <div class="button-container">
                         <button class="save-button" onclick="alert('Настройки сохранены!')">Сохранить</button>

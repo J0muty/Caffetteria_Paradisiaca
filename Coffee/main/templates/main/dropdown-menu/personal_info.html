@@ -29,6 +29,8 @@
             transition: background-color 0.3s, color 0.3s;
             background-color: inherit;
             color: inherit;
+            height: 100vh;
+            margin: 0;
         }
 
         html.dark-theme {
@@ -38,12 +40,13 @@
 
         .container {
             display: flex;
-            height: 100vh;
+            height: 100%;
             overflow-y: auto;
+            flex-direction: row;
         }
 
         .sidebar {
-            width: 30%;
+            width: 35%;
             padding: 20px;
             border-right: 1px solid #d6cfc4;
             align-items: center;
@@ -74,11 +77,13 @@
         }
 
         .content {
-            width: 70%;
+            width: 65%;
             background-color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             padding: 20px;
+            height: 100%;
+            overflow-y: auto;
         }
 
         .dark-theme .content {
@@ -145,6 +150,58 @@
         .dark-theme .card-body {
             background-color: #444;
             color: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #d6cfc4;
+                border-radius: 0;
+                padding: 10px;
+            }
+
+            .sidebar h1 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+
+            .content {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .card-header {
+                font-size: 1.25rem;
+            }
+
+            .back-button {
+                top: 5px;
+                left: 5px;
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .back-button {
+                font-size: 1rem;
+            }
+
+            .sidebar h1 {
+                font-size: 1.2rem;
+            }
+
+            .card-header {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 10px;
+            }
         }
     </style>
 </head>

@@ -191,7 +191,6 @@
         .error-visible {
             display: block;
         }
-
         @media (max-width: 768px) {
             .registration-form {
                 width: 100%;
@@ -262,6 +261,39 @@
             .login-link {
                 font-size: 9px;
             }
+        }
+
+        .password-requirements {
+            margin-top: 10px;
+        }
+
+        .password-requirements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .password-requirements li {
+            font-size: 14px;
+            color: #e74c3c;
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .password-requirements li::before {
+            content: '•';
+            color: #e74c3c;
+            position: absolute;
+            left: 15px;
+            font-size: 16px;
+        }
+
+        .password-requirements li.valid {
+            color: green;
+        }
+
+        .password-requirements li.valid::before {
+            color: green;
         }
     </style>
 </head>
