@@ -30,6 +30,7 @@
             display: flex;
             flex-direction: column;
             transition: background-color 0.3s, color 0.3s;
+            overflow-x: hidden;
         }
 
         .dark-theme {
@@ -83,6 +84,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             padding: 30px;
             overflow-y: auto;
+            position: relative;
         }
 
         .dark-theme .content {
@@ -240,6 +242,254 @@
             justify-content: center;
             margin-top: 20px;
         }
+
+        .notification {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            display: none;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            display: block;
+        }
+
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 5px;
+            background-color: #fff;
+            width: 100%;
+            animation: progress 2s linear forwards;
+        }
+
+        @keyframes progress {
+            0% { width: 100%; }
+            100% { width: 0; }
+        }
+
+        @media (max-width: 390px) {
+            .sidebar h1 {
+                font-size: 1.6rem;
+            }
+
+            .custom-switch {
+                width: 55px;
+                height: 30px;
+            }
+
+            .slider:before {
+                height: 24px;
+                width: 24px;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            .card-header {
+                font-size: 1rem;
+                padding: 8px;
+            }
+
+            .form-check-label {
+                font-size: 0.9rem;
+            }
+
+            .form-check {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .small-text {
+                font-size: 0.75rem;
+            }
+
+            .save-button {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+
+            .notification {
+            padding: 10px;
+            font-size: 0.9rem;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 90%;
+            box-sizing: border-box;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+            .progress-bar {
+                height: 3px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .form-check {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+
+            .custom-switch {
+                width: 60px;
+                height: 34px;
+                margin-top: 10px;
+            }
+
+            .slider {
+                border-radius: 34px;
+            }
+
+            .slider:before {
+                height: 26px;
+                width: 26px;
+            }
+
+            .sidebar {
+                width: 100%;
+                min-width: 100%;
+                padding: 10px;
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+            }
+
+            .content {
+                padding: 15px;
+                width: 100%;
+                position: relative;
+            }
+
+            .card {
+                margin-top: 10px;
+                border-radius: 5px;
+            }
+
+            .card-header {
+                font-size: 1.2rem;
+                padding: 10px;
+            }
+
+            .form-check-label {
+                font-size: 1rem;
+            }
+
+            .small-text {
+                font-size: 0.8rem;
+            }
+
+            .save-button {
+                width: 100%;
+                padding: 10px;
+                font-size: 1rem;
+            }
+
+            .notification {
+                padding: 10px;
+                font-size: 0.9rem;
+                top: 5px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar h1 {
+                font-size: 1.7rem;
+            }
+
+            .slider {
+                border-radius: 34px;
+            }
+
+            .custom-switch {
+                width: 60px;
+                height: 34px;
+            }
+
+            .slider:before {
+                height: 26px;
+                width: 26px;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            .card-header {
+                font-size: 1rem;
+                padding: 8px;
+            }
+
+            .form-check-label {
+                font-size: 0.9rem;
+            }
+
+
+            .custom-switch {
+                margin-top: 10px;
+            }
+
+
+            .form-check {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .small-text {
+                font-size: 0.8rem;
+            }
+
+            .save-button {
+                font-size: 1rem;
+                padding: 8px;
+            }
+
+            .notification {
+                padding: 10px;
+                font-size: 0.9rem;
+                top: 5px;
+            }
+        }
+
+        @media (max-width: 990px) and (min-width: 770px) {
+            .form-check {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .custom-switch {
+                margin-top: 10px;
+            }
+
+            .form-check-label {
+                font-size: 1rem;
+            }
+
+            .notification {
+                padding: 10px;
+                font-size: 0.9rem;
+                top: 5px;
+            }
+
+        }
+
     </style>
 </head>
 <body>
@@ -260,7 +510,7 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <p class="small-text">Да, я хотел бы получать электронные письма от Starbucks о предложениях и рекламных акциях, в том числе касающихся информации, содержащейся в моей учетной записи.</p>
+                    <p class="small-text">Да, я хотел бы получать электронные письма от Paradiso о предложениях и рекламных акциях, в том числе касающихся информации, содержащейся в моей учетной записи.</p>
 
                     <div class="form-check">
                         <span class="form-check-label"><strong>Персонализированные электронные письма</strong></span>
@@ -269,15 +519,21 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <p class="small-text">Да, я хотел бы получать электронные письма от Starbucks о предложениях и рекламных акциях на конкретные продукты, основанные на информации моей учетной записи. Вы можете отказаться от подписки в любое время. <br> Пожалуйста, прочтите нашу Политику конфиденциальности или свяжитесь с нами напрямую.</p>
+                    <p class="small-text">Да, я хотел бы получать электронные письма от Paradiso о предложениях и рекламных акциях <br> на конкретные продукты, основанные на информации моей учетной записи. Вы можете отказаться от подписки <br> в любое время. Пожалуйста, прочтите нашу Политику конфиденциальности или свяжитесь с нами напрямую.</p>
 
                     <div class="button-container">
-                        <button class="save-button" onclick="alert('Настройки сохранены!')">Сохранить</button>
+                        <button class="save-button" onclick="showNotification()">Сохранить</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div id="notification" class="notification">
+        Изменения сохранены
+        <div class="progress-bar"></div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -295,6 +551,18 @@
 
             applyTheme();
         });
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+
+            const content = document.querySelector('.content');
+            content.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
+        }
     </script>
 </body>
 </html>
