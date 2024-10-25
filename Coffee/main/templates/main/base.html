@@ -229,29 +229,29 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const profileLink = document.querySelector('.dropdown-toggle');
-        const dropdownMenu = document.querySelector('.dropdown-menu');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const profileLink = document.querySelector('.dropdown-toggle');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
 
-        function handleProfileClick(event) {
-            if (window.innerWidth < 768) {
-                event.preventDefault(); // Отменяем стандартное поведение ссылки
-                dropdownMenu.classList.remove('show'); // Скрываем меню
-                window.location.href = profileLink.dataset.url; // Переход на страницу профиля
+            function handleProfileClick(event) {
+                if (window.innerWidth < 768) {
+                    event.preventDefault();
+                    dropdownMenu.classList.remove('show');
+                    window.location.href = profileLink.dataset.url;
+                }
             }
-        }
 
-        profileLink.addEventListener('click', handleProfileClick);
+            profileLink.addEventListener('click', handleProfileClick);
 
-        window.addEventListener('resize', function () {
-            if (window.innerWidth >= 768) {
-                profileLink.removeEventListener('click', handleProfileClick);
-            } else {
-                profileLink.addEventListener('click', handleProfileClick);
-            }
+            window.addEventListener('resize', function () {
+                if (window.innerWidth >= 768) {
+                    profileLink.removeEventListener('click', handleProfileClick);
+                } else {
+                    profileLink.addEventListener('click', handleProfileClick);
+                }
+            });
         });
-    });
-</script>
+    </script>
 </body>
 </html>

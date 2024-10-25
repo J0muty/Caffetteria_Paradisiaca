@@ -366,6 +366,10 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
             .toggle {
                 width: 70px;
                 height: 34px;
@@ -397,39 +401,66 @@
             }
 
             .toggle-button {
-                display: block;
-                background-color: #333;
-                color: white;
-                padding: 12px 18px;
-                border: none;
-                border-radius: 8px;
+                background-color: #ffffff;
+                color: #333;
+                border: 2px solid #ccc;
+                border-radius: 25px;
+                padding: 12px 24px;
+                font-size: 18px;
                 cursor: pointer;
-                transition: background-color 0.3s, box-shadow 0.3s;
-                margin-top: 10px;
-                margin-bottom: 10px;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+
+            .dark-theme .toggle-button {
+                background: linear-gradient(135deg, #444, #666);
+                color: #f0f0f0;
             }
 
             .toggle-button:hover {
-                background-color: #665544;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                background-color: #f0f0f0;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+            }
+
+            .dark-theme .toggle-button:hover {
+                background: linear-gradient(135deg, #555, #777);
             }
 
             .close-button {
                 display: block;
                 position: absolute;
-                top: 15px;
+                top: 24px;
                 right: 15px;
                 background: none;
                 border: none;
                 font-size: 2rem;
                 cursor: pointer;
-                transition: color 0.3s;
+                transition: color 0.3s, transform 0.3s;
             }
 
             .close-button:hover {
-                color: #ff3333;
+                transform: scale(1.1);
             }
 
+            .close-button {
+                color: #333;
+            }
+
+            .dark-theme .close-button {
+                color: #f0f0f0;
+            }
+
+            .close-button:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            .dark-theme .close-button:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+                color: #ff3333;
+            }
+            
             .sidebar {
                 display: none;
                 position: fixed;
@@ -458,6 +489,35 @@
             .menu-list li:hover:not(.logout) {
                 background: rgba(0, 123, 255, 0.4);
                 box-shadow: 0 4px 25px rgba(0, 123, 255, 0.25);
+            }
+
+            .star--5, .star--6 {
+                display: none;
+            }
+
+            .star--1 {
+                width: 15px;
+                height: 2px;
+                left: 25px;
+            }
+
+            .star--2 {
+                width: 15px;
+                height: 2px;
+                left: 30px;
+            }
+
+            .star--3 {
+                width: 10px;
+                height: 2px;
+                left: 35px;
+            }
+
+            .star--4 {
+                top: 16px;
+                left: 20px;
+                width: 2px;
+                height: 2px;
             }
         }
 
@@ -512,10 +572,9 @@
                 {% csrf_token %}
             </form>
         </div>
+
         <div class="content">
-            <div class="toggle-button" id="toggleButton">
-                ☰
-            </div>
+            <button id="toggleButton" class="toggle-button">☰ Меню</button>
             <div class="h2-container">
                 <h2>Добро пожаловать, {{ firstname }}!</h2>
             </div>
@@ -554,7 +613,6 @@
     <div class="footer">
         &copy; 2024 Кофейня. Все права защищены.
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -563,6 +621,12 @@
             const toggleButton = document.getElementById('toggleButton');
             const sidebar = document.getElementById('sidebar');
             const closeButton = document.getElementById('closeButton');
+
+            toggle.checked = localStorage.getItem('dark-theme') === 'true';
+            if (toggle.checked) {
+                htmlElement.classList.add('dark-theme');
+                toggleButton.classList.add('dark-theme');
+            }
 
             toggleButton.addEventListener('click', () => {
                 sidebar.classList.toggle('active');
@@ -582,9 +646,11 @@
                 if (toggle.checked) {
                     htmlElement.classList.add('dark-theme');
                     localStorage.setItem('dark-theme', 'true');
+                    toggleButton.classList.add('dark-theme');
                 } else {
                     htmlElement.classList.remove('dark-theme');
                     localStorage.setItem('dark-theme', 'false');
+                    toggleButton.classList.remove('dark-theme');
                 }
             });
         });
