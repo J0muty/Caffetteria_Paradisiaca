@@ -604,47 +604,70 @@
     <div class="footer">
         &copy; 2024 Кофейня. Все права защищены.
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const toggle = document.querySelector('#darkmode-toggle');
-            const htmlElement = document.documentElement;
-            const toggleButton = document.getElementById('toggleButton');
-            const sidebar = document.getElementById('sidebar');
-            const closeButton = document.getElementById('closeButton');
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const toggle = document.querySelector('#darkmode-toggle');
+                const htmlElement = document.documentElement;
+                const toggleButton = document.getElementById('toggleButton');
+                const sidebar = document.getElementById('sidebar');
+                const closeButton = document.getElementById('closeButton');
 
-            toggle.checked = localStorage.getItem('dark-theme') === 'true';
-            if (toggle.checked) {
-                htmlElement.classList.add('dark-theme');
-                toggleButton.classList.add('dark-theme');
-            }
-
-            toggleButton.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-            });
-
-            closeButton.addEventListener('click', () => {
-                sidebar.classList.remove('active');
-            });
-
-            document.addEventListener('click', function(event) {
-                if (!sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
-                    sidebar.classList.remove('active');
-                }
-            });
-
-            toggle.addEventListener('change', function() {
-                if (toggle.checked) {
+                // Устанавливаем начальное состояние темы и переключателя на основе данных пользователя
+                const darkModeEnabled = {{ user.dark_mode|yesno:"true,false" }};
+                toggle.checked = darkModeEnabled;
+                if (darkModeEnabled) {
                     htmlElement.classList.add('dark-theme');
-                    localStorage.setItem('dark-theme', 'true');
                     toggleButton.classList.add('dark-theme');
                 } else {
                     htmlElement.classList.remove('dark-theme');
-                    localStorage.setItem('dark-theme', 'false');
                     toggleButton.classList.remove('dark-theme');
                 }
+
+                // Обработчик для кнопок бокового меню
+                toggleButton.addEventListener('click', () => {
+                    sidebar.classList.toggle('active');
+                });
+
+                closeButton.addEventListener('click', () => {
+                    sidebar.classList.remove('active');
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!sidebar.contains(event.target) && !toggleButton.contains(event.target)) {
+                        sidebar.classList.remove('active');
+                    }
+                });
+
+                // Обработчик переключателя темы
+                toggle.addEventListener('change', function() {
+                    if (toggle.checked) {
+                        htmlElement.classList.add('dark-theme');
+                        toggleButton.classList.add('dark-theme');
+                    } else {
+                        htmlElement.classList.remove('dark-theme');
+                        toggleButton.classList.remove('dark-theme');
+                    }
+
+                    // Отправляем AJAX-запрос для обновления состояния темы на сервере
+                    fetch("{% url 'toggle_theme' %}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        },
+                        body: JSON.stringify({ dark_mode: toggle.checked })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Тема обновлена на сервере:', data);
+                    })
+                    .catch(error => {
+                        console.error('Ошибка при обновлении темы:', error);
+                    });
+                });
             });
-        });
-    </script>
+        </script>
+
 </body>
 </html>

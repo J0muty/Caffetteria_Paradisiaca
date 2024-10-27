@@ -31,6 +31,7 @@ class RegUser(AbstractBaseUser, PermissionsMixin):
     birthdate = models.DateField('День рождения')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    dark_mode = models.BooleanField(default=False)
 
     objects = RegUserManager()
 

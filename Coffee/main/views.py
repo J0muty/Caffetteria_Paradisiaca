@@ -11,6 +11,10 @@ from django.http import HttpResponse
 from .forms import ResetPasswordForm
 from .forms import CustomPasswordResetForm
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 User = get_user_model()
 
@@ -208,3 +212,14 @@ def new_password(request):
 @login_required
 def change_settings(request):
     return render(request, 'main/profile/change.html')
+
+
+@require_POST
+@csrf_exempt
+@login_required
+def toggle_theme(request):
+    data = json.loads(request.body)
+    user = request.user
+    user.dark_mode = data.get('dark_mode', False)  # Получаем значение темы из запроса
+    user.save()  # Сохраняем обновление
+    return JsonResponse({'dark_mode': user.dark_mode})
