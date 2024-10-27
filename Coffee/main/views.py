@@ -220,6 +220,6 @@ def change_settings(request):
 def toggle_theme(request):
     data = json.loads(request.body)
     user = request.user
-    user.dark_mode = data.get('dark_mode', False)  # Получаем значение темы из запроса
-    user.save()  # Сохраняем обновление
+    user.dark_mode = data.get('dark_mode', False)
+    user.save()
     return JsonResponse({'dark_mode': user.dark_mode})

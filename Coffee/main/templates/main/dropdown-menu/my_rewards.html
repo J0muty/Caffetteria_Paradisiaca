@@ -22,46 +22,9 @@
             color: inherit;
         }
 
-        /* Темная тема */
         html.dark-theme {
             background-color: #333;
             color: #fff;
-        }
-
-        html.dark-theme .sidebar {
-            border-right: 1px solid #444;
-            background-color: #444;
-        }
-
-        html.dark-theme .sidebar h1 {
-            color: #fff;
-        }
-
-        html.dark-theme .content {
-            background-color: #555;
-            color: #ddd;
-        }
-
-        html.dark-theme .card-header {
-            background-color: #3e2b23;
-            color: #ffffff;
-        }
-
-        html.dark-theme .form-label {
-            color: #e0e0e0;
-        }
-
-        html.dark-theme .back-button {
-            color: #ffffff;
-        }
-
-        html.dark-theme .back-button:hover {
-            color: #d1cfcf;
-        }
-
-        html.dark-theme .card-body {
-            background-color: #444;
-            color: #e0e0e0;
         }
 
         .container {
@@ -69,6 +32,7 @@
             flex: 1;
             overflow: hidden;
             flex-direction: row;
+            perspective: 1000px;
         }
 
         .sidebar {
@@ -79,12 +43,11 @@
             background-color: #ffffff;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            position: relative;
-            transition: background-color 0.3s, border-color 0.3s;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            transition: background-color 0.3s, border-color 0.3s;
         }
 
         .sidebar h1 {
@@ -93,6 +56,7 @@
             margin-bottom: 30px;
             text-align: center;
             font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
         }
 
         .content {
@@ -103,7 +67,6 @@
             padding: 30px;
             overflow-y: auto;
             transition: background-color 0.3s, color 0.3s;
-            position: relative;
         }
 
         .card {
@@ -129,7 +92,7 @@
         .back-button {
             position: absolute;
             top: 10px;
-            left: 10px;
+            left: 20px;
             background-color: transparent;
             border: none;
             cursor: pointer;
@@ -148,13 +111,89 @@
             transition: color 0.3s, background-color 0.3s;
         }
 
+        .bonus-item {
+            background-color: #f7f7f7;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            will-change: transform;
+            backface-visibility: hidden;
+        }
+
+        .bonus-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .bonus-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #6f4e37;
+            text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .bonus-description {
+            color: #555;
+        }
+
+        :root {
+            --bonus-item-bg-light: #f7f7f7;
+            --bonus-item-bg-dark: #444;
+            --bonus-item-text-light: #6f4e37;
+            --bonus-item-text-dark: #ddd;
+            --bonus-item-shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        html.dark-theme .sidebar {
+            border-right: 1px solid #444;
+            background-color: #444;
+        }
+
+        html.dark-theme .sidebar h1,
+        html.dark-theme .form-label,
+        html.dark-theme .back-button {
+            color: #fff;
+        }
+
+        html.dark-theme .content {
+            background-color: #555;
+            color: #ddd;
+        }
+
+        html.dark-theme .card-header {
+            background-color: #3e2b23;
+        }
+
+        html.dark-theme .card-body {
+            background-color: #444;
+            color: #e0e0e0;
+        }
+
+        html.dark-theme .bonus-item {
+            background-color: #555;
+            color: var(--bonus-item-text-dark);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        html.dark-theme .bonus-title {
+            color: #ffffff;
+        }
+
+        html.dark-theme .bonus-description {
+            color: #ddd;
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
                 border-right: none;
                 border-bottom: 1px solid #d6cfc4;
                 border-radius: 0;
-                padding: 10px;
+                padding: 15px;
+                background-color: #ffffff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
 
             .container {
@@ -162,25 +201,55 @@
             }
 
             .sidebar h1 {
-                font-size: 1.5rem;
-                margin-bottom: 15px;
+                font-size: 1.75rem;
+                margin-bottom: 20px;
+                text-align: center;
             }
 
             .content {
-                padding: 15px;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                margin-top: 10px;
             }
 
             .card-header {
-                font-size: 1.25rem;
+                font-size: 1.5rem;
+                padding: 15px;
+                border-radius: 10px;
+                text-align: center;
             }
 
             .back-button {
                 top: 5px;
-                left: 5px;
-                font-size: 1.25rem;
+                left: 15px;
+                font-size: 1.5rem;
+                padding: 10px;
+                border-radius: 5px;
+                transition: background-color 0.3s, transform 0.3s;
+            }
+
+            .back-button:hover {
+                background-color: rgba(111, 78, 55, 0.1);
+                transform: scale(1.1);
+            }
+
+            .bonus-item {
+                padding: 20px;
+            }
+
+            .bonus-title {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+
+            .bonus-description {
+                font-size: 1.1rem;
+                margin-top: 5px;
             }
         }
     </style>
+
 </head>
 <body>
     <div class="container">
@@ -193,10 +262,25 @@
         <div class="content">
             <div class="card mt-5">
                 <div class="card-header">
-                    Бонусы
+                    Доступные бонусы
                 </div>
                 <div class="card-body">
-                    <p>Здесь будет информация о бонусах.</p>
+                    <div class="bonus-item">
+                        <div class="bonus-title">Скидка 10% на первый заказ</div>
+                        <p class="bonus-description">Получите 10% скидку на ваш первый заказ в нашей кофейне!</p>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-title">Кофе в подарок</div>
+                        <p class="bonus-description">При каждом десятом заказе мы дарим кофе!</p>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-title">Счастливые часы</div>
+                        <p class="bonus-description">Каждый день с 16:00 до 18:00 – скидка 20% на все напитки!</p>
+                    </div>
+                    <div class="bonus-item">
+                        <div class="bonus-title">Лояльность</div>
+                        <p class="bonus-description">Соберите 100 баллов и получите бесплатный напиток на выбор!</p>
+                    </div>
                 </div>
             </div>
         </div>
