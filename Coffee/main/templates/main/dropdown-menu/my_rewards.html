@@ -32,7 +32,6 @@
             flex: 1;
             overflow: hidden;
             flex-direction: row;
-            perspective: 1000px;
         }
 
         .sidebar {
@@ -45,9 +44,28 @@
             border-radius: 10px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            position: relative;
+            justify-content: center;
+            height: 100%;
             transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 8px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #6f4e37;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .back-button:hover {
+            color: #5d4037;
+            transform: scale(1.1);
         }
 
         .sidebar h1 {
@@ -84,28 +102,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        .form-label {
-            font-weight: bold;
-            color: #6f4e37;
-        }
-
-        .back-button {
-            position: absolute;
-            top: 10px;
-            left: 20px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: #6f4e37;
-            transition: color 0.3s, transform 0.3s;
-        }
-
-        .back-button:hover {
-            color: #5d4037;
-            transform: scale(1.1);
-        }
-
         .card-body {
             color: #000;
             transition: color 0.3s, background-color 0.3s;
@@ -129,21 +125,13 @@
 
         .bonus-title {
             font-size: 1.25rem;
-            font-weight: bold;
             color: #6f4e37;
             text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
         }
 
         .bonus-description {
             color: #555;
-        }
-
-        :root {
-            --bonus-item-bg-light: #f7f7f7;
-            --bonus-item-bg-dark: #444;
-            --bonus-item-text-light: #6f4e37;
-            --bonus-item-text-dark: #ddd;
-            --bonus-item-shadow: rgba(0, 0, 0, 0.1);
         }
 
         html.dark-theme .sidebar {
@@ -152,7 +140,6 @@
         }
 
         html.dark-theme .sidebar h1,
-        html.dark-theme .form-label,
         html.dark-theme .back-button {
             color: #fff;
         }
@@ -173,16 +160,13 @@
 
         html.dark-theme .bonus-item {
             background-color: #555;
-            color: var(--bonus-item-text-dark);
+            color: #ddd;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
-        html.dark-theme .bonus-title {
-            color: #ffffff;
-        }
-
+        html.dark-theme .bonus-title,
         html.dark-theme .bonus-description {
-            color: #ddd;
+            color: #ffffff;
         }
 
         @media (max-width: 768px) {
@@ -194,6 +178,8 @@
                 padding: 15px;
                 background-color: #ffffff;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+                height: auto; /* Высота адаптивна */
+                position: relative; /* Позиция адаптивна */
             }
 
             .container {
@@ -220,20 +206,6 @@
                 text-align: center;
             }
 
-            .back-button {
-                top: 5px;
-                left: 15px;
-                font-size: 1.5rem;
-                padding: 10px;
-                border-radius: 5px;
-                transition: background-color 0.3s, transform 0.3s;
-            }
-
-            .back-button:hover {
-                background-color: rgba(111, 78, 55, 0.1);
-                transform: scale(1.1);
-            }
-
             .bonus-item {
                 padding: 20px;
             }
@@ -244,7 +216,7 @@
             }
 
             .bonus-description {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
                 margin-top: 5px;
             }
         }
