@@ -609,7 +609,7 @@
             </div>
             <p>Здесь вы можете управлять своей учетной записью и просматривать информацию.</p>
             <div class="toggleWrapper">
-                <input id="darkmode-toggle" type="checkbox">
+                <input type="checkbox" id="darkmode-toggle" {% if user.dark_mode %}checked{% endif %}>
                 <label for="darkmode-toggle" class="toggle">
                     <span class="toggle__handler">
                         <span class="crater crater--1"></span>
