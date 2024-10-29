@@ -26,4 +26,5 @@ urlpatterns = [
 
 
     path('toggle-theme/', views.toggle_theme, name='toggle_theme'),
+    path('update_notification_settings/', views.update_notification_settings, name='update_notification_settings'),
 ]

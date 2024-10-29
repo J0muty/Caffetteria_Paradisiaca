@@ -33,6 +33,9 @@ class RegUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     dark_mode = models.BooleanField(default=False)
 
+    general_emails = models.BooleanField(default=False)
+    personalized_emails = models.BooleanField(default=False)
+
     objects = RegUserManager()
 
     USERNAME_FIELD = 'email'

@@ -1,20 +1,20 @@
-from .forms import RegistrationForm
-from .models import RegUser
-from django.db import IntegrityError
-from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from datetime import datetime
-from django.contrib.auth import get_user_model
-from django.core.mail import send_mail
-from django.http import HttpResponse
-from .forms import ResetPasswordForm
-from .forms import CustomPasswordResetForm
-from django.contrib import messages
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
 import json
+from datetime import datetime
+
+from django.contrib import messages
+from django.contrib.auth import get_user_model
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+from .forms import CustomPasswordResetForm
+from .forms import RegistrationForm
+from .forms import ResetPasswordForm
+from .models import RegUser
 
 User = get_user_model()
 
@@ -211,7 +211,24 @@ def new_password(request):
 
 @login_required
 def change_settings(request):
-    return render(request, 'main/profile/change.html')
+    user = request.user
+    context = {
+        'general_emails': user.general_emails,
+        'personalized_emails': user.personalized_emails,
+    }
+    return render(request, 'main/profile/change.html', context)
+
+
+@require_POST
+@csrf_exempt
+@login_required
+def update_notification_settings(request):
+    user = request.user
+    data = json.loads(request.body)
+    user.general_emails = data.get('general_emails', False)
+    user.personalized_emails = data.get('personalized_emails', False)
+    user.save()
+    return JsonResponse({'status': 'success'})
 
 
 @require_POST
