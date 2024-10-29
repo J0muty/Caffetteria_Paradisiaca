@@ -96,8 +96,8 @@ def logout_view(request):
     return redirect('index')
 
 
-def my_rewards(request):
-    return render(request, 'main/dropdown-menu/my_rewards.html')
+def bonus(request):
+    return render(request, 'main/dropdown-menu/bonus.html')
 
 
 def order_coffee(request):
