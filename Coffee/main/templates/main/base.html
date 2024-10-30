@@ -241,34 +241,22 @@
                                   /* !!!!!!!!!!!!!!!!!!!!!! need fix !!!!!!!!!!!!!!!!!!!!!! */
 
         @media (max-width: 576px) {
-            .navbar-toggler {
-                display: block;
-            }
-
             .navbar-custom {
-                padding: 5px 10px;
+                justify-content: space-between;
+            }
+
+            .brand-link {
+                display: flex;
+                align-items: center;
+                margin: 0;
+            }
+
+            .navbar-toggler {
+                margin-left: auto;
             }
 
             .navbar-collapse {
-                display: none;
-            }
-
-            .navbar-collapse {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .content {
-                padding: 10px;
-                margin-top: 10px;
-            }
-
-            .brand-link img {
-                max-height: 50px;
-            }
-
-            .fs-4 {
-                font-size: 1rem;
+                display: none; /* Скрыть навигацию на маленьких экранах */
             }
         }
     </style>
@@ -278,7 +266,7 @@
 <body>
     <div class="background"></div>
 
-    <nav class="navbar navbar-expand-md navbar-custom d-flex flex-column flex-md-row align-items-center pb-3 mb-4">
+    <nav class="navbar navbar-expand-md navbar-custom d-flex align-items-center justify-content-between">
         <a href="{% url 'index' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none navbar-brand brand-link">
             <img src="{% static 'main/logo.png' %}" alt="Coffee Paradiso Logo" class="img-fluid me-2">
             <span class="fs-4">Coffee Paradiso</span>
