@@ -55,44 +55,14 @@
         color: #d19e56;
     }
 
-    ul {
+    lu {
         margin-left: 20px;
         margin-bottom: 20px;
         list-style-type: disc;
     }
 
-    li {
+    il {
         margin-bottom: 10px;
-    }
-
-    .career-link {
-        position: relative;
-        color: #d19e56;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        font-weight: 600;
-    }
-
-    .career-link::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        display: block;
-        margin-top: 5px;
-        right: 0;
-        background: #d19e56;
-        transition: width 0.3s ease, background-color 0.3s ease;
-    }
-
-    .career-link:hover {
-        color: #a87c41;
-    }
-
-    .career-link:hover::after {
-        width: 100%;
-        left: 0;
-        background: #a87c41;
     }
 
     @media (max-width: 1200px) {
@@ -163,19 +133,11 @@
             font-size: 1em;
             margin-bottom: 8px;
         }
-
-        .career-link::after {
-            height: 1.5px;
-        }
     }
 
     @media (max-width: 576px) {
         .custom-heading {
             box-shadow: none;
-        }
-
-        .career-link {
-            display: inline-block;
         }
     }
 </style>

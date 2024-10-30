@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://static-maps.yandex.ru" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Lobster&family=Raleway:wght@400&family=Merriweather:wght@400&family=Poppins:wght@400&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
@@ -18,6 +19,7 @@
             background-color: #1a1a1a;
             font-family: 'Poppins', sans-serif;
         }
+
         .background {
             position: fixed;
             top: 0;
@@ -29,17 +31,19 @@
             filter: blur(8px);
             z-index: -1;
         }
+
         .nav-link {
             color: #fff;
             border-radius: 25px;
             text-align: center;
-            padding: 1px 35px;
+            padding: 1px 15px;
             transition: background-color 0.3s, color 0.5s, box-shadow 0.5s;
             text-decoration: none;
             margin-right: 15px;
             font-size: 1.2rem;
             border: 13px solid transparent;
             display: inline-block;
+            line-height: 1;
         }
 
         .nav-link:hover,
@@ -58,22 +62,29 @@
             box-shadow: none;
             outline: none;
         }
+
         .nav-link:focus-visible {
             outline: none;
         }
+
         .brand-link img {
             max-height: 75px;
             height: auto;
             width: auto;
             margin-right: 15px;
         }
+
         .fs-4 {
             color: #d19e56;
             font-weight: bold;
             letter-spacing: 1px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
+
         .navbar-custom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
             padding: 10px 20px;
@@ -81,37 +92,28 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
             position: relative;
             z-index: 1050;
+            flex-wrap: nowrap;
         }
 
-        @media (max-width: 576px) {
-            .navbar-toggler {
-                display: block;
-            }
-            .navbar-collapse {
-                display: none;
-            }
-            .navbar-collapse {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .content {
-                padding: 10px;
-                margin-top: 10px;
-            }
-            .brand-link img {
-                max-height: 50px;
-                margin-right: 8px;
-            }
-            .fs-4 {
-                font-size: 1rem;
-            }
+        .navbar-collapse {
+            flex-grow: 1;
+            justify-content: flex-end;
+            display: flex;
         }
+
+        .navbar-nav .nav-item {
+            margin-right: 10px;
+            position: relative;
+        }
+
+
         .navbar-toggler {
             border-color: rgba(255, 255, 255, 0.5);
             padding: 0.25rem 0.75rem;
             margin-left: auto;
-            margin-top: -50px;
+            margin-top: 0;
         }
+
         .navbar-toggler-icon {
             background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.7)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
             width: 30px;
@@ -121,7 +123,7 @@
         .mobile-menu {
             position: fixed;
             top: 0;
-            right: -100%;
+            right: -120%;
             width: 370px;
             height: 100%;
             background-color: #fff;
@@ -182,10 +184,95 @@
             margin: 10px 0;
             width: 200%;
         }
+
         .mobile-menu-auth .d-flex {
             width: 100%;
         }
+
+        @media (max-width: 1360px) {
+            .navbar-custom {
+                padding: 10px 10px;
+                flex-wrap: nowrap;
+            }
+            .nav-link {
+                font-size: 0.9rem;
+                padding: 1px 5px;
+                margin-right: 5px;
+            }
+            .brand-link img {
+                max-height: 60px;
+            }
+            .navbar-nav .nav-item {
+                margin-right: 5px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .navbar-custom {
+                padding: 5px 5px;
+                flex-wrap: nowrap;
+            }
+
+            .navbar-collapse {
+                flex-grow: 1;
+                justify-content: flex-end;
+                padding-right: 20px;
+            }
+
+            .nav-link {
+                font-size: 0.95rem;
+                padding: 1px 1px;
+                margin-right: 1px;
+            }
+
+            .navbar-nav .nav-item:last-child {
+                margin-right: 20px;
+            }
+
+            .brand-link img {
+                max-height: 60px;
+            }
+
+            .fs-4 {
+                font-size: 1.2rem !important;
+            }
+        }
+
+                                  /* !!!!!!!!!!!!!!!!!!!!!! need fix !!!!!!!!!!!!!!!!!!!!!! */
+
+        @media (max-width: 576px) {
+            .navbar-toggler {
+                display: block;
+            }
+
+            .navbar-custom {
+                padding: 5px 10px;
+            }
+
+            .navbar-collapse {
+                display: none;
+            }
+
+            .navbar-collapse {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .content {
+                padding: 10px;
+                margin-top: 10px;
+            }
+
+            .brand-link img {
+                max-height: 50px;
+            }
+
+            .fs-4 {
+                font-size: 1rem;
+            }
+        }
     </style>
+
     {% block styles %}{% endblock %}
 </head>
 <body>
@@ -209,7 +296,7 @@
                     <a class="nav-link menu-link" href="{% url 'menu' %}">Меню</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link coffee-link" href="{% url 'career' %}">Карьера</a>
+                    <a class="nav-link career-link" href="{% url 'career' %}">Карьера</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link contact-link" href="{% url 'contact' %}">Контакты</a>
