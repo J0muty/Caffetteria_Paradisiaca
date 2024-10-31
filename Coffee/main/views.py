@@ -2,11 +2,9 @@ import json
 from datetime import datetime
 
 from django.contrib import messages
-from django.contrib.auth import get_user_model
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
-from django.http import JsonResponse
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -75,17 +73,13 @@ def login_view(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
 
-        try:
-            user = User.objects.get(email=email)
-            if user.check_password(password):
-                login(request, user)
-                return redirect('index')
-        except User.DoesNotExist:
-            pass
-
-        error_message = "Вы ввели неверный email или пароль."
-        print(error_message)
-        return render(request, 'main/registration/login.html', {'error_message': error_message})
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = "Вы ввели неверный email или пароль."
+            return render(request, 'main/registration/login.html', {'error_message': error_message})
 
     return render(request, 'main/registration/login.html')
 

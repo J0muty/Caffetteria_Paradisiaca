@@ -131,6 +131,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'main.RegUser'
 
 AUTHENTICATION_BACKENDS = [
+    'Coffee.backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend',
 ]
 
