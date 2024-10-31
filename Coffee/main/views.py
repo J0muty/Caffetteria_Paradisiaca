@@ -4,7 +4,8 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden, JsonResponse
+from django.core.mail import send_mail
+from django.http import HttpResponseForbidden, JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -190,6 +191,15 @@ def password_reset_confirm(request):
 
     return render(request, 'main/registration/password_reset_confirm.html', {'form': form})
 
+def send_test_email(request):
+    send_mail(
+        'Тестовое письмо',
+        'Это тестовое письмо от Django.',
+        'lololow2017@yandex.ru',
+        ['J0muty@mail.ru'],
+        fail_silently=False,
+    )
+    return HttpResponse("Письмо отправлено!")
 
 def password_reset_complete(request):
     referer = request.META.get('HTTP_REFERER')
