@@ -10,8 +10,14 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+import smtplib
 from pathlib import Path
+
+from click import BaseCommand
 from django.contrib.messages import constants as message_constants
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,12 +147,12 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_PORT = 587
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = 'lololow2017@yandex.ru'
-EMAIL_HOST_PASSWORD = 'lpjrywdjnpydonie'
+EMAIL_HOST_PASSWORD = 'rpwhqrtuyjtaipuj'
 DEFAULT_FROM_EMAIL = 'lololow2017@yandex.ru'
 
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
