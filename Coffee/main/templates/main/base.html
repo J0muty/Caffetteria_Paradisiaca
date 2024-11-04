@@ -238,25 +238,34 @@
             }
         }
 
-                                  /* !!!!!!!!!!!!!!!!!!!!!! need fix !!!!!!!!!!!!!!!!!!!!!! */
-
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
             .navbar-custom {
-                justify-content: space-between;
-            }
-
-            .brand-link {
-                display: flex;
-                align-items: center;
-                margin: 0;
-            }
-
-            .navbar-toggler {
-                margin-left: auto;
+                display: none;
             }
 
             .navbar-collapse {
-                display: none; /* Скрыть навигацию на маленьких экранах */
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .navbar-custom {
+                display: none;
+            }
+
+            .navbar-collapse {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+                right: -120%;
+                width: 320px;
+                height: 100%;
             }
         }
     </style>
