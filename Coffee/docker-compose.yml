@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: nouchka/sqlite3
+    container_name: sqlite-db
+    volumes:
+      - ./db.sqlite3:/Coffee/db.sqlite3
+    networks:
+      - coffee-network
+
+  web:
+    build: .
+    container_name: coffee-web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/Coffee
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - coffee-network
+
+networks:
+  coffee-network:
+    driver: bridge
