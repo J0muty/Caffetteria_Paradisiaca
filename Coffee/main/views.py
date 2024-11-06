@@ -15,6 +15,8 @@ from .forms import RegistrationForm
 from .forms import ResetPasswordForm
 from .models import RegUser
 
+from django.core.cache import cache
+
 User = get_user_model()
 
 
@@ -148,6 +150,12 @@ def snacks(request):
 
 
 def password_reset_form(request):
+    form_cache_key = f'password_reset_form_{request.user.id}'
+
+    if cache.get(form_cache_key):
+        messages.info(request, 'Вы уже отправили запрос на сброс пароля.')
+        return redirect('password_reset_done')
+
     if request.method == 'POST':
         form = CustomPasswordResetForm(request.POST)
         if form.is_valid():
@@ -156,7 +164,11 @@ def password_reset_form(request):
                 use_https=request.is_secure(),
                 email_template_name='main/registration/password_reset_email.txt',
             )
+
             request.session['password_reset_form_submitted'] = True
+
+            cache.set(form_cache_key, 'submitted', timeout=3600)
+
             messages.success(request, 'Инструкции по сбросу пароля отправлены на вашу почту.')
             return redirect('password_reset_done')
         else:
