@@ -151,3 +151,4 @@ Coffee/main/__pycache__/urls.cpython-312.pyc
 Coffee/main/__pycache__/models.cpython-312.pyc
 Coffee/main/__pycache__/forms.cpython-312.pyc
 Coffee/db.sqlite3
+*.sqlite3
