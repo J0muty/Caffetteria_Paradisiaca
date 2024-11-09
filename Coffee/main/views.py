@@ -44,11 +44,17 @@ def application(request):
 @login_required(login_url='login')
 def profile(request):
     user = request.user
-    context = {
-        'firstname': user.firstname,
-        'lastname': user.lastname,
-    }
-    print(f"User authenticated: {request.user.is_authenticated}")
+    cache_key = f'profile_data_{user.id}'
+    context = cache.get(cache_key)
+
+    if not context:
+        context = {
+            'firstname': user.firstname,
+            'lastname': user.lastname,
+        }
+
+        cache.set(cache_key, context, timeout=300)
+
     return render(request, 'main/profile.html', context)
 
 
