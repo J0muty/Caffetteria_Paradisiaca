@@ -135,6 +135,9 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            overflow-y: auto;
+            overflow-x: hidden;
+            max-height: 100vh;
         }
 
         .mobile-menu.open {
@@ -182,7 +185,7 @@
             height: 1px;
             background-color: #d19e56;
             margin: 10px 0;
-            width: 200%;
+            width: 400%;
         }
 
         .mobile-menu-auth .d-flex {
@@ -204,6 +207,20 @@
             }
             .navbar-nav .nav-item {
                 margin-right: 5px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .navbar-custom {
+                display: none;
+            }
+
+            .navbar-collapse {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
             }
         }
 
@@ -252,7 +269,7 @@
             }
         }
 
-        @media (max-width: 320px) {
+        @media (max-width: 350px) {
             .navbar-custom {
                 display: none;
             }
@@ -268,14 +285,43 @@
                 height: 100%;
             }
         }
-    </style>
+
+        @media (max-width: 240px) {
+            .brand-link img {
+                max-height: 45px;
+            }
+
+            .fs-4 {
+                display: none;
+            }
+
+            .navbar-toggler {
+                padding: 0.1rem 0.3rem;
+            }
+
+            .mobile-menu {
+                width: 240px;
+                padding-top: 30px;
+            }
+
+            .mobile-menu a {
+                font-size: 0.9rem;
+                padding: 5px 10px;
+            }
+
+            .close-btn {
+                font-size: 1.2rem;
+            }
+        }
+
+        </style>
 
     {% block styles %}{% endblock %}
 </head>
 <body>
     <div class="background"></div>
 
-    <nav class="navbar navbar-expand-md navbar-custom d-flex align-items-center justify-content-between">
+    <nav class="navbar navbar-expand-lg navbar-custom d-flex align-items-center justify-content-between">
         <a href="{% url 'index' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none navbar-brand brand-link">
             <img src="{% static 'main/logo.png' %}" alt="Coffee Paradiso Logo" class="img-fluid me-2">
             <span class="fs-4">Coffee Paradiso</span>

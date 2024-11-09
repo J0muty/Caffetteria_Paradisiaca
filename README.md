@@ -10,10 +10,20 @@ coffee shop
 
     Сделать так, чтобы css change был такой же, как и у других вкладок (СДЕЛАНО)
 
-profile nexus 10
-nexus 7 
-microsoft lumia 550
-kindler fire XDX
-Galaxy Tab S4
-Galaxy s9+
-Blackbarry PlayBook
+    profile nexus 10 (СДЕЛАНО)
+
+    nexus 7 (СДЕЛАНО)
+
+    microsoft lumia 550 (СДЕЛАНО)
+    
+    kindler fire XDX (СДЕЛАНО)
+    
+    Galaxy Tab S4 (СДЕЛАНО)
+    
+    Galaxy s9+ (СДЕЛАНО)
+    
+    Blackbarry PlayBook (СДЕЛАНО)
+    
+    Баг какой-то на планшетах иногда не листается (мб это просто в браузере проблема) (СДЕЛАНО)
+    
+    Microsoft Lumia 550 (СДЕЛАНО)
