@@ -9,6 +9,7 @@ from django.http import HttpResponseForbidden, JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from urllib3 import request
 
 from .forms import CustomPasswordResetForm
 from .forms import RegistrationForm
@@ -239,6 +240,10 @@ def change_settings(request):
         'personalized_emails': user.personalized_emails,
     }
     return render(request, 'main/profile/change.html', context)
+
+@login_required
+def support(request):
+    return render(request, 'main/profile/support.html')
 
 
 @require_POST
