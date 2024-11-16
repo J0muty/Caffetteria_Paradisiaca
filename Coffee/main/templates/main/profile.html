@@ -63,8 +63,9 @@
 
     <style>
         body {
-            background-color: inherit;
             font-family: 'Poppins', sans-serif;
+            background-image: none;
+            color: #343a40;
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -109,9 +110,7 @@
 
         .menu-list li {
             margin: 10px 0;
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
+            display: block;
             border-radius: 8px;
             background: rgba(111, 78, 55, 0.1);
             transition: background 0.3s, box-shadow 0.3s;
@@ -137,17 +136,23 @@
             text-align: center;
         }
 
-        .menu-list li.logout:hover {
-            background: rgba(255, 0, 0, 0.15);
-            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
-        }
-
-        .menu-list a {
-            text-decoration: none;
-            color: inherit;
-            width: 100%;
+        .menu-list li a.nav-link {
             display: flex;
             align-items: center;
+            padding: 15px 20px;
+            width: 100%;
+            height: 100%;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .menu-list li a.nav-link:hover {
+            text-decoration: none;
+        }
+
+        .menu-list li.logout a.nav-link:hover {
+            background: rgba(255, 0, 0, 0.15);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.3);
         }
 
         .content {
@@ -593,8 +598,10 @@
                         <i class="fa fa-cog"></i>Настройки
                     </a>
                 </li>
-                <li class="logout" onclick="document.getElementById('logout-form').submit();">
-                    <i class="fa fa-sign-out-alt"></i>Выйти
+                <li class="logout">
+                    <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa fa-sign-out-alt"></i>Выйти
+                    </a>
                 </li>
             </ul>
             <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: none;">
