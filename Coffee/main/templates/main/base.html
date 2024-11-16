@@ -18,6 +18,7 @@
             overflow-x: hidden;
             background-color: #1a1a1a;
             font-family: 'Poppins', sans-serif;
+            padding-top: 80px;
         }
 
         .background {
@@ -82,16 +83,18 @@
         }
 
         .navbar-custom {
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1030;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: rgba(0, 0, 0, 0.7);
-            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 0;
             padding: 10px 20px;
             backdrop-filter: blur(15px);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
-            position: relative;
-            z-index: 1050;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
             flex-wrap: nowrap;
         }
 
@@ -321,7 +324,7 @@
 <body>
     <div class="background"></div>
 
-    <nav class="navbar navbar-expand-lg navbar-custom d-flex align-items-center justify-content-between">
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top d-flex align-items-center justify-content-between">
         <a href="{% url 'index' %}" class="d-flex align-items-center link-body-emphasis text-decoration-none navbar-brand brand-link">
             <img src="{% static 'main/logo.png' %}" alt="Coffee Paradiso Logo" class="img-fluid me-2">
             <span class="fs-4">Coffee Paradiso</span>
