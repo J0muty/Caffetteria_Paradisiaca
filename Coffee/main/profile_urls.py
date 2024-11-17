@@ -10,4 +10,6 @@ urlpatterns = [
     path('settings/', login_required(views.settings), name='settings'),
     path('settings/change/', login_required(views.change_settings), name='change_settings'),
     path('settings/support/', login_required(views.support), name='support'),
+    path('settings/privacy_policy', login_required(views.privacy_policy), name='privacy_policy'),
+    path('settings/terms', login_required(views.terms), name='terms'),
 ]

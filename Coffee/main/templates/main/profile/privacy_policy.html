@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru" class="{% if user.dark_mode %}dark-theme{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Lobster&family=Raleway:wght@400&family=Merriweather:wght@400&family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --scrollbar-width: 12px;
+            --scrollbar-track-color-light: #f1f1f1;
+            --scrollbar-thumb-color-light: #6f4e37;
+            --scrollbar-thumb-hover-color-light: #5d4037;
+            --scrollbar-track-color-dark: #444;
+            --scrollbar-thumb-color-dark: #aaa;
+            --scrollbar-thumb-hover-color-dark: #888;
+        }
+
+        body {
+            background-color: inherit;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s, color 0.3s;
+            color: inherit;
+        }
+
+        html.dark-theme {
+            background-color: #333;
+            color: #fff;
+        }
+
+        html.dark-theme body {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            flex-direction: row;
+            perspective: 1000px;
+        }
+
+        .sidebar {
+            width: 360px;
+            min-width: 250px;
+            padding: 20px;
+            border-right: 1px solid #d6cfc4;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .dark-theme .sidebar {
+            border-right: 1px solid #444;
+            background-color: #444;
+        }
+
+        .sidebar h1 {
+            font-size: 1.9rem;
+            color: #6f4e37;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-theme .sidebar h1 {
+            color: #fff;
+        }
+
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            overflow-y: auto;
+            transition: background-color 0.3s, color 0.3s;
+            max-height: 100vh;
+            position: relative;
+        }
+
+        .dark-theme .content {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .content::-webkit-scrollbar {
+            width: var(--scrollbar-width);
+        }
+
+        .content::-webkit-scrollbar-track {
+            background: var(--scrollbar-track-color-light);
+            border-radius: 10px;
+        }
+
+        .dark-theme .content::-webkit-scrollbar-track {
+            background: var(--scrollbar-track-color-dark);
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-color-light);
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+            transition: background-color 0.3s;
+        }
+
+        .dark-theme .content::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-color-dark);
+        }
+
+        .content::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover-color-light);
+        }
+
+        .dark-theme .content::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover-color-dark);
+        }
+
+        .content {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb-color-light) var(--scrollbar-track-color-light);
+            transition: scrollbar-color 0.3s;
+        }
+
+        .dark-theme .content {
+            scrollbar-color: var(--scrollbar-thumb-color-dark) var(--scrollbar-track-color-dark);
+        }
+
+        h2, h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        a.btn-link {
+            color: #6f4e37;
+        }
+
+        a.btn-link:hover {
+            color: #5d4037;
+            text-decoration: underline;
+        }
+
+        .thank-you-message {
+            font-size: 1.25rem;
+            text-align: center;
+            margin-top: 20px;
+            color: #6f4e37;
+            font-weight: 600;
+        }
+
+        .dark-theme .thank-you-message {
+            color: #ffffff;
+        }
+
+        .thank-you-message strong {
+            color: #d2691e;
+        }
+
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            .content {
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+            }
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .card-header {
+            background-color: #6f4e37;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            padding: 15px;
+            transition: background-color 0.3s, color 0.3s;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .dark-theme .card-header {
+            background-color: #3e2b23;
+            color: #ffffff;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #6f4e37;
+            font-size: 1.25rem;
+            margin-top: 20px;
+        }
+
+        .user-data {
+            font-size: 1.25rem;
+            margin-top: 10px;
+            color: #444;
+        }
+
+        .dark-theme .form-label {
+            color: #ffffff;
+        }
+
+        .dark-theme .user-data {
+            color: #efefef;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #6f4e37;
+            will-change: transform;
+            transition: color 0.3s, transform 0.3s;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @media (min-width: 769px) {
+            .back-button:hover {
+                color: #5d4037;
+                transform: scale(1.1) translateZ(0);
+            }
+        }
+
+        .dark-theme .back-button {
+            color: #ffffff;
+        }
+
+        .dark-theme .back-button:hover {
+            color: #d1cfcf;
+        }
+
+        .card-body {
+            color: #000;
+            transition: color 0.3s, background-color 0.3s;
+            margin-top: -20px;
+            border-radius: 10px;
+        }
+
+        .dark-theme .card-body {
+            background-color: #444;
+            color: #ffffff;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            color: inherit;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .btn-link:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .btn-link.light-theme {
+            color: black;
+        }
+
+        .btn-link.dark-theme {
+            color: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #d6cfc4;
+                border-radius: 0;
+                padding: 15px;
+                background-color: #ffffff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .back-button {
+                position: absolute;
+                top: 10px;
+                left: 20px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: #6f4e37;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar h1 {
+                font-size: 1.75rem;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .content {
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                margin-top: 10px;
+                max-height: calc(100vh - 80px);
+            }
+
+            .card-header {
+                font-size: 1.5rem;
+                padding: 15px;
+                border-radius: 10px;
+                text-align: center;
+            }
+
+            .card-body {
+                margin-top: -15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <button class="back-button" onclick="window.location.href='/profile/settings'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Политика конфиденциальности</h1>
+        </div>
+        <div class="content">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Политика конфиденциальности кофейни Paradiso</h2>
+                    <p>Мы ценим вашу конфиденциальность и стремимся защищать вашу личную информацию. Настоящая Политика конфиденциальности описывает, как кофейня Paradiso собирает, использует и защищает ваши данные.</p>
+
+                    <h3 id="definitions">Определения</h3>
+                    <p><strong>Персональные данные:</strong> любая информация, относящаяся к прямо или косвенно идентифицируемому физическому лицу.</p>
+                    <p><strong>Обработка данных:</strong> любое действие или совокупность действий, выполняемых с персональными данными, такие как сбор, хранение, использование, передача и удаление.</p>
+                    <p><strong>Файлы cookie:</strong> небольшие текстовые файлы, которые сохраняются на устройстве пользователя для улучшения взаимодействия с сайтом.</p>
+
+                    <h3 id="data-collection">1. Сбор информации</h3>
+                    <p>Мы можем собирать следующую информацию о вас:</p>
+                    <ul>
+                        <li>Имя, фамилия.</li>
+                        <li>Контактные данные, такие как телефон, электронная почта.</li>
+                        <li>Информация о ваших предпочтениях (например, любимые напитки или блюда).</li>
+                        <li>История заказов.</li>
+                        <li>Геолокационные данные, если вы используете наше мобильное приложение.</li>
+                    </ul>
+                    <p>Мы собираем информацию через:</p>
+                    <ul>
+                        <li>Регистрацию на нашем сайте или в мобильном приложении.</li>
+                        <li>Оформление заказов через онлайн-формы или в кафе.</li>
+                        <li>Участие в программах лояльности или акциях.</li>
+                    </ul>
+
+                    <h3 id="legal-basis">2. Юридические основания для обработки данных</h3>
+                    <p>Мы обрабатываем ваши персональные данные на основании следующих юридических оснований:</p>
+                    <ul>
+                        <li><strong>Согласие:</strong> Вы дали явное согласие на обработку своих данных для определенных целей.</li>
+                        <li><strong>Необходимость для исполнения договора:</strong> Обработка данных необходима для выполнения наших обязательств перед вами.</li>
+                        <li><strong>Законные интересы:</strong> Обработка данных необходима для наших законных интересов, таких как улучшение качества обслуживания.</li>
+                        <li><strong>Юридическая обязанность:</strong> Мы обязаны обрабатывать данные для соблюдения законодательства.</li>
+                    </ul>
+
+                    <h3 id="data-use">3. Использование информации</h3>
+                    <p>Мы используем ваши данные для следующих целей:</p>
+                    <ul>
+                        <li>Обработка заказов и оказание услуг.</li>
+                        <li>Отправка уведомлений о статусе заказов.</li>
+                        <li>Улучшение качества обслуживания.</li>
+                        <li>Персонализация предложений (скидки, акции, новости).</li>
+                        <li>Обратная связь и ответы на ваши запросы.</li>
+                    </ul>
+
+                    <h3 id="data-sharing">4. Передача данных третьим лицам</h3>
+                    <p>Мы передаем ваши данные третьим лицам только в следующих случаях:</p>
+                    <ul>
+                        <li><strong>Партнеры по доставке:</strong> Для выполнения заказов и доставки товаров.</li>
+                        <li><strong>Государственные органы:</strong> По запросу в соответствии с законодательством.</li>
+                        <li><strong>Аналитические и маркетинговые партнеры:</strong> Для анализа и улучшения наших услуг, при этом данные передаются в обезличенном виде.</li>
+                    </ul>
+                    <p>Все наши партнеры обязаны соблюдать стандарты защиты данных и использовать их только в указанных целях.</p>
+
+                    <h3 id="data-protection">5. Защита данных</h3>
+                    <p>Мы применяем следующие меры для защиты ваших данных:</p>
+                    <ul>
+                        <li><strong>Шифрование:</strong> Все передаваемые данные шифруются с использованием современных методов шифрования.</li>
+                        <li><strong>Ограничение доступа:</strong> Доступ к данным имеют только уполномоченные сотрудники, которым это необходимо для выполнения своих обязанностей.</li>
+                        <li><strong>Мониторинг:</strong> Постоянный мониторинг систем на предмет несанкционированного доступа или утечек данных.</li>
+                    </ul>
+
+                    <h3 id="data-transfers">6. Передача данных за границу</h3>
+                    <p>В некоторых случаях мы можем передавать ваши данные за пределы вашей страны. При этом мы обеспечиваем, что такие передачи соответствуют требованиям законодательства и защищены соответствующими мерами безопасности, такими как стандартные договорные положения или сертифицированные механизмы передачи данных.</p>
+
+                    <h3 id="logs-analytics">7. Логи и аналитика</h3>
+                    <p>Мы собираем и анализируем технические данные о вашем взаимодействии с нашим сайтом и приложением, такие как IP-адрес, тип браузера, страницы, которые вы посещаете, и другие данные для улучшения качества наших услуг и обеспечения безопасности.</p>
+
+                    <h3 id="automated-decision">8. Автоматизированные решения и профилирование</h3>
+                    <p>Мы можем использовать автоматизированные решения для анализа ваших данных и предоставления персонализированных предложений. Вы имеете право возразить против такого профилирования в любой момент.</p>
+
+                    <h3 id="data-retention">9. Хранение данных</h3>
+                    <p>Ваши данные будут храниться только столько времени, сколько необходимо для выполнения указанных целей или в рамках требований законодательства. После этого данные будут удалены или обезличены.</p>
+
+                    <h3 id="user-rights">10. Ваши права</h3>
+                    <p>В соответствии с законодательством вы имеете право:</p>
+                    <ul>
+                        <li><strong>Право на доступ:</strong> Запросить доступ к вашим персональным данным.</li>
+                        <li><strong>Право на исправление:</strong> Исправить или обновить ваши данные.</li>
+                        <li><strong>Право на удаление:</strong> Требовать удаления ваших данных при определенных условиях.</li>
+                        <li><strong>Право на ограничение обработки:</strong> Ограничить обработку ваших данных.</li>
+                        <li><strong>Право на переносимость данных:</strong> Получить ваши данные в структурированном, машиночитаемом формате.</li>
+                        <li><strong>Право на возражение:</strong> Возразить против обработки данных в определенных случаях.</li>
+                    </ul>
+                    <p>Для реализации этих прав свяжитесь с нами по следующим контактам:</p>
+                    <ul>
+                        <li><strong>Адрес:</strong> 14 улица 88 дом </li>
+                        <li><strong>Телефон:</strong> +79181488148 </li>
+                        <li><strong>Email:</strong> j0muty1488@mail.ru </li>
+                    </ul>
+
+                    <h3 id="cookies">11. Файлы cookie</h3>
+                    <p>Мы используем файлы cookie для:</p>
+                    <ul>
+                        <li>Анализа работы сайта.</li>
+                        <li>Персонализации взаимодействия.</li>
+                        <li>Упрощения авторизации.</li>
+                    </ul>
+                    <p>Вы можете настроить параметры файлов cookie в своем браузере.</p>
+
+                    <h3 id="data-breach">12. Уведомление о нарушениях безопасности данных</h3>
+                    <p>В случае обнаружения утечки или несанкционированного доступа к вашим данным мы незамедлительно предпримем меры для устранения нарушения и уведомим вас о случившемся в соответствии с законодательством.</p>
+
+                    <h3 id="policy-changes">13. Изменения в Политике конфиденциальности</h3>
+                    <p>Мы оставляем за собой право изменять настоящую Политику конфиденциальности. Все изменения будут опубликованы на нашем сайте или в мобильном приложении. Рекомендуем периодически просматривать данную страницу, чтобы быть в курсе обновлений.</p>
+
+                    <h3 id="supervisory-authority">14. Надзорный орган</h3>
+                    <p>Если вы считаете, что мы нарушаем ваши права на защиту данных, вы можете подать жалобу в соответствующий надзорный орган.</p>
+
+                    <p class="thank-you-message">
+                        Спасибо, что выбираете кофейню <strong>Paradiso</strong>! Мы заботимся о вашем комфорте и конфиденциальности.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

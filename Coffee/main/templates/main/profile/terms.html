@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru" class="{% if user.dark_mode %}dark-theme{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Условия использования и правовые уведомления</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&family=Lobster&family=Raleway:wght@400&family=Merriweather:wght@400&family=Poppins:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --scrollbar-width: 12px;
+            --scrollbar-track-color-light: #f1f1f1;
+            --scrollbar-thumb-color-light: #6f4e37;
+            --scrollbar-thumb-hover-color-light: #5d4037;
+            --scrollbar-track-color-dark: #444;
+            --scrollbar-thumb-color-dark: #aaa;
+            --scrollbar-thumb-hover-color-dark: #888;
+        }
+
+        body {
+            background-color: inherit;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.3s, color 0.3s;
+            color: inherit;
+        }
+
+        html.dark-theme {
+            background-color: #333;
+            color: #fff;
+        }
+
+        html.dark-theme body {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            flex-direction: row;
+            perspective: 1000px;
+        }
+
+        .sidebar {
+            width: 360px;
+            min-width: 250px;
+            padding: 20px;
+            border-right: 1px solid #d6cfc4;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .dark-theme .sidebar {
+            border-right: 1px solid #444;
+            background-color: #444;
+        }
+
+        .sidebar h1 {
+            font-size: 1.9rem;
+            color: #6f4e37;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-theme .sidebar h1 {
+            color: #fff;
+        }
+
+        .content {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            overflow-y: auto;
+            transition: background-color 0.3s, color 0.3s;
+            max-height: 100vh;
+            position: relative;
+        }
+
+        .dark-theme .content {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .content::-webkit-scrollbar {
+            width: var(--scrollbar-width);
+        }
+
+        .content::-webkit-scrollbar-track {
+            background: var(--scrollbar-track-color-light);
+            border-radius: 10px;
+        }
+
+        .dark-theme .content::-webkit-scrollbar-track {
+            background: var(--scrollbar-track-color-dark);
+        }
+
+        .content::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-color-light);
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+            transition: background-color 0.3s;
+        }
+
+        .dark-theme .content::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb-color-dark);
+        }
+
+        .content::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover-color-light);
+        }
+
+        .dark-theme .content::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover-color-dark);
+        }
+
+        .content {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb-color-light) var(--scrollbar-track-color-light);
+            transition: scrollbar-color 0.3s;
+        }
+
+        .dark-theme .content {
+            scrollbar-color: var(--scrollbar-thumb-color-dark) var(--scrollbar-track-color-dark);
+        }
+
+        /* Увеличенные отступы для заголовков */
+        h2, h3 {
+            margin-top: 2rem; /* Увеличен отступ сверху */
+            margin-bottom: 1.5rem; /* Увеличен отступ снизу */
+        }
+
+        a.btn-link {
+            color: #6f4e37;
+            text-decoration: none;
+            font-weight: normal;
+        }
+
+        a.btn-link:hover {
+            color: #5d4037;
+            text-decoration: underline;
+        }
+
+        /* Новые стили для ссылок в тёмной теме */
+        .dark-theme .btn-link {
+            color: #ffffff;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        /* Убираем изменение цвета при наведении в тёмной теме */
+        .dark-theme .btn-link:hover {
+            color: #ffffff; /* Оставляем цвет белым */
+            text-decoration: underline; /* Подчёркивание сохраняется */
+            font-weight: bold; /* Жирный шрифт сохраняется */
+        }
+
+        .thank-you-message {
+            font-size: 1.25rem;
+            text-align: center;
+            margin-top: 20px;
+            color: #6f4e37;
+            font-weight: 600;
+        }
+
+        .dark-theme .thank-you-message {
+            color: #ffffff;
+        }
+
+        .thank-you-message strong {
+            color: #d2691e;
+        }
+
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            .content {
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+            }
+        }
+
+        .card {
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .card-header {
+            background-color: #6f4e37;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            padding: 15px;
+            transition: background-color 0.3s, color 0.3s;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .dark-theme .card-header {
+            background-color: #3e2b23;
+            color: #ffffff;
+        }
+
+        .form-label {
+            font-weight: bold;
+            color: #6f4e37;
+            font-size: 1.25rem;
+            margin-top: 20px;
+        }
+
+        .user-data {
+            font-size: 1.25rem;
+            margin-top: 10px;
+            color: #444;
+        }
+
+        .dark-theme .form-label {
+            color: #ffffff;
+        }
+
+        .dark-theme .user-data {
+            color: #efefef;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #6f4e37;
+            will-change: transform;
+            transition: color 0.3s, transform 0.3s;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        @media (min-width: 769px) {
+            .back-button:hover {
+                color: #5d4037;
+                transform: scale(1.1) translateZ(0);
+            }
+        }
+
+        .dark-theme .back-button {
+            color: #ffffff;
+        }
+
+        .dark-theme .back-button:hover {
+            color: #d1cfcf;
+        }
+
+        .card-body {
+            color: #000;
+            transition: color 0.3s, background-color 0.3s;
+            padding-top: 10px;
+            margin-top: -10px;
+            border-radius: 10px;
+        }
+
+        .dark-theme .card-body {
+            background-color: #444;
+            color: #ffffff;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            color: inherit;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .btn-link:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .btn-link.light-theme {
+            color: black;
+        }
+
+        .btn-link.dark-theme {
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #d6cfc4;
+                border-radius: 0;
+                padding: 15px;
+                background-color: #ffffff;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .back-button {
+                position: absolute;
+                top: 10px;
+                left: 20px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: #6f4e37;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar h1 {
+                font-size: 1.75rem;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+
+            .content {
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                margin-top: 10px;
+                max-height: calc(100vh - 80px);
+            }
+
+            .card-header {
+                font-size: 1.5rem;
+                padding: 15px;
+                border-radius: 10px;
+                text-align: center;
+            }
+
+            .card-body {
+                margin-top: -15px;
+                padding-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <button class="back-button" onclick="window.location.href='/profile/settings'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <h1>Условия использования и правовые уведомления</h1>
+        </div>
+        <div class="content">
+            <div class="card">
+                <div class="card-body">
+                    <!-- Раздел Условия использования -->
+                    <h2>Условия использования</h2>
+                    <p>Добро пожаловать на сайт кофейни <strong>Paradiso</strong>! Настоящие Условия использования регулируют ваш доступ к нашему сайту и его использование. Пожалуйста, внимательно ознакомьтесь с ними перед началом использования.</p>
+
+                    <h3 id="acceptance">1. Принятие Условий</h3>
+                    <p>Используя наш сайт, вы соглашаетесь соблюдать и быть связанными настоящими Условиями использования. Если вы не согласны с любым из этих условий, пожалуйста, не используйте наш сайт.</p>
+
+                    <h3 id="use-of-site">2. Использование Сайта</h3>
+                    <p>Вы соглашаетесь использовать сайт только в законных целях и таким образом, который не нарушает права других пользователей или ограничивает их возможности использования сайта.</p>
+
+                    <h3 id="intellectual-property">3. Интеллектуальная Собственность</h3>
+                    <p>Все материалы на сайте, включая тексты, изображения, логотипы и графику, являются собственностью кофейни <strong>Paradiso</strong> и защищены законами об авторском праве. Любое несанкционированное использование материалов запрещено.</p>
+
+                    <h3 id="limitation-of-liability">4. Ограничение Ответственности</h3>
+                    <p>Мы не несем ответственности за любые убытки, прямые или косвенные, возникшие в результате использования или невозможности использования нашего сайта.</p>
+
+                    <h3 id="external-links">5. Ссылки на Третьи Сайты</h3>
+                    <p>Наш сайт может содержать ссылки на сторонние ресурсы. Мы не контролируем и не несем ответственности за содержимое таких сайтов.</p>
+
+                    <h3 id="changes-to-terms">6. Изменения в Условиях Использования</h3>
+                    <p>Мы оставляем за собой право изменять настоящие Условия использования в любое время. Все изменения будут опубликованы на этой странице. Продолжая использовать сайт после внесения изменений, вы соглашаетесь с обновленными условиями.</p>
+
+                    <h3 id="governing-law">7. Применимое Право</h3>
+                    <p>Настоящие Условия использования регулируются законодательством Российской Федерации. Все споры, возникающие в связи с использованием сайта, подлежат рассмотрению в соответствующих судах Российской Федерации.</p>
+
+                    <h2>Правовые уведомления</h2>
+                    <h3 id="company-information">1. Информация о Владельце Сайта</h3>
+                    <p><strong>Название компании:</strong> ООО "Paradiso Coffee"</p>
+                    <p><strong>Юридический адрес:</strong> 148814, г. Москва, ул. Примерная, д. 14, оф. 88</p>
+                    <p><strong>Телефон:</strong> +7 (918) 148-81-48</p>
+                    <p><strong>Email:</strong> j0muty1488@mail.ru</p>
+
+                    <h3 id="registration-details">2. Регистрационные Данные</h3>
+                    <p><strong>ИНН:</strong> 148814881</p>
+                    <p><strong>КПП:</strong> 148814881</p>
+                    <p><strong>ОГРН:</strong> 1488148814881</p>
+                    <p><strong>Дата регистрации:</strong> 14.12.1488</p>
+
+                    <h3 id="content-responsibility">3. Ответственность за Контент</h3>
+                    <p>Кофейня <strong>Paradiso</strong> не несёт ответственности за содержимое внешних сайтов, на которые могут вести ссылки на нашем сайте. Все материалы предоставлены "как есть" без каких-либо гарантий.</p>
+
+                    <h3 id="copyright-trademarks">4. Авторские Права и Трейдмарки</h3>
+                    <p>Все материалы на этом сайте, включая тексты, изображения, логотипы и графику, защищены авторским правом и являются собственностью ООО "Paradiso Coffee". Любое несанкционированное использование материалов запрещено.</p>
+
+                    <h3 id="taxes-regulatory-bodies">5. Налоги и Регулирующие Организации</h3>
+                    <p>ООО "Paradiso Coffee" зарегистрировано в налоговых органах Российской Федерации и действует в соответствии с законодательством РФ.</p>
+                    <p>Если наш бизнес требует наличия лицензий или разрешений, укажите их здесь.</p>
+
+                    <h3 id="additional-information">6. Дополнительная Информация</h3>
+                    <p>Используя наш сайт, вы соглашаетесь с нашими <a href="/profile/settings/terms" class="btn-link">Условиями использования</a> и <a href="/profile/settings/privacy_policy" class="btn-link">Политикой конфиденциальности</a>.</p>
+
+                    <p>Если у вас есть вопросы или нужны дополнительные сведения, пожалуйста, свяжитесь с нами по указанным выше контактам.</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

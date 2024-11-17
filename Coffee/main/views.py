@@ -245,6 +245,14 @@ def change_settings(request):
 def support(request):
     return render(request, 'main/profile/support.html')
 
+@login_required
+def privacy_policy(request):
+    return render(request, 'main/profile/privacy_policy.html')
+
+@login_required
+def terms(request):
+    return render(request, 'main/profile/terms.html')
+
 
 @require_POST
 @csrf_exempt
