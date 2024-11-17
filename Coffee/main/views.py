@@ -5,15 +5,16 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
-from django.http import HttpResponseForbidden, JsonResponse, HttpResponse
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from urllib3 import request
+from django.conf import settings as django_settings
 
 from .forms import CustomPasswordResetForm
 from .forms import RegistrationForm
 from .forms import ResetPasswordForm
+from .forms import SupportForm
 from .models import RegUser
 
 from django.core.cache import cache
@@ -210,16 +211,6 @@ def password_reset_confirm(request):
 
     return render(request, 'main/registration/password_reset_confirm.html', {'form': form})
 
-def send_test_email(request):
-    send_mail(
-        'Тестовое письмо',
-        'Это тестовое письмо от Django.',
-        'lololow2017@yandex.ru',
-        ['J0muty@mail.ru'],
-        fail_silently=False,
-    )
-    return HttpResponse("Письмо отправлено!")
-
 def password_reset_complete(request):
     referer = request.META.get('HTTP_REFERER')
     if not referer or 'password_reset_confirm' not in referer:
@@ -243,7 +234,38 @@ def change_settings(request):
 
 @login_required
 def support(request):
-    return render(request, 'main/profile/support.html')
+    print(type(django_settings))
+    if request.method == 'POST':
+        form = SupportForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            full_message = f"Имя: {name}\nEmail: {email}\n\nСообщение:\n{message}"
+
+            try:
+                send_mail(
+                    subject=subject,
+                    message=full_message,
+                    from_email=django_settings.DEFAULT_FROM_EMAIL,  # Используем переименованный settings
+                    recipient_list=['lololow2017@yandex.ru'],
+                    fail_silently=False,
+                )
+                messages.success(request, "Ваше сообщение успешно отправлено в поддержку.")
+                return redirect('support')
+            except Exception as e:
+                messages.error(request, f"Произошла ошибка при отправке сообщения: {e}")
+        else:
+            messages.error(request, "Пожалуйста, исправьте ошибки в форме.")
+    else:
+        form = SupportForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'main/profile/support.html', context)
 
 @login_required
 def privacy_policy(request):

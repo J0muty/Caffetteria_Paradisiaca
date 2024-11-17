@@ -296,21 +296,26 @@
                 <div class="card-body">
                     <form method="post" action="{% url 'support' %}">
                         {% csrf_token %}
+                        {{ form.non_field_errors }}
                         <div class="mb-3">
-                            <label for="name" class="form-label">Ваше имя</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                            {{ form.name.errors }}
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label">Ваш электронный адрес</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                            {{ form.email.errors }}
                         </div>
                         <div class="mb-3">
-                            <label for="subject" class="form-label">Тема обращения</label>
-                            <input type="text" class="form-control" id="subject" name="subject" required>
+                            {{ form.subject.label_tag }}
+                            {{ form.subject }}
+                            {{ form.subject.errors }}
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label">Ваше сообщение</label>
-                            <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            {{ form.message.label_tag }}
+                            {{ form.message }}
+                            {{ form.message.errors }}
                         </div>
                         <button type="submit" class="btn btn-primary">Отправить</button>
                     </form>

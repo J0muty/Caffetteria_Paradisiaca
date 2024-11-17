@@ -67,3 +67,24 @@ class CustomPasswordResetForm(PasswordResetForm):
         if not RegUser.objects.filter(email=email).exists():
             raise ValidationError("Пользователь с таким email не зарегистрирован.")
         return email
+
+
+class SupportForm(forms.Form):
+    name = forms.CharField(max_length=100, label='Ваше имя', widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Введите ваше имя',
+    }))
+    email = forms.EmailField(label='Ваш электронный адрес', widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Введите ваш email',
+    }))
+    subject = forms.CharField(max_length=150, label='Тема обращения', widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Введите тему обращения',
+    }))
+    message = forms.CharField(label='Ваше сообщение', widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'placeholder': 'Введите ваше сообщение',
+        'rows': 5,
+    }))
+
