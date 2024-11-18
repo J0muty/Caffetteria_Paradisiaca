@@ -609,10 +609,10 @@
             </form>
         </div>
 
-        <div class="content">
+<div class="content">
             <button id="toggleButton" class="toggle-button">☰ Меню</button>
             <div class="h2-container">
-                <h2>Добро пожаловать, {{ firstname }}!</h2>
+                <h2><span id="greeting"></span>, {{ firstname }}!</h2>
             </div>
             <p>Здесь вы можете управлять своей учетной записью и просматривать информацию.</p>
             <div class="toggleWrapper">
@@ -638,5 +638,26 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const greetingElement = document.getElementById("greeting");
+            if (!greetingElement) return;
+
+            const hour = new Date().getHours();
+            let greeting;
+
+            if (hour >= 5 && hour < 12) {
+                greeting = "Доброе утро";
+            } else if (hour >= 12 && hour < 18) {
+                greeting = "Добрый день";
+            } else if (hour >= 18 && hour < 22) {
+                greeting = "Добрый вечер";
+            } else {
+                greeting = "Доброй ночи";
+            }
+
+            greetingElement.textContent = greeting;
+        });
+    </script>
 </body>
 </html>
