@@ -84,7 +84,7 @@
     .contact-info {
         flex: 0 1 42%;
         max-width: 42%;
-        background-color: #f8f1e4;
+        background-color: #f8f4e3;
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -157,80 +157,123 @@
         color: #d19e56;
     }
 
-    @media (max-width: 1200px) {
+    /* Медиазапросы */
+    @media (max-width: 1440px) {
         .contacts-container {
             max-width: 1000px;
+            padding: 30px 20px;
         }
-    }
 
-    @media (max-width: 992px) {
-        .contacts-container {
-            max-width: 90%;
-            padding: 35px 15px;
-        }
         .custom-heading {
             font-size: 2.5em;
             padding: 18px;
         }
-        .brew-method h2 {
+
+        .contact-info h2 {
             font-size: 1.6em;
         }
-        .coffee-text, .brew-method p {
-            margin-left: 15px;
-            margin-right: 15px;
+
+        .contact-info p, .contact-info ul {
+            font-size: 1em;
+        }
+
+        .contacts-content {
+            gap: 15px;
+        }
+
+        .map-container {
+            max-width: 58%;
+        }
+
+        .contact-info {
+            max-width: 40%;
+            padding: 18px;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .contacts-container {
+            max-width: 850px;
+            padding: 25px 15px;
+        }
+
+        .custom-heading {
+            font-size: 2.3em;
+            padding: 16px;
+        }
+
+        .contact-info h2 {
+            font-size: 1.5em;
+        }
+
+        .contact-info p, .contact-info ul {
+            font-size: 1em;
+        }
+
+        .contacts-content {
+            gap: 15px;
+            flex-direction: column;
+        }
+
+        .map-container {
+            max-width: 100%;
+            padding-bottom: 56.25%;
+        }
+
+        .contact-info {
+            max-width: 100%;
+            padding: 16px;
+        }
+
+        .social-media {
+            font-size: 1.4em;
+        }
+
+        .social-icons {
+            gap: 25px;
+        }
+
+        .social-icon img {
+            width: 45px;
+            height: 45px;
         }
     }
 
     @media (max-width: 768px) {
+        .contacts-container {
+            max-width: 700px;
+            padding: 20px 15px;
+        }
+
+        .custom-heading {
+            font-size: 2em;
+            padding: 14px;
+        }
+
+        .contact-info h2 {
+            font-size: 1.4em;
+        }
+
+        .contact-info p, .contact-info ul {
+            font-size: 1em;
+        }
+
         .contacts-content {
+            gap: 10px;
             flex-direction: column;
         }
-        .map-container, .contact-info {
+
+        .map-container {
+            padding-bottom: 56.25%;
+        }
+
+        .contact-info {
             max-width: 100%;
-            flex: 1 1 100%;
-        }
-        .custom-heading {
-            font-size: 2.2em;
-            padding: 15px;
-        }
-        .brew-method h2 {
-            font-size: 1.5em;
-        }
-        .coffee-text, .brew-method p {
-            margin-left: 10px;
-            margin-right: 10px;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .contacts-container {
-            max-width: 100%;
-            margin: 10px;
-            padding: 20px 10px;
+            padding: 14px;
         }
 
-        .custom-heading {
-            font-size: 1.8em;
-            padding: 10px;
-        }
-
-        .brew-method h2 {
+        .social-media {
             font-size: 1.3em;
-            text-align: center;
-        }
-
-        .coffee-text, .brew-method p {
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-
-        .custom-centered-heading {
-            font-size: 1.8em;
-            padding: 15px;
-        }
-
-        .brew-method {
-            padding: 15px;
         }
 
         .social-icons {
@@ -243,20 +286,134 @@
         }
     }
 
-    a {
-        color: #d19e56;
-        text-decoration: none;
-        transition: color 0.3s ease;
+    @media (max-width: 425px) {
+        .contacts-container {
+            max-width: 95%;
+            padding: 15px 10px;
+        }
+
+        .custom-heading {
+            font-size: 1.8em;
+            padding: 12px;
+        }
+
+        .contact-info h2 {
+            font-size: 1.3em;
+        }
+
+        .contact-info p, .contact-info ul {
+            font-size: 1em;
+        }
+
+        .contacts-content {
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .map-container {
+            padding-bottom: 56.25%;
+        }
+
+        .contact-info {
+            max-width: 100%;
+            padding: 12px;
+        }
+
+        .social-media {
+            font-size: 1.2em;
+        }
+
+        .social-icons {
+            gap: 15px;
+        }
+
+        .social-icon img {
+            width: 35px;
+            height: 35px;
+        }
     }
 
-    a:hover {
-        color: #a87c41;
-        text-decoration: underline;
+    @media (max-width: 375px) {
+        .custom-heading {
+            font-size: 1.6em;
+            padding: 10px;
+        }
+
+        .contact-info h2 {
+            font-size: 1.2em;
+        }
+
+        .contact-info p, .contact-info ul {
+            font-size: 0.95em;
+        }
+
+        .contacts-content {
+            gap: 8px;
+        }
+
+        .map-container {
+            padding-bottom: 56.25%;
+        }
+
+        .contact-info {
+            padding: 10px;
+        }
+
+        .social-media {
+            font-size: 1.1em;
+        }
+
+        .social-icons {
+            gap: 10px;
+        }
+
+        .social-icon img {
+            width: 30px;
+            height: 30px;
+        }
     }
 
-    @media (max-width: 576px) {
-        .custom-heading, .custom-centered-heading {
-            box-shadow: none;
+    @media (max-width: 320px) {
+        .contacts-container {
+            padding: 10px 5px;
+        }
+
+        .custom-heading {
+            font-size: 1.4em;
+            padding: 8px;
+        }
+
+        .contact-info h2 {
+            font-size: 1.2em;
+        }
+
+        .contact-info p, .contact-info ul {
+            font-size: 0.9em;
+        }
+
+        .contacts-content {
+            gap: 5px;
+        }
+
+        .map-container {
+            padding-bottom: 56.25%;
+        }
+
+        .contact-info {
+            padding: 8px;
+        }
+
+        .social-media {
+            font-size: 1em;
+        }
+
+        .social-icons {
+            gap: 10px;
+        }
+
+        .social-icon img {
+            width: 28px;
+            height: 28px;
         }
     }
 </style>
