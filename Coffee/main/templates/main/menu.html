@@ -75,11 +75,13 @@
         text-align: center;
         margin: 20px;
         flex: 0 0 calc(50% - 40px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .section img {
-        display: block;
-        margin: 0 auto 10px auto;
+        margin: 0 auto;
         width: 200px;
         height: auto;
         border-radius: 10px;
@@ -91,12 +93,11 @@
     }
 
     .section a {
-        display: block;
+        margin-top: 20px;
         font-size: 1.5em;
         color: #d19e56;
         text-decoration: none;
         padding: 10px 20px;
-        margin-bottom: 10px;
         transition: color 0.3s, background-color 0.3s;
     }
 
@@ -107,37 +108,81 @@
     }
 
     .section p {
-        font-size: 0.9em;
+        font-size: 1em;
         color: #555;
-        margin-top: 15px;
+        margin-top: 10px;
         padding: 0 10px;
         text-align: center;
+        max-width: 90%;
+        line-height: 1.5;
     }
 
-    @media (max-width: 992px) {
-        .nav-menu a {
-            flex: 1 1 calc(50% - 40px);
-        }
+    a {
+        text-decoration: none;
+        color: #d19e56;
+        transition: color 0.3s ease;
     }
 
-    @media (max-width: 768px) {
-        .nav-menu a {
-            flex: 1 1 100%;
-        }
+    a:hover {
+        color: #a87c41;
+        text-decoration: none;
+    }
 
-        .section {
-            flex: 0 0 100%;
-            max-width: 100%;
-        }
-
-        .section img {
-            width: 150px;
+    @media (max-width: 1440px) {
+        .main-container {
+            max-width: 1100px;
+            padding: 35px 15px;
         }
 
         .custom-heading {
             font-size: 2.5em;
-            padding: 15px;
-            margin-bottom: 30px;
+            padding: 18px;
+        }
+
+        .nav-menu a {
+            font-size: 1.4em;
+            padding: 9px 18px;
+            flex: 1 1 calc(50% - 30px);
+        }
+
+        .section img {
+            width: 180px;
+        }
+
+        .section a {
+            font-size: 1.4em;
+            padding: 9px 18px;
+        }
+
+        .section p {
+            font-size: 0.95em;
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .main-container {
+            max-width: 900px;
+            padding: 30px 15px;
+        }
+
+        .custom-heading {
+            font-size: 2.3em;
+            padding: 16px;
+        }
+
+        .nav-menu a {
+            font-size: 1.3em;
+            padding: 8px 16px;
+            flex: 1 1 calc(50% - 25px);
+        }
+
+        .section {
+            flex: 0 0 calc(50% - 30px);
+            margin: 15px;
+        }
+
+        .section img {
+            width: 160px;
         }
 
         .section a {
@@ -146,32 +191,72 @@
         }
 
         .section p {
+            font-size: 0.9em;
+        }
+    }
+
+    @media (max-width: 600px)
+        body {
+            padding-top: 60px;
+        }
+
+        .main-container {
+            max-width: 750px;
+            margin: 40px auto 15px auto;
+            padding: 25px 15px;
+        }
+
+        .custom-heading {
+            font-size: 2.1em;
+            padding: 14px;
+        }
+
+        .nav-menu a {
+            font-size: 1.2em;
+            padding: 7px 14px;
+            flex: 1 1 100%;
+            margin: 10px;
+        }
+
+        .section {
+            flex: 1 1 100%;
+            margin: 10px;
+        }
+
+        .section img {
+            width: 140px;
+        }
+
+        .section a {
+            font-size: 1.2em;
+            padding: 7px 14px;
+        }
+
+        .section p {
             font-size: 0.85em;
         }
     }
 
-    @media (max-width: 576px) {
-        .nav-menu {
-            flex-direction: column;
-            align-items: center;
+    @media (max-width: 425px) {
+        .main-container {
+            max-width: 95%;
+            margin: 30px auto 10px auto;
+            padding: 20px 10px;
+        }
+
+        .custom-heading {
+            font-size: 1.8em;
+            padding: 12px;
         }
 
         .nav-menu a {
-            flex: 1 1 100%;
-            max-width: 90%;
-            margin: 10px 0;
-            font-size: 1.2em;
-            padding: 8px 16px;
+            font-size: 1.1em;
+            padding: 6px 12px;
+            margin: 8px 10px;
         }
 
         .section img {
             width: 120px;
-        }
-
-        .custom-heading {
-            font-size: 2em;
-            padding: 10px;
-            margin-bottom: 20px;
         }
 
         .section a {
@@ -184,24 +269,59 @@
         }
     }
 
-    a {
-        color: #d19e56;
-        text-decoration: none;
-        transition: color 0.3s ease;
-    }
-
-    a:hover {
-        color: #a87c41;
-        text-decoration: underline;
-    }
-
-    @media (max-width: 576px) {
-        .custom-heading, .nav-menu a, .section a {
-            box-shadow: none;
+    @media (max-width: 375px) {
+        .custom-heading {
+            font-size: 1.6em;
+            padding: 10px;
         }
 
-        .section img:hover {
-            transform: none;
+        .nav-menu a {
+            font-size: 1em;
+            padding: 5px 10px;
+            margin: 6px 8px;
+        }
+
+        .section img {
+            width: 100px;
+        }
+
+        .section a {
+            font-size: 1em;
+            padding: 5px 10px;
+        }
+
+        .section p {
+            font-size: 0.75em;
+        }
+    }
+
+    @media (max-width: 320px) {
+        .main-container {
+            padding: 15px 5px;
+        }
+
+        .custom-heading {
+            font-size: 1.4em;
+            padding: 8px;
+        }
+
+        .nav-menu a {
+            font-size: 0.95em;
+            padding: 4px 8px;
+            margin: 4px 6px;
+        }
+
+        .section img {
+            width: 90px;
+        }
+
+        .section a {
+            font-size: 0.95em;
+            padding: 4px 8px;
+        }
+
+        .section p {
+            font-size: 0.7em;
         }
     }
 </style>
@@ -216,17 +336,17 @@
             <div class="section">
                 <img src="{% static 'main/menu/drinks_preview_.png' %}" alt="Напитки">
                 <a href="{% url 'drinks' %}">Напитки</a>
-                <p>Погрузитесь в мир напитков Paradiso! Наши бариста с радостью приготовят <br> для вас что-то особенное, что сделает ваш день ярче</p>
+                <p>Погрузитесь в мир напитков Paradiso! Наши бариста с радостью приготовят для вас что-то особенное, что сделает ваш день ярче</p>
             </div>
             <div class="section">
                 <img src="{% static 'main/menu/snacks_preview.png' %}" alt="Закуски">
                 <a href="{% url 'snacks' %}">Закуски</a>
-                <p>Проверьте наши аппетитные закуски, идеально сочетающиеся с кофе! <br> В каждом укусе — забота о вашем вкусе</p>
+                <p>Проверьте наши аппетитные закуски, идеально сочетающиеся с кофе! В каждом укусе — забота о вашем вкусе</p>
             </div>
             <div class="section">
                 <img src="{% static 'main/menu/desserts_preview.png' %}" alt="Десерты">
                 <a href="{% url 'desserts' %}">Десерты</a>
-                <p>У нас есть все для сладкоежек! Насладитесь нашими десертами, которые <br>  идеально сочетаются с вашим любимым напитком</p>
+                <p>У нас есть все для сладкоежек! Насладитесь нашими десертами, которые идеально сочетаются с вашим любимым напитком</p>
             </div>
             <div class="section">
                 <img src="{% static 'main/menu/combo.png' %}" alt="Комбо">
