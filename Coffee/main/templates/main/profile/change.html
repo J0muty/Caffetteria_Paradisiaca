@@ -58,6 +58,7 @@
             text-align: center;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            word-wrap: break-word;
         }
 
         .dark-theme .sidebar h1 {
@@ -129,11 +130,15 @@
             color: #d1cfcf;
         }
 
+        .card {
+            background: #444;
+        }
+
         .card-body {
             color: #000;
             border-radius: 9px;
+            overflow: hidden;
         }
-
         .dark-theme .card-body {
             background-color: #444;
             color: #e0e0e0;
@@ -285,17 +290,17 @@
             }
 
             .notification {
-            padding: 10px;
-            font-size: 0.9rem;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            max-width: 90%;
-            box-sizing: border-box;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+                padding: 10px;
+                font-size: 0.9rem;
+                top: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                max-width: 90%;
+                box-sizing: border-box;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
 
             .progress-bar {
                 height: 3px;
@@ -305,6 +310,13 @@
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
+            }
+
+            .sidebar h1 {
+                font-size: 1.6rem;
+                word-wrap: break-word;
+                line-height: 1.2;
+                margin-bottom: 10px;
             }
 
             .back-button {
@@ -343,10 +355,11 @@
 
             .sidebar {
                 width: 100%;
+                min-width: 100%;
                 border-right: none;
                 border-bottom: 1px solid #d6cfc4;
                 border-radius: 0;
-                padding: 10px;
+                padding: 15px;
                 background-color: #ffffff;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             }
@@ -386,58 +399,40 @@
 
         @media (max-width: 480px) {
             .sidebar h1 {
-                font-size: 1.7rem;
+                font-size: 1.4rem;
             }
 
-            .slider {
-                border-radius: 34px;
+            .back-button {
+                position: absolute;
+                top: 12px;
+                left: 8px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.4rem;
+                color: #6f4e37;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
 
             .custom-switch {
-                width: 60px;
-                height: 34px;
+                width: 57px;
+                height: 32px;
+            }
+
+            .slider {
+                border-radius: 30px;
             }
 
             .slider:before {
-                height: 26px;
-                width: 26px;
+                height: 24px;
+                width: 24px;
             }
 
             .content {
                 padding: 10px;
             }
-
-            .form-check-label {
-                font-size: 0.9rem;
-            }
-
-
-            .custom-switch {
-                margin-top: 10px;
-            }
-
-
-            .form-check {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .small-text {
-                font-size: 0.8rem;
-            }
-
-            .save-button {
-                font-size: 1rem;
-                padding: 8px;
-            }
-
-            .notification {
-                padding: 10px;
-                font-size: 0.9rem;
-                top: 5px;
-            }
         }
-
         @media (max-width: 990px) and (min-width: 770px) {
             .form-check {
                 flex-direction: column;
@@ -457,7 +452,39 @@
                 font-size: 0.9rem;
                 top: 5px;
             }
+        }
 
+        @media (max-width: 390px) {
+            .sidebar h1 {
+                font-size: 1.3rem;
+            }
+
+            .back-button {
+                position: absolute;
+                top: 12px;
+                left: 8px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.3rem;
+                color: #6f4e37;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .custom-switch {
+                width: 55px;
+                height: 30px;
+            }
+
+            .slider:before {
+                height: 22px;
+                width: 22px;
+            }
+
+            .content {
+                padding: 10px;
+            }
         }
 
     </style>
