@@ -268,7 +268,8 @@
                 text-align: center;
             }
         }
-         @media (max-width: 425px) {
+
+        @media (max-width: 425px) {
             .sidebar h1 {
                 font-size: 1.4rem;
             }
@@ -321,9 +322,30 @@
                 font-size: 1rem;
             }
         }
+
+        .spinner-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
     </style>
 </head>
 <body>
+    <!-- Spinner Overlay -->
+    <div class="spinner-overlay" id="spinner-overlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
     <div class="container">
         <div class="sidebar">
             <button class="back-button" onclick="window.location.href='/profile/settings'">
@@ -333,21 +355,23 @@
         </div>
 
         <div class="content">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
+            <div id="message-container">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
 
             <div class="card">
                 <div class="card-header">
                     Свяжитесь с нами
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{% url 'support' %}">
+                    <form method="post" action="{% url 'support' %}" id="support-form">
                         {% csrf_token %}
                         {{ form.non_field_errors }}
                         <div class="mb-3">
@@ -370,7 +394,10 @@
                             {{ form.message }}
                             {{ form.message.errors }}
                         </div>
-                        <button type="submit" class="btn btn-primary">Отправить</button>
+                        <button type="submit" class="btn btn-primary" id="submit-button">
+                            <span id="submit-button-text">Отправить</span>
+                            <span id="submit-button-spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -378,5 +405,113 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('support-form');
+            const submitButton = document.getElementById('submit-button');
+            const submitButtonText = document.getElementById('submit-button-text');
+            const submitButtonSpinner = document.getElementById('submit-button-spinner');
+            const spinnerOverlay = document.getElementById('spinner-overlay');
+            const messageContainer = document.getElementById('message-container');
+
+            function autoDismissAlert(alertElement, duration = 2000) {
+                setTimeout(() => {
+                    bootstrap.Alert.getOrCreateInstance(alertElement).close();
+                }, duration);
+            }
+
+            function animateExistingAlerts() {
+                const existingAlerts = messageContainer.querySelectorAll('.alert');
+                existingAlerts.forEach(alert => {
+                    autoDismissAlert(alert, 2000);
+                });
+            }
+
+            animateExistingAlerts();
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                spinnerOverlay.style.display = 'flex';
+                submitButton.disabled = true;
+                submitButtonSpinner.style.display = 'inline-block';
+                submitButtonText.textContent = 'Отправка...';
+
+                const formData = new FormData(form);
+
+                const csrfToken = formData.get('csrfmiddlewaretoken');
+
+                fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrfToken,
+                    },
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    spinnerOverlay.style.display = 'none';
+                    submitButton.disabled = false;
+                    submitButtonSpinner.style.display = 'none';
+                    submitButtonText.textContent = 'Отправить';
+
+                    messageContainer.innerHTML = '';
+
+                    if (data.success) {
+                        const successAlert = document.createElement('div');
+                        successAlert.className = 'alert alert-success alert-dismissible fade show';
+                        successAlert.role = 'alert';
+                        successAlert.innerHTML = `
+                            ${data.message}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                        `;
+                        messageContainer.appendChild(successAlert);
+
+                        autoDismissAlert(successAlert, 2000);
+
+                        form.reset();
+                    } else {
+                        let errorHtml = '';
+                        if (data.errors) {
+                            for (const field in data.errors) {
+                                errorHtml += `<div>${data.errors[field]}</div>`;
+                            }
+                        }
+                        const errorAlert = document.createElement('div');
+                        errorAlert.className = 'alert alert-danger alert-dismissible fade show';
+                        errorAlert.role = 'alert';
+                        errorAlert.innerHTML = `
+                            ${data.message}
+                            ${errorHtml}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                        `;
+                        messageContainer.appendChild(errorAlert);
+
+                        // Auto-dismiss after 2 seconds
+                        autoDismissAlert(errorAlert, 2000);
+                    }
+                })
+                .catch(error => {
+                    spinnerOverlay.style.display = 'none';
+                    submitButton.disabled = false;
+                    submitButtonSpinner.style.display = 'none';
+                    submitButtonText.textContent = 'Отправить';
+
+                    const genericErrorAlert = document.createElement('div');
+                    genericErrorAlert.className = 'alert alert-danger alert-dismissible fade show';
+                    genericErrorAlert.role = 'alert';
+                    genericErrorAlert.innerHTML = `
+                        Произошла ошибка при отправке сообщения. Пожалуйста, попробуйте еще раз.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрыть"></button>
+                    `;
+                    messageContainer.innerHTML = '';
+                    messageContainer.appendChild(genericErrorAlert);
+
+                    autoDismissAlert(genericErrorAlert, 2000);
+                });
+            });
+        });
+    </script>
 </body>
 </html>

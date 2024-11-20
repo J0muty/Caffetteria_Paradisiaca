@@ -96,6 +96,15 @@
             z-index: 2;
         }
 
+        .alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1050;
+            display: none;
+        }
+
         button[type="submit"] {
             width: 100%;
             padding: 12px;
@@ -170,46 +179,44 @@
             display: block;
         }
 
-@media (max-width: 576px) {
-    .container {
-        width: 95%;
-        padding: 20px;
-    }
+        @media (max-width: 576px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
 
-    .welcome-text h1 {
-        font-size: 20px;
-        margin-top: 10px;
-        margin-left: 15px;
-        text-align: center;
-    }
+            .welcome-text h1 {
+                font-size: 20px;
+                margin-top: 10px;
+                margin-left: 15px;
+                text-align: center;
+            }
 
-    input[type="text"],
-    input[type="password"] {
-        padding: 10px;
-        font-size: 14px;
-    }
+            input[type="text"],
+            input[type="password"] {
+                padding: 10px;
+                font-size: 14px;
+            }
 
-    button[type="submit"] {
-        padding: 10px;
-        font-size: 14px;
-    }
+            button[type="submit"] {
+                padding: 10px;
+                font-size: 14px;
+            }
 
-.back-button {
-    position: absolute;
-    top: 20px;
-    left: 15px;
-    font-size: 24px;
-    color: #6d4c41;
-    cursor: pointer;
-    transition: color 0.3s, transform 0.3s;
-}
+            .back-button {
+                position: absolute;
+                top: 20px;
+                left: 15px;
+                font-size: 24px;
+                color: #6d4c41;
+                cursor: pointer;
+                transition: color 0.3s, transform 0.3s;
+            }
 
-
-    .rewards-text {
-        font-size: 12px;
-    }
-}
-
+            .rewards-text {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -218,7 +225,6 @@
         <div class="back-button" onclick="window.location.href='/'">
             <i class="fas fa-arrow-left"></i>
         </div>
-
         <div class="welcome-text">
             <h1>Войдите или создайте учетную запись</h1>
         </div>
@@ -226,28 +232,14 @@
             {% csrf_token %}
             <div class="form-group">
                 <input type="text" id="email" name="email" placeholder="Почта" required>
-                <div class="error-message" id="emailError">
-                    {% if form.email.errors %}
-                        {{ form.email.errors.0 }}
-                    {% else %}
-                        Пожалуйста, введите корректный email.
-                    {% endif %}
-                </div>
+                <div class="error-message" id="emailError"></div>
             </div>
-            <div class="form-group">
-                <div class="password-container">
-                    <input type="password" id="password" name="password" placeholder="Пароль" required>
-                    <button type="button" id="togglePassword" aria-label="Показать пароль">
-                        <i id="eyeIcon" class="fas fa-eye"></i>
-                    </button>
-                </div>
-                <div class="error-message" id="passwordError">
-                    {% if form.password.errors %}
-                        {{ form.password.errors.0 }}
-                    {% else %}
-                        Пожалуйста, введите ваш пароль.
-                    {% endif %}
-                </div>
+            <div class="form-group password-container">
+                <input type="password" id="password" name="password" placeholder="Пароль" required>
+                <button type="button" id="togglePassword" aria-label="Показать пароль">
+                    <i id="eyeIcon" class="fas fa-eye"></i>
+                </button>
+                <div class="error-message" id="passwordError"></div>
             </div>
             <button type="submit">Авторизоваться</button>
             <div class="link-container">
@@ -255,78 +247,97 @@
                 <a href="{% url 'register' %}">Создать учетную запись</a>
             </div>
         </form>
+        {% if error_message %}
+        <div class="alert alert-danger" id="errorMessage" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+        {% if success %}
+        <div class="alert alert-success" id="successMessage" role="alert">
+            Успешный вход в систему!
+        </div>
+        {% endif %}
     </div>
     <div class="rewards-text">
         Присоединяйтесь к программе Paradisiaca® Rewards,<br> чтобы получать бесплатную еду и напитки,<br> бесплатные добавки, оплачивать и делать заказы с<br> помощью телефона и многое другое.
         <br><a href="{% url 'register' %}">Присоединяйтесь сейчас</a>
     </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const togglePasswordButton = document.getElementById("togglePassword");
             const eyeIcon = document.getElementById("eyeIcon");
             const passwordInput = document.getElementById("password");
+            const successMessage = document.getElementById("successMessage");
+            const errorMessage = document.getElementById("errorMessage");
 
-            togglePasswordButton.addEventListener("click", function () {
-                const currentType = passwordInput.getAttribute("type");
+            if (togglePasswordButton && eyeIcon && passwordInput) {
+                togglePasswordButton.addEventListener("click", function() {
+                    const isPasswordHidden = passwordInput.getAttribute("type") === "password";
+                    if (isPasswordHidden) {
+                        passwordInput.setAttribute("type", "text");
+                        eyeIcon.classList.remove("fa-eye");
+                        eyeIcon.classList.add("fa-eye-slash");
+                        togglePasswordButton.setAttribute("aria-label", "Скрыть пароль");
+                    } else {
+                        passwordInput.setAttribute("type", "password");
+                        eyeIcon.classList.remove("fa-eye-slash");
+                        eyeIcon.classList.add("fa-eye");
+                        togglePasswordButton.setAttribute("aria-label", "Показать пароль");
+                    }
+                });
+            }
 
-                if (currentType === "password") {
-                    passwordInput.setAttribute("type", "text");
-                    eyeIcon.classList.remove("fa-eye");
-                    eyeIcon.classList.add("fa-eye-slash");
-                    togglePasswordButton.setAttribute("aria-label", "Скрыть пароль");
-                } else {
-                    passwordInput.setAttribute("type", "password");
-                    eyeIcon.classList.remove("fa-eye-slash");
-                    eyeIcon.classList.add("fa-eye");
-                    togglePasswordButton.setAttribute("aria-label", "Показать пароль");
-                }
+            if (successMessage) {
+                successMessage.style.display = 'block';
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                    window.location.href = "{% url 'index' %}";
+                }, 1000);
+            }
 
-                console.log(`Current password input type: ${currentType}`);
-            });
+            if (errorMessage) {
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 1500);
+            }
 
             const loginForm = document.getElementById("loginForm");
-            const emailError = document.getElementById("emailError");
-            const passwordError = document.getElementById("passwordError");
+            if (loginForm) {
+                loginForm.addEventListener("submit", function(e) {
+                    const emailError = document.getElementById("emailError");
+                    const passwordError = document.getElementById("passwordError");
+                    const emailInput = document.getElementById("email");
+                    let isValid = true;
 
-            loginForm.addEventListener("submit", function(e) {
-                let isValid = true;
+                    [emailError, passwordError].forEach(function(el) {
+                        if (el) el.classList.remove("error-visible");
+                    });
 
-                [emailError, passwordError].forEach(function(el) {
-                    el.classList.remove("error-visible");
-                });
-
-                const email = document.getElementById("email").value.trim();
-                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailPattern.test(email)) {
-                    emailError.textContent = "Пожалуйста, введите корректный email.";
-                    emailError.classList.add("error-visible");
-                    isValid = false;
-                }
-
-                const password = passwordInput.value;
-                if (password.length < 8) {
-                    passwordError.textContent = "Пароль должен содержать не менее 8 символов.";
-                    passwordError.classList.add("error-visible");
-                    isValid = false;
-                }
-
-                if (!isValid) {
-                    e.preventDefault();
-                }
-            });
-
-            {% if form.errors %}
-                {% for field in form %}
-                    {% if field.errors %}
-                        const errorElement = document.getElementById("{{ field.name }}Error");
-                        if (errorElement) {
-                            errorElement.textContent = "{{ field.errors.0|escapejs }}";
-                            errorElement.classList.add("error-visible");
+                    const email = emailInput ? emailInput.value.trim() : '';
+                    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailPattern.test(email)) {
+                        if (emailError) {
+                            emailError.textContent = "Пожалуйста, введите корректный email.";
+                            emailError.classList.add("error-visible");
                         }
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
+                        isValid = false;
+                    }
+
+                    const password = passwordInput ? passwordInput.value : '';
+                    if (password.length < 8) {
+                        if (passwordError) {
+                            passwordError.textContent = "Пароль должен содержать не менее 8 символов.";
+                            passwordError.classList.add("error-visible");
+                        }
+                        isValid = false;
+                    }
+
+                    if (!isValid) {
+                        e.preventDefault();
+                    }
+                });
+            }
         });
     </script>
 </body>

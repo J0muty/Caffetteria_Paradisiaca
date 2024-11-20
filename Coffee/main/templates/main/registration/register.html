@@ -417,7 +417,6 @@
 
             let areRequirementsVisible = false;
 
-            // Функция для проверки валидности даты
             function validateBirthdate(dateStr) {
                 const parts = dateStr.split('-');
                 if (parts.length !== 3) return false;
@@ -439,12 +438,10 @@
                 return true;
             }
 
-            // Функция для проверки, содержит ли строка цифры
             function containsDigits(str) {
                 return /\d/.test(str);
             }
 
-            // Обработчик ввода для автоматического форматирования
             birthdateInput.addEventListener("input", function(e) {
                 let value = e.target.value.replace(/\D/g, '');
                 if (value.length >= 2) {
@@ -462,16 +459,13 @@
                 e.target.value = value;
             });
 
-            // Обработчик отправки формы
             registrationForm.addEventListener("submit", function(e) {
                 let isValid = true;
 
-                // Очистка предыдущих ошибок
                 [firstNameError, lastNameError, emailError, passwordError, birthdateError].forEach(function(el) {
                     el.classList.remove("error-visible");
                 });
 
-                // Проверка Имени
                 const firstName = document.getElementById("first_name").value.trim();
                 if (firstName === "") {
                     firstNameError.textContent = "Пожалуйста, введите ваше имя.";
@@ -483,7 +477,6 @@
                     isValid = false;
                 }
 
-                // Проверка Фамилии
                 const lastName = document.getElementById("last_name").value.trim();
                 if (lastName === "") {
                     lastNameError.textContent = "Пожалуйста, введите вашу фамилию.";
@@ -495,7 +488,6 @@
                     isValid = false;
                 }
 
-                // Проверка Email
                 const email = document.getElementById("email").value.trim();
                 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailPattern.test(email)) {
@@ -504,7 +496,6 @@
                     isValid = false;
                 }
 
-                // Проверка Пароля
                 const password = document.getElementById("password").value;
                 const allRequirementsMet = lengthRequirement.classList.contains("valid") &&
                     uppercaseRequirement.classList.contains("valid") &&
@@ -517,7 +508,6 @@
                     isValid = false;
                 }
 
-                // Проверка Даты Рождения
                 const birthdate = document.getElementById("birthdate").value.trim();
                 if (!validateBirthdate(birthdate)) {
                     const today = new Date();
@@ -548,7 +538,6 @@
                 }
             });
 
-            // Показывать серверные ошибки при загрузке страницы
             function showServerErrors() {
                 {% if form.errors %}
                     {% for field in form %}
@@ -577,35 +566,30 @@
             passwordInput.addEventListener("input", function() {
                 const password = passwordInput.value;
 
-                // Проверка длины
                 if (password.length >= 8) {
                     lengthRequirement.classList.add("valid");
                 } else {
                     lengthRequirement.classList.remove("valid");
                 }
 
-                // Проверка на заглавные буквы
                 if (/[A-Z]/.test(password)) {
                     uppercaseRequirement.classList.add("valid");
                 } else {
                     uppercaseRequirement.classList.remove("valid");
                 }
 
-                // Проверка на строчные буквы
                 if (/[a-z]/.test(password)) {
                     lowercaseRequirement.classList.add("valid");
                 } else {
                     lowercaseRequirement.classList.remove("valid");
                 }
 
-                // Проверка на специальные символы
                 if (/[!/@#$%^&*()_,.?":{}|<>-]/.test(password)) {
                     specialCharacterRequirement.classList.add("valid");
                 } else {
                     specialCharacterRequirement.classList.remove("valid");
                 }
 
-                // Проверка всех условий перед отправкой формы
                 const allRequirementsMet = lengthRequirement.classList.contains("valid") &&
                     uppercaseRequirement.classList.contains("valid") &&
                     lowercaseRequirement.classList.contains("valid") &&
@@ -618,7 +602,6 @@
                 }
             });
 
-            // Функция для показа/скрытия пароля
             togglePasswordButton.addEventListener("click", function () {
                 const currentType = passwordInput.getAttribute("type");
 
@@ -634,7 +617,6 @@
                     togglePasswordButton.setAttribute("aria-label", "Показать пароль");
                 }
 
-                // Обеспечиваем, чтобы требования к паролю всегда оставались видимыми
                 passwordRequirements.style.display = "block";
                 areRequirementsVisible = true;
             });

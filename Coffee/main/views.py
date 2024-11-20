@@ -87,7 +87,7 @@ def login_view(request):
         user = authenticate(request, email=email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return render(request, 'main/registration/login.html', {'success': True})
         else:
             error_message = "Вы ввели неверный email или пароль."
             return render(request, 'main/registration/login.html', {'error_message': error_message})
@@ -232,9 +232,9 @@ def change_settings(request):
     }
     return render(request, 'main/profile/change.html', context)
 
+
 @login_required
 def support(request):
-    print(type(django_settings))
     if request.method == 'POST':
         form = SupportForm(request.POST)
         if form.is_valid():
@@ -253,12 +253,25 @@ def support(request):
                     recipient_list=['lololow2017@yandex.ru'],
                     fail_silently=False,
                 )
-                messages.success(request, "Ваше сообщение успешно отправлено в поддержку.")
-                return redirect('support')
+                success_message = "Ваше сообщение успешно отправлено в поддержку."
+
+                if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                    return JsonResponse({'success': True, 'message': success_message})
+                else:
+                    messages.success(request, success_message)
+                    return redirect('support')
             except Exception as e:
-                messages.error(request, f"Произошла ошибка при отправке сообщения: {e}")
+                error_message = f"Произошла ошибка при отправке сообщения: {e}"
+                if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                    return JsonResponse({'success': False, 'message': error_message})
+                else:
+                    messages.error(request, error_message)
         else:
-            messages.error(request, "Пожалуйста, исправьте ошибки в форме.")
+            error_message = "Пожалуйста, исправьте ошибки в форме."
+            if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+                return JsonResponse({'success': False, 'message': error_message, 'errors': form.errors})
+            else:
+                messages.error(request, error_message)
     else:
         form = SupportForm()
 
