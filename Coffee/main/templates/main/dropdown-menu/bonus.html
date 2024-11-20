@@ -182,10 +182,11 @@
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
+                min-width: 100%;
+                padding: 10px;
                 border-right: none;
                 border-bottom: 1px solid #d6cfc4;
                 border-radius: 0;
-                padding: 15px;
                 background-color: #ffffff;
                 box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
                 height: auto;
@@ -210,13 +211,13 @@
             }
 
             .sidebar h1 {
-                font-size: 1.75rem;
+                font-size: 1.5rem;
                 margin-bottom: 20px;
                 text-align: center;
             }
 
             .content {
-                padding: 20px;
+                padding: 15px;
                 border-radius: 10px;
                 box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                 margin-top: 10px;
@@ -230,17 +231,186 @@
             }
 
             .bonus-item {
-                padding: 20px;
+                padding: 10px;
             }
 
             .bonus-title {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
                 margin-bottom: 10px;
             }
 
             .bonus-description {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 1440px) {
+            .sidebar {
+                width: 280px;
+                padding: 15px;
+            }
+
+            .back-button {
+                position: absolute;
+                top: 10px;
+                left: 8px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: #6f4e37;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .sidebar h1 {
+                font-size: 1.8rem;
+            }
+
+            .content {
+                padding: 25px;
+            }
+
+            .bonus-item {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 250px;
+                padding: 10px;
+            }
+
+            .back-button {
+                position: absolute;
+                top: 10px;
+                left: 8px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: #6f4e37;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .sidebar h1 {
+                font-size: 1.6rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .bonus-item {
+                padding: 15px;
+            }
+
+            .bonus-title {
+                font-size: 1.25rem;
+            }
+
+            .bonus-description {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 425px) {
+            .sidebar {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .back-button {
+                position: absolute;
+                top: 10px;
+                left: 8px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: #6f4e37;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .sidebar h1 {
+                font-size: 1.5rem;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .bonus-item {
+                padding: 10px;
+            }
+
+            .bonus-title {
                 font-size: 1.2rem;
-                margin-top: 5px;
+            }
+
+            .bonus-description {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .sidebar h1 {
+                font-size: 1.3rem;
+            }
+
+            .back-button {
+                position: absolute;
+                top: 10px;
+                left: 8px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                font-size: 1.5rem;
+                color: #6f4e37;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            .bonus-item {
+                padding: 8px;
+            }
+
+            .bonus-title {
+                font-size: 1.1rem;
+            }
+
+            .bonus-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .sidebar h1 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            .content {
+                padding: 5px;
+            }
+
+            .bonus-item {
+                padding: 5px;
+            }
+
+            .bonus-title {
+                font-size: 1rem;
+            }
+
+            .bonus-description {
+                font-size: 0.85rem;
             }
         }
     </style>
