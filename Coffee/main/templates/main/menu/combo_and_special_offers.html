@@ -13,7 +13,7 @@
 
     .main-container {
         max-width: 1200px;
-        margin: 20px auto;
+        margin: 60px auto;
         padding: 40px 20px;
         background-color: #f8f4e3;
         border-radius: 15px;
@@ -22,7 +22,9 @@
     }
 
     .custom-heading {
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-size: 2.8em;
         color: #d19e56;
         margin-bottom: 30px;
@@ -32,7 +34,34 @@
         padding: 20px;
         border-radius: 15px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        transition: background-color 0.3s, transform 0.3s;
+        position: relative;
+        text-transform: uppercase;
+    }
+
+    .back-button {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(90deg, #6f4e37, #8a624f);
+        color: #ffffff;
+        font-size: 1.5rem;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+        transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+        background: linear-gradient(90deg, #8a624f, #6f4e37);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        transform: translateY(-50%) scale(1.15);
     }
 
     .brew-methods {
@@ -60,7 +89,12 @@
 
 {% block content %}
     <div class="main-container">
-        <h1 class="custom-heading">Специальные предложения</h1>
+                <div class="custom-heading">
+            <button class="back-button" onclick="window.location.href='/menu'">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            Специальные предложения
+        </div>
 
         <div class="brew-methods">
             <div class="brew-method">
