@@ -78,16 +78,29 @@
         font-size: 1.5em;
         color: #d19e56;
         text-decoration: none;
-        padding: 10px 20px;
-        transition: color 0.3s, background-color 0.3s;
+        position: relative;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .section a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 2px;
+        background-color: #d19e56;
+        transition: width 0.3s ease;
     }
 
     .section a:hover {
-        color: #fff;
-        background-color: #d19e56;
-        border-radius: 5px;
+        color: #c68c4f;
+        transform: translateY(-2px);
     }
 
+    .section a:hover::after {
+        width: 100%;
+    }
     .section p {
         font-size: 1em;
         color: #555;
