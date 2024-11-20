@@ -20,6 +20,20 @@
             color: inherit;
         }
 
+        .btn-link {
+            text-decoration: none;
+            color: inherit;
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .btn-link:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
         html.dark-theme {
             background-color: #333;
             color: #fff;
@@ -53,11 +67,6 @@
             transition: background-color 0.3s, border-color 0.3s;
         }
 
-        .dark-theme .sidebar {
-            border-right: 1px solid #444;
-            background-color: #444;
-        }
-
         .sidebar h1 {
             font-size: 2rem;
             color: #6f4e37;
@@ -65,10 +74,7 @@
             text-align: center;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        .dark-theme .sidebar h1 {
-            color: #fff;
+            word-wrap: break-word;
         }
 
         .content {
@@ -79,11 +85,6 @@
             padding: 30px;
             overflow-y: auto;
             transition: background-color 0.3s, color 0.3s;
-        }
-
-        .dark-theme .content {
-            background-color: #555;
-            color: #ddd;
         }
 
         .card {
@@ -101,11 +102,6 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        .dark-theme .card-header {
-            background-color: #3e2b23;
-            color: #ffffff;
-        }
-
         .form-label {
             font-weight: bold;
             color: #6f4e37;
@@ -116,15 +112,36 @@
         .user-data {
             font-size: 1.25rem;
             margin-top: 10px;
-            color: #444;
+            color: #000;
         }
 
-        .dark-theme .form-label {
-            color: #ffffff;
+        html.dark-theme .sidebar {
+            border-right: 1px solid #444;
+            background-color: #444;
         }
 
-        .dark-theme .user-data {
+        html.dark-theme .sidebar h1,
+        html.dark-theme .form-label,
+        html.dark-theme .back-button {
+            color: #fff;
+        }
+
+        html.dark-theme .user-data {
             color: #efefef;
+        }
+
+        html.dark-theme .content {
+            background-color: #555;
+            color: #ddd;
+        }
+
+        html.dark-theme .card-header {
+            background-color: #3e2b23;
+        }
+
+        html.dark-theme .card-body {
+            background-color: #444;
+            color: #e0e0e0;
         }
 
         .back-button {
@@ -149,49 +166,10 @@
             }
         }
 
-        .dark-theme .back-button {
-            color: #ffffff;
-        }
-
-        .dark-theme .back-button:hover {
-            color: #d1cfcf;
-        }
-
-        .card-body {
-            color: #000;
-            transition: color 0.3s, background-color 0.3s;
-        }
-
-        .dark-theme .card-body {
-            background-color: #444;
-            color: #e0e0e0;
-        }
-
-        .btn-link {
-            text-decoration: none;
-            color: inherit;
-            background-color: transparent;
-            border: none;
-            padding: 0;
-            cursor: pointer;
-        }
-
-        .btn-link:hover {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .btn-link.light-theme {
-            color: black;
-        }
-
-        .btn-link.dark-theme {
-            color: #e0e0e0;
-        }
-
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
+                min-width: 100%;
                 border-right: none;
                 border-bottom: 1px solid #d6cfc4;
                 border-radius: 0;
@@ -218,9 +196,10 @@
             }
 
             .sidebar h1 {
-                font-size: 1.75rem;
-                margin-bottom: 20px;
-                text-align: center;
+                font-size: 1.5rem;
+                word-wrap: break-word;
+                line-height: 1.2;
+                margin-bottom: 10px;
             }
 
             .content {
@@ -235,6 +214,101 @@
                 padding: 15px;
                 border-radius: 10px;
                 text-align: center;
+            }
+        }
+
+        @media (max-width: 1440px) {
+            .sidebar {
+                width: 280px;
+                padding: 15px;
+            }
+
+            .sidebar h1 {
+                font-size: 1.9rem;
+            }
+
+            .content {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 260px;
+                padding: 10px;
+            }
+
+            .sidebar h1 {
+                font-size: 1.75rem;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 425px) {
+            .sidebar h1 {
+                font-size: 1.3rem;
+                word-wrap: break-word;
+                line-height: 1.2;
+                margin-bottom: 10px;
+            }
+
+            .back-button {
+                font-size: 1.3rem;
+                top: 7px;
+                left: 15px;
+            }
+
+            .content {
+                padding: 15px;
+            }
+
+            .card-header {
+                font-size: 1.3rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .sidebar h1 {
+                font-size: 1.2rem;
+            }
+
+            .back-button {
+                font-size: 1.1rem;
+                top: 8px;
+                left: 15px;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            .card-header {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .sidebar h1 {
+                font-size: 1rem;
+            }
+
+            .back-button {
+                font-size: 1rem;
+                top: 8px;
+                left: 15px;
+            }
+
+            .content {
+                padding: 5px;
+            }
+
+            .card-header {
+                font-size: 1.3rem;
+                padding: 8px;
             }
         }
     </style>
