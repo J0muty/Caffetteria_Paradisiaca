@@ -72,7 +72,10 @@ def register(request):
             )
             reg_user.set_password(form.cleaned_data['password'])
             reg_user.save()
-            return redirect('login')
+            return render(request, 'main/registration/register.html', {'success': True})
+        else:
+            error_message = "Ошибка регистрации. Проверьте введенные данные."
+            return render(request, 'main/registration/register.html', {'form': form, 'error_message': error_message})
     else:
         form = RegistrationForm()
 
