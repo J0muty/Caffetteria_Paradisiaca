@@ -1,0 +1,25 @@
+name: Deploy to Beget
+
+on:
+  push:
+    branches:
+      - main  # Ветка, при пуше в которую будет происходить деплой
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: coffeeparadiso.ru
+        username: j0mutyp2
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        port: 22
+        script: |
+          cd ~/public_html
+          git pull origin main
