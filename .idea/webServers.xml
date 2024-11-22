@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4ca4feba-8049-4371-9bc5-8d4d82ff4f90" name="PythonAnywhere" url="/home/Jomuty/Caffetteria_Paradisiaca/">
+        <fileTransfer rootFolder="/home/Jomuty/" accessType="SFTP" host="jomuty.pythonanywhere.com" port="22" sshConfigId="cd3fdf3e-8dee-4588-b1dd-940ba1dbdea6" sshConfig="PythonAnywhere">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

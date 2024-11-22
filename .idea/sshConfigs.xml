@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="jomuty.pythonanywhere.com" id="cd3fdf3e-8dee-4588-b1dd-940ba1dbdea6" port="22" customName="PythonAnywhere" nameFormat="CUSTOM" username="Jomuty" useOpenSSHConfig="true">
+        <option name="customName" value="PythonAnywhere" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

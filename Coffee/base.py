@@ -3,12 +3,9 @@ import sqlite3
 conn = sqlite3.connect('db.sqlite3')
 cursor = conn.cursor()
 
-firstname_ = 'Николай'
+email_ = 'tix1@mail.ru'
 
-
-# Выполняем запрос на удаление
-cursor.execute("DELETE FROM main_reguser WHERE firstname = ?", (firstname_,))
+cursor.execute("DELETE FROM main_reguser WHERE email = ?", (email_,))
 
 conn.commit()
-
 conn.close()
