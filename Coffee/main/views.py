@@ -238,6 +238,9 @@ def change_settings(request):
 
 @login_required
 def support(request):
+    storage = messages.get_messages(request)
+    list(storage)
+
     if request.method == 'POST':
         form = SupportForm(request.POST)
         if form.is_valid():
@@ -252,7 +255,7 @@ def support(request):
                 send_mail(
                     subject=subject,
                     message=full_message,
-                    from_email=django_settings.DEFAULT_FROM_EMAIL,  # Используем переименованный settings
+                    from_email=django_settings.DEFAULT_FROM_EMAIL,
                     recipient_list=['lololow2017@yandex.ru'],
                     fail_silently=False,
                 )
@@ -261,20 +264,19 @@ def support(request):
                 if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                     return JsonResponse({'success': True, 'message': success_message})
                 else:
-                    messages.success(request, success_message)
                     return redirect('support')
             except Exception as e:
                 error_message = f"Произошла ошибка при отправке сообщения: {e}"
                 if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                     return JsonResponse({'success': False, 'message': error_message})
                 else:
-                    messages.error(request, error_message)
+                    return redirect('support')
         else:
             error_message = "Пожалуйста, исправьте ошибки в форме."
             if request.headers.get('x-requested-with') == 'XMLHttpRequest':
                 return JsonResponse({'success': False, 'message': error_message, 'errors': form.errors})
             else:
-                messages.error(request, error_message)
+                pass
     else:
         form = SupportForm()
 
@@ -282,6 +284,7 @@ def support(request):
         'form': form,
     }
     return render(request, 'main/profile/support.html', context)
+
 
 @login_required
 def privacy_policy(request):
