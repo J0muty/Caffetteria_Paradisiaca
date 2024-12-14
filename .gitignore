@@ -158,3 +158,6 @@ Coffee/db.sqlite3
 *.pyc
 *.pyc
 *.pyc
+Coffee/db.sqlite3
+Coffee/Coffee/__pycache__/settings.cpython-312.pyc
+*.pyc
